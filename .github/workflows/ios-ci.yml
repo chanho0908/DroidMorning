@@ -1,11 +1,10 @@
-name: iOS CI(KMP)
+name: iOS CI (KMP)
 
 on:
   workflow_call:
 
 jobs:
   ios-build:
-    name: Build iOS (KMP)
     runs-on: macos-14
 
     steps:
