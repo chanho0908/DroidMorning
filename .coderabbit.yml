@@ -1,0 +1,156 @@
+# CodeRabbit이 사용할 언어 설정
+language: ko-KR
+
+# AI 코치의 성격과 리뷰 스타일 (자유 텍스트 영역)
+tone_instructions: >
+  문제의 원인과 개선 방법을 명확히 제시하고 교육적 관점에서 리뷰하세요.
+  비난보다는 개선 방향을 제안하며, 가능한 경우 근거와 예시를 함께 제공합니다.
+  특별한 문제가 없다면 칭찬도 적극적으로 남깁니다.
+
+  [리뷰 스타일]
+  - 왜 문제가 되는지 → 어떻게 개선할 수 있는지 순서로 설명합니다.
+  - 토론이 필요한 부분은 질문형 코멘트로 제안합니다.
+
+# 코드 리뷰 전반 설정
+reviews:
+  profile: chill                      # 리뷰 스타일: 편안하고 친근한 톤
+  request_changes_workflow: false     # Request Change 요청시 병합 비활성화 해제
+  high_level_summary: false           # PR 전체 요약 제공
+  changed_files_summary: false        # 개별 파일 요약은 비활성화 (중복 방지)
+  sequence_diagrams: false            # 시퀀스 다이어그램 생성 비활성화
+  assess_linked_issues: true          # 연결된 이슈 분석 활성화
+  related_issues: false               # 관련 이슈 추천 비활성화
+  related_prs: false                  # 관련 PR 추천 비활성화
+  suggested_labels: false             # 라벨 추천 비활성화
+  auto_apply_labels: false            # 자동 라벨 적용 비활성화
+  suggested_reviewers: false          # 리뷰어 추천 비활성화
+  auto_assign_reviewers: false        # 자동 리뷰어 할당 비활성화
+  poem: false                         # 리뷰 완료 후 시 작성 활성화 (재미 요소)
+
+  # 경로별 상세 리뷰 가이드
+  path_instructions:
+    # Feature 모듈 - MVI 패턴
+    - path: feature/**
+      instructions: |
+        [Feature 모듈 - MVI 패턴 리뷰 가이드]
+
+        1. MVI 구조
+        - Intent가 사용자 액션 단위로 명확히 정의되어 있는가?
+        - State가 불변(immutable) 데이터 클래스로 정의되어 있는가?
+        - SideEffect가 일회성 이벤트로 분리되어 있는가?
+        - 단방향 데이터 플로우(Intent → ViewModel → State → View)가 유지되는가?
+
+        2. Compose UI
+        - Composable 함수가 순수 함수인가?
+        - State Hoisting이 적절히 적용되었는가?
+        - 불필요한 recomposition 가능성은 없는가?
+        - remember, LaunchedEffect 등 사이드 이펙트 API가 적절히 사용되었는가?
+        - Preview Composable이 제공되는가?
+
+        3. 의존성 주입
+        - Koin을 통한 DI가 책임에 맞게 구성되었는가?
+
+    # Domain 모듈 - Pure Kotlin
+    - path: domain/**
+      instructions: |
+        [Domain 모듈 리뷰 가이드]
+
+        1. 아키텍처
+        - Android 및 외부 프레임워크 의존성이 없는가?
+        - 비즈니스 로직이 명확히 표현되어 있는가?
+        - 도메인 모델이 불변 객체로 설계되었는가?
+
+    # Data 모듈
+    - path: data/**
+      instructions: |
+        [Data 모듈 리뷰 가이드]
+
+        1. Repository 구현
+        - Domain 인터페이스를 정확히 구현하는가?
+        - Remote / Local 데이터 소스 조합 로직이 명확한가?
+        - 에러가 도메인 레벨로 적절히 변환되는가?
+
+        2. Mapper
+        - DTO → Domain 변환 책임이 명확한가?
+        - null safety가 충분히 고려되었는가?
+
+    # 공통 UI 모듈
+    - path: core/ui/**
+      instructions: |
+        [공통 UI 모듈 리뷰 가이드]
+        - 재사용 가능한 Composable로 설계되었는가?
+        - 커스터마이징 포인트가 적절한가?
+        - 다양한 상태에 대한 Preview가 제공되는가?
+
+    # 디자인 시스템
+    - path: core/design-system/**
+      instructions: |
+        [디자인 시스템 리뷰 가이드]
+        - Material Design 3 가이드라인 준수 여부
+        - Dark Mode 지원 여부
+        - 접근성(Accessibility) 고려 여부
+
+    # Build Logic
+    - path: build-logic/**
+      instructions: |
+        [Convention Plugin 리뷰 가이드]
+        - 각 플러그인이 단일 책임을 가지는가?
+        - 중복 설정이 제거되었는가?
+        - Version Catalog 활용이 적절한가?
+        - Configuration Cache에 안전한가?
+
+    # 테스트 코드
+    - path: "**/test/**"
+      instructions: |
+        [테스트 코드 리뷰 가이드]
+        - Given-When-Then 구조를 따르는가?
+        - 테스트 메서드명이 의도를 잘 드러내는가?
+        - Happy / Sad Path가 모두 커버되는가?
+        - 코루틴 테스트에 TestDispatcher를 사용하는가?
+
+    # Gradle 파일
+    - path: "**/*.gradle.kts"
+      instructions: |
+        [Gradle 빌드 파일 리뷰 가이드]
+        - Convention Plugin이 적절히 사용되었는가?
+        - 불필요한 의존성이 없는가?
+        - implementation / api 구분이 명확한가?
+        - 모듈 간 의존성 방향이 올바른가?
+
+    # 리소스
+    - path: "**/res/**"
+      instructions: |
+        [리소스 리뷰 가이드]
+        - 하드코딩 문자열이 없는가?
+        - 다국어 지원을 고려했는가?
+        - 색상과 테마가 디자인 시스템에 포함되는가?
+
+  abort_on_close: true
+  disable_cache: false
+  auto_review:
+    enabled: true
+    auto_incremental_review: true
+    base_branches:
+      - main
+      - develop
+
+# 채팅 설정
+chat:
+  auto_reply: true
+
+# 지식 베이스
+knowledge_base:
+  opt_out: false
+  web_search:
+    enabled: true
+  code_guidelines:
+    enabled: true
+    filePatterns:
+      - README.md
+      - docs/**/*.md
+  learnings:
+    scope: local
+  issues:
+    scope: local
+  pull_requests:
+    scope: local
