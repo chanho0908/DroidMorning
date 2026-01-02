@@ -12,8 +12,8 @@ import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.json.Json
 
 object HttpClientFactory {
-    fun create(enableLogging: Boolean = false): HttpClient {
-        return HttpClient {
+    fun create(enableLogging: Boolean = false): HttpClient =
+        HttpClient {
             install(ContentNegotiation) {
                 json(
                     Json { prettyPrint = true },
@@ -34,5 +34,4 @@ object HttpClientFactory {
                 }
             }
         }
-    }
 }
