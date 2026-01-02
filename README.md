@@ -12,6 +12,22 @@ This is a Kotlin Multiplatform project targeting Android, iOS.
 * [/iosApp](./iosApp/iosApp) contains iOS applications. Even if you’re sharing your UI with Compose Multiplatform,
   you need this entry point for your iOS app. This is also where you should add SwiftUI code for your project.
 
+### Dependency Injection - Koin
+
+This project uses [Koin](https://insert-koin.io/) for dependency injection across all platforms.
+
+📖 **[Koin Setup Guide](./docs/KOIN_SETUP_GUIDE.md)** - Complete guide for setting up Koin in KMP projects
+
+**Quick Overview:**
+- **Version**: Koin 4.1.1
+- **Modules**: Network, Repository, ViewModel
+- **Platforms**: Android (with androidContext) & iOS (with doInitKoin)
+
+**Key Files:**
+- [KoinInitializer.kt](./composeApp/src/commonMain/kotlin/com/peto/droidmorning/KoinInitializer.kt) - Common initialization
+- [DroidMorningApp.kt](./composeApp/src/androidMain/kotlin/com/peto/droidmorning/DroidMorningApp.kt) - Android setup
+- [iOSApp.swift](./iosApp/iosApp/iOSApp.swift) - iOS setup
+
 ### Build and Run Android Application
 
 To build and run the development version of the Android app, use the run configuration from the run widget
