@@ -2,6 +2,13 @@ name: iOS CI (KMP)
 
 on:
   workflow_call:
+    secrets:
+      GOOGLE_CLIENT_ID:
+        required: true
+      SUPABASE_URL:
+        required: true
+      SUPABASE_KEY:
+        required: true
 
 jobs:
   ios-build:
@@ -9,6 +16,14 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+
+      - name: Create local.properties
+        run: |
+          cat > local.properties << EOF
+          GOOGLE_CLIENT_ID=${{ secrets.GOOGLE_CLIENT_ID }}
+          SUPABASE_URL=${{ secrets.SUPABASE_URL }}
+          SUPABASE_KEY=${{ secrets.SUPABASE_KEY }}
+          EOF
 
       - name: Select Xcode 15.4
         run: sudo xcode-select -s /Applications/Xcode_15.4.app

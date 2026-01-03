@@ -5,7 +5,6 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.compose.multiplatform)
     alias(libs.plugins.kotlin.compose)
-    alias(libs.plugins.kotlin.serialization)
 }
 
 kotlin {
@@ -30,11 +29,17 @@ kotlin {
             implementation(compose.preview)
             implementation(libs.androidx.activity.compose)
 
-            implementation(libs.ktor.client.okhttp)
-
             implementation(libs.kotlinx.coroutines.android)
+
+            implementation(libs.bundles.credential.manager)
         }
         commonMain.dependencies {
+            // 모듈 의존성
+            implementation(project(":domain"))
+            implementation(project(":data"))
+            implementation(project(":presentation"))
+
+            // Compose 의존성
             implementation(compose.runtime)
             implementation(compose.foundation)
             implementation(compose.material3)
@@ -44,17 +49,13 @@ kotlin {
             implementation(libs.androidx.lifecycle.viewmodel.compose)
             implementation(libs.androidx.lifecycle.runtime.compose)
 
+            // DI
             implementation(libs.bundles.koin)
-            implementation(libs.bundles.ktor.common)
             implementation(libs.kotlinx.coroutines.core)
-            implementation(libs.kotlinx.serialization.json)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
             implementation(libs.koin.test)
-        }
-        iosMain.dependencies {
-            implementation(libs.ktor.client.darwin)
         }
     }
 }

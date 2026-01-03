@@ -14,7 +14,15 @@ jobs:
   android:
     name: Android CI
     uses: ./.github/workflows/android-ci.yml
+    secrets:
+      GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
+      SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+      SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
 
   ios:
     name: iOS CI
     uses: ./.github/workflows/ios-ci.yml
+    secrets:
+      GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
+      SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+      SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
