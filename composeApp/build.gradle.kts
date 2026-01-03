@@ -5,6 +5,7 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.compose.multiplatform)
     alias(libs.plugins.kotlin.compose)
+    kotlin("native.cocoapods")
 }
 
 kotlin {
@@ -19,6 +20,19 @@ kotlin {
         iosSimulatorArm64(),
     ).forEach { iosTarget ->
         iosTarget.binaries.framework {
+            baseName = "ComposeApp"
+            isStatic = true
+        }
+    }
+
+    cocoapods {
+        version = "1.0"
+        summary = "DroidMorning Shared Module"
+        homepage = "https://github.com/yourusername/DroidMorning"
+
+        ios.deploymentTarget = "14.0"
+
+        framework {
             baseName = "ComposeApp"
             isStatic = true
         }
