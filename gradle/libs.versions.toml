@@ -34,7 +34,7 @@ koin = "4.1.1"
 buildkonfig = "0.17.1"
 
 # Supabase
-supabase = "3.0.2"
+supabase = "3.2.6"
 
 # Ktlint
 ktlint = "14.0.1"
