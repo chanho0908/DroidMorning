@@ -2,6 +2,13 @@ name: Android CI (KMP)
 
 on:
   workflow_call:
+    secrets:
+      GOOGLE_CLIENT_ID:
+        required: true
+      SUPABASE_URL:
+        required: true
+      SUPABASE_KEY:
+        required: true
 
 jobs:
   android-build:
@@ -9,6 +16,14 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+
+      - name: Create local.properties
+        run: |
+          cat > local.properties << EOF
+          GOOGLE_CLIENT_ID=${{ secrets.GOOGLE_CLIENT_ID }}
+          SUPABASE_URL=${{ secrets.SUPABASE_URL }}
+          SUPABASE_KEY=${{ secrets.SUPABASE_KEY }}
+          EOF
 
       - name: Cache Gradle
         uses: actions/cache@v4
