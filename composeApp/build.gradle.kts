@@ -53,6 +53,9 @@ kotlin {
             implementation(libs.bundles.ktor.common)
             implementation(libs.kotlinx.coroutines.core)
             implementation(libs.kotlinx.serialization.json)
+
+            implementation(project.dependencies.platform(libs.supabase.bom))
+            implementation(libs.bundles.supabase)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)

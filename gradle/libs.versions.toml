@@ -33,6 +33,9 @@ koin = "4.1.1"
 # BuildKonfig
 buildkonfig = "0.17.1"
 
+# Supabase
+supabase = "3.0.2"
+
 # Ktlint
 ktlint = "14.0.1"
 
@@ -79,6 +82,12 @@ koin-core = { module = "io.insert-koin:koin-core", version.ref = "koin" }
 koin-compose = { module = "io.insert-koin:koin-compose", version.ref = "koin" }
 koin-compose-viewmodel = { module = "io.insert-koin:koin-compose-viewmodel", version.ref = "koin" }
 
+# Supabase
+supabase-bom = { group = "io.github.jan-tennert.supabase", name = "bom", version.ref = "supabase" }
+supabase-postgrest = { group = "io.github.jan-tennert.supabase", name = "postgrest-kt" }
+supabase-auth = { group = "io.github.jan-tennert.supabase", name = "auth-kt" }
+supabase-realtime = { group = "io.github.jan-tennert.supabase", name = "realtime-kt" }
+
 # Test
 junit = { module = "junit:junit", version.ref = "junit" }
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
@@ -122,6 +131,12 @@ koin = [
     "koin-core",
     "koin-compose",
     "koin-compose-viewmodel",
+]
+
+supabase = [
+    "supabase-auth",
+    "supabase-postgrest",
+    "supabase-realtime"
 ]
 
 test-unit = [
