@@ -42,7 +42,7 @@ class AuthViewModel(
                     }
 
                     is AuthType.Unauthenticated -> {
-                        // _authState.value = AuthState.Initial
+                        _authState.value = AuthState.Initial
                     }
                 }
             }
