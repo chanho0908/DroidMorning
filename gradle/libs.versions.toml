@@ -26,6 +26,9 @@ ktor = "3.3.3"
 # Koin
 koin = "4.1.1"
 
+# BuildKonfig
+buildkonfig = "0.17.1"
+
 # Ktlint
 ktlint = "14.0.1"
 
@@ -135,6 +138,9 @@ kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", versi
 
 # Compose
 compose-multiplatform = { id = "org.jetbrains.compose", version.ref = "compose-multiplatform" }
+
+# BuildKonfig
+buildkonfig = { id = "com.codingfeline.buildkonfig", version.ref = "buildkonfig" }
 
 # Ktlint
 ktlint = { id = "org.jlleitschuh.gradle.ktlint", version.ref = "ktlint" }

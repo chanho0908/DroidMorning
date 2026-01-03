@@ -1,4 +1,6 @@
+import com.codingfeline.buildkonfig.compiler.FieldSpec.Type
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+import java.util.Properties
 
 plugins {
     alias(libs.plugins.kotlin.multiplatform)
@@ -6,6 +8,7 @@ plugins {
     alias(libs.plugins.compose.multiplatform)
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.kotlin.serialization)
+    alias(libs.plugins.buildkonfig)
 }
 
 kotlin {
@@ -56,6 +59,35 @@ kotlin {
         iosMain.dependencies {
             implementation(libs.ktor.client.darwin)
         }
+    }
+}
+
+buildkonfig {
+    packageName = "com.peto.droidmorning"
+    exposeObjectWithName = "BuildKonfig"
+
+    val props =
+        Properties().apply {
+            val file = rootProject.file("local.properties")
+            if (file.exists()) file.inputStream().use { load(it) }
+        }
+
+    defaultConfigs {
+        buildConfigField(
+            Type.STRING,
+            "GOOGLE_CLIENT_ID",
+            props.getProperty("GOOGLE_CLIENT_ID"),
+        )
+        buildConfigField(
+            Type.STRING,
+            "SUPABASE_URL",
+            props.getProperty("SUPABASE_URL"),
+        )
+        buildConfigField(
+            Type.STRING,
+            "SUPABASE_KEY",
+            props.getProperty("SUPABASE_KEY"),
+        )
     }
 }
 
