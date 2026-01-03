@@ -109,10 +109,7 @@ fun AuthScreen(
                     horizontalAlignment = Alignment.CenterHorizontally,
                     verticalArrangement = Arrangement.spacedBy(8.dp),
                 ) {
-                    Text("오류: ${state.message}", color = MaterialTheme.colorScheme.error)
-                    Button(onClick = { errorMessage = null }) {
-                        Text("다시 시도")
-                    }
+                    Text("로그인에 실패했습니다.", color = MaterialTheme.colorScheme.error)
                 }
             }
         }

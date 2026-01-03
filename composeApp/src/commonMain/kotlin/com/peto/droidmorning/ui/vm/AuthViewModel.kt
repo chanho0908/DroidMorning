@@ -19,9 +19,7 @@ sealed interface AuthState {
         val user: UserInfo,
     ) : AuthState
 
-    data class Error(
-        val message: String,
-    ) : AuthState
+    data object Error : AuthState
 }
 
 class AuthViewModel(
@@ -44,7 +42,7 @@ class AuthViewModel(
                     }
 
                     is AuthType.Unauthenticated -> {
-                        // _authState.value = AuthState.Error(it)
+                        // _authState.value = AuthState.Initial
                     }
                 }
             }
@@ -55,14 +53,8 @@ class AuthViewModel(
             _authState.value = AuthState.Loading
             authRepository
                 .signInWithGoogle(idToken)
-                .onSuccess { user ->
-                    _authState.value = AuthState.Success(user)
-                }.onFailure { exception ->
-                    _authState.value =
-                        AuthState.Error(
-                            exception.message ?: "로그인에 실패했어요",
-                        )
-                }
+                .onSuccess { user -> _authState.value = AuthState.Success(user) }
+                .onFailure { _authState.value = AuthState.Error }
         }
     }
 
@@ -70,14 +62,8 @@ class AuthViewModel(
         viewModelScope.launch {
             authRepository
                 .signOut()
-                .onSuccess {
-                    _authState.value = AuthState.Initial
-                }.onFailure { exception ->
-                    _authState.value =
-                        AuthState.Error(
-                            exception.message ?: "로그아웃에 실패했어요",
-                        )
-                }
+                .onSuccess { _authState.value = AuthState.Initial }
+                .onFailure { _authState.value = AuthState.Error }
         }
     }
 }
