@@ -36,6 +36,8 @@ kotlin {
             implementation(libs.ktor.client.okhttp)
 
             implementation(libs.kotlinx.coroutines.android)
+
+            implementation(libs.bundles.credential.manager)
         }
         commonMain.dependencies {
             implementation(compose.runtime)
