@@ -1,9 +1,9 @@
 package com.peto.droidmorning.domain.repository.auth
 
-import io.github.jan.supabase.auth.user.UserInfo
+import com.peto.droidmorning.domain.model.User
 
 interface AuthRepository {
-    suspend fun signInWithGoogle(oauthIdToken: String): Result<UserInfo>
+    suspend fun signInWithGoogle(oauthIdToken: String): Result<User>
 
     suspend fun signOut(): Result<Unit>
 
