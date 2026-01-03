@@ -1,6 +1,6 @@
-package com.peto.droidmorning.ui.di
+package com.peto.droidmorning.presentation.di
 
-import com.peto.droidmorning.ui.vm.AuthViewModel
+import com.peto.droidmorning.presentation.vm.AuthViewModel
 import org.koin.core.module.dsl.viewModelOf
 import org.koin.dsl.module
 

@@ -24,8 +24,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.peto.droidmorning.auth.GoogleAuthClient
 import com.peto.droidmorning.auth.GoogleAuthResult
-import com.peto.droidmorning.ui.vm.AuthState
-import com.peto.droidmorning.ui.vm.AuthViewModel
+import com.peto.droidmorning.presentation.vm.AuthState
+import com.peto.droidmorning.presentation.vm.AuthViewModel
 import kotlinx.coroutines.launch
 import org.jetbrains.compose.ui.tooling.preview.Preview
 import org.koin.compose.koinInject
@@ -96,7 +96,6 @@ fun AuthScreen(
                     verticalArrangement = Arrangement.spacedBy(8.dp),
                 ) {
                     Text("환영합니다!", style = MaterialTheme.typography.headlineMedium)
-                    Text("Email: ${state.user.email}", style = MaterialTheme.typography.bodyLarge)
                     Spacer(modifier = Modifier.height(16.dp))
                     Button(onClick = { viewModel.signOut() }) {
                         Text("로그아웃")

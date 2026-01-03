@@ -1,8 +1,7 @@
-package com.peto.droidmorning.ui.vm
+package com.peto.droidmorning.presentation.vm
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.peto.droidmorning.domain.model.User
 import com.peto.droidmorning.domain.repository.auth.AuthRepository
 import com.peto.droidmorning.domain.repository.auth.AuthType
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -15,9 +14,7 @@ sealed interface AuthState {
 
     data object Loading : AuthState
 
-    data class Success(
-        val user: User,
-    ) : AuthState
+    data object Success : AuthState
 
     data object Error : AuthState
 }
@@ -38,7 +35,7 @@ class AuthViewModel(
             .onSuccess {
                 when (it) {
                     is AuthType.Authenticated -> {
-                        _authState.value = AuthState.Success(it.user)
+                        _authState.value = AuthState.Success
                     }
 
                     is AuthType.Unauthenticated -> {

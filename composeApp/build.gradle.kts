@@ -1,14 +1,10 @@
-import com.codingfeline.buildkonfig.compiler.FieldSpec.Type
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
-import java.util.Properties
 
 plugins {
     alias(libs.plugins.kotlin.multiplatform)
     alias(libs.plugins.android.application)
     alias(libs.plugins.compose.multiplatform)
     alias(libs.plugins.kotlin.compose)
-    alias(libs.plugins.kotlin.serialization)
-    alias(libs.plugins.buildkonfig)
 }
 
 kotlin {
@@ -33,13 +29,17 @@ kotlin {
             implementation(compose.preview)
             implementation(libs.androidx.activity.compose)
 
-            implementation(libs.ktor.client.okhttp)
-
             implementation(libs.kotlinx.coroutines.android)
 
             implementation(libs.bundles.credential.manager)
         }
         commonMain.dependencies {
+            // 모듈 의존성
+            implementation(project(":domain"))
+            implementation(project(":data"))
+            implementation(project(":presentation"))
+
+            // Compose 의존성
             implementation(compose.runtime)
             implementation(compose.foundation)
             implementation(compose.material3)
@@ -49,50 +49,14 @@ kotlin {
             implementation(libs.androidx.lifecycle.viewmodel.compose)
             implementation(libs.androidx.lifecycle.runtime.compose)
 
+            // DI
             implementation(libs.bundles.koin)
-            implementation(libs.bundles.ktor.common)
             implementation(libs.kotlinx.coroutines.core)
-            implementation(libs.kotlinx.serialization.json)
-
-            implementation(project.dependencies.platform(libs.supabase.bom))
-            implementation(libs.bundles.supabase)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
             implementation(libs.koin.test)
         }
-        iosMain.dependencies {
-            implementation(libs.ktor.client.darwin)
-        }
-    }
-}
-
-buildkonfig {
-    packageName = "com.peto.droidmorning"
-    exposeObjectWithName = "BuildKonfig"
-
-    val props =
-        Properties().apply {
-            val file = rootProject.file("local.properties")
-            if (file.exists()) file.inputStream().use { load(it) }
-        }
-
-    defaultConfigs {
-        buildConfigField(
-            Type.STRING,
-            "GOOGLE_CLIENT_ID",
-            props.getProperty("GOOGLE_CLIENT_ID"),
-        )
-        buildConfigField(
-            Type.STRING,
-            "SUPABASE_URL",
-            props.getProperty("SUPABASE_URL"),
-        )
-        buildConfigField(
-            Type.STRING,
-            "SUPABASE_KEY",
-            props.getProperty("SUPABASE_KEY"),
-        )
     }
 }
 
