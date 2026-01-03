@@ -19,7 +19,7 @@ captures
 node_modules/
 vcs.xml
 google-services.json
-scripts
+scripts/
 
 # CocoaPods
 Pods/
@@ -29,3 +29,4 @@ Podfile.lock
 
 # Cursor AI Rules (개인 설정)
 .cursorrules
+
