@@ -13,5 +13,3 @@ val supabaseClient =
         install(Auth)
         install(Postgrest)
     }
-
-// https://scmstnxmabjgmuxmozzg.supabase.co/auth/v1/callback
