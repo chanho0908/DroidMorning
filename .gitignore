@@ -19,3 +19,13 @@ captures
 node_modules/
 vcs.xml
 google-services.json
+scripts
+
+# CocoaPods
+Pods/
+Podfile.lock
+*.xcworkspace/xcuserdata/
+*.xcworkspace/xcshareddata/IDEWorkspaceChecks.plist
+
+# Cursor AI Rules (개인 설정)
+.cursorrules
