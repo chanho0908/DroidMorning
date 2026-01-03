@@ -50,7 +50,7 @@ class AuthViewModel(
             _authState.value = AuthState.Loading
             authRepository
                 .signInWithGoogle(idToken)
-                .onSuccess { user -> _authState.value = AuthState.Success(user) }
+                .onSuccess { user -> _authState.value = AuthState.Success }
                 .onFailure { _authState.value = AuthState.Error }
         }
     }
