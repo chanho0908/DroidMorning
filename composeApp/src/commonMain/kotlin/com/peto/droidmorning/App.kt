@@ -1,51 +1,118 @@
 package com.peto.droidmorning
 
-import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeContentPadding
 import androidx.compose.material3.Button
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import droidmorning.composeapp.generated.resources.Res
-import droidmorning.composeapp.generated.resources.compose_multiplatform
-import org.jetbrains.compose.resources.painterResource
+import androidx.compose.ui.unit.dp
+import com.peto.droidmorning.auth.GoogleAuthClient
+import com.peto.droidmorning.auth.GoogleAuthResult
+import com.peto.droidmorning.ui.vm.AuthState
+import com.peto.droidmorning.ui.vm.AuthViewModel
+import kotlinx.coroutines.launch
 import org.jetbrains.compose.ui.tooling.preview.Preview
+import org.koin.compose.koinInject
+import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
 @Preview
 fun App() {
     MaterialTheme {
-        var showContent by remember { mutableStateOf(false) }
-        Column(
-            modifier =
-                Modifier
-                    .background(MaterialTheme.colorScheme.primaryContainer)
-                    .safeContentPadding()
-                    .fillMaxSize(),
-            horizontalAlignment = Alignment.CenterHorizontally,
-        ) {
-            Button(onClick = { showContent = !showContent }) {
-                Text("Click me!")
-            }
-            AnimatedVisibility(showContent) {
-                val greeting = remember { Greeting().greet() }
-                Column(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalAlignment = Alignment.CenterHorizontally,
+        AuthScreen()
+    }
+}
+
+@Composable
+fun AuthScreen(
+    viewModel: AuthViewModel = koinViewModel(),
+    googleAuthClient: GoogleAuthClient = koinInject(),
+) {
+    val authState by viewModel.authState.collectAsState()
+    var errorMessage by remember { mutableStateOf<String?>(null) }
+    val scope = rememberCoroutineScope()
+
+    Column(
+        modifier =
+            Modifier
+                .background(MaterialTheme.colorScheme.primaryContainer)
+                .safeContentPadding()
+                .fillMaxSize()
+                .padding(16.dp),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center,
+    ) {
+        when (val state = authState) {
+            is AuthState.Initial -> {
+                Button(
+                    onClick = {
+                        scope.launch {
+                            when (val result = googleAuthClient.signIn()) {
+                                is GoogleAuthResult.Success -> {
+                                    viewModel.signInWithGoogle(result.idToken)
+                                }
+                                is GoogleAuthResult.Failure -> {
+                                    errorMessage = result.message
+                                }
+                                GoogleAuthResult.Cancelled -> {
+                                    errorMessage = "로그인이 취소되었습니다"
+                                }
+                            }
+                        }
+                    },
                 ) {
-                    Image(painterResource(Res.drawable.compose_multiplatform), null)
-                    Text("Compose: $greeting")
+                    Text("Google로 로그인")
+                }
+
+                errorMessage?.let {
+                    Spacer(modifier = Modifier.height(16.dp))
+                    Text(text = it, color = MaterialTheme.colorScheme.error)
+                }
+            }
+
+            is AuthState.Loading -> {
+                CircularProgressIndicator()
+            }
+
+            is AuthState.Success -> {
+                Column(
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.spacedBy(8.dp),
+                ) {
+                    Text("환영합니다!", style = MaterialTheme.typography.headlineMedium)
+                    Text("Email: ${state.user.email}", style = MaterialTheme.typography.bodyLarge)
+                    Spacer(modifier = Modifier.height(16.dp))
+                    Button(onClick = { viewModel.signOut() }) {
+                        Text("로그아웃")
+                    }
+                }
+            }
+
+            is AuthState.Error -> {
+                Column(
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.spacedBy(8.dp),
+                ) {
+                    Text("오류: ${state.message}", color = MaterialTheme.colorScheme.error)
+                    Button(onClick = { errorMessage = null }) {
+                        Text("다시 시도")
+                    }
                 }
             }
         }
