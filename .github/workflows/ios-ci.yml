@@ -72,6 +72,9 @@ jobs:
       - name: Grant execute permission for gradlew
         run: chmod +x ./gradlew
 
+      - name: Generate Dummy Framework for CocoaPods
+        run: ./gradlew :composeApp:generateDummyFramework
+
       - name: Install CocoaPods dependencies
         working-directory: iosApp
         run: |
