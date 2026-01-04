@@ -31,10 +31,7 @@ jobs:
 
       - name: Decode and setup iOS configuration files
         run: |
-          # Decode GoogleService-Info.plist
           echo "${{ secrets.IOS_GOOGLE_SERVICE_INFO_PLIST }}" | base64 --decode > iosApp/iosApp/GoogleService-Info.plist
-          
-          # Decode Info.plist content and merge with existing Info.plist
           echo "${{ secrets.IOS_INFO_PLIST }}" | base64 --decode > iosApp/iosApp/Info.plist
 
       - name: Select Xcode 15.4
