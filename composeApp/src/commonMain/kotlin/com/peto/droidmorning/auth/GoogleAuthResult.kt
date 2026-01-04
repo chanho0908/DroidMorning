@@ -5,9 +5,7 @@ sealed interface GoogleAuthResult {
         val idToken: String,
     ) : GoogleAuthResult
 
-    data class Failure(
-        val message: String,
-    ) : GoogleAuthResult
+    data object Failure : GoogleAuthResult
 
     data object Cancelled : GoogleAuthResult
 }
