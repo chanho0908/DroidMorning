@@ -19,7 +19,9 @@ captures
 node_modules/
 vcs.xml
 google-services.json
-scripts/
+GoogleService-Info.plist
+Info.plist
+*.original
 
 # CocoaPods
 Pods/

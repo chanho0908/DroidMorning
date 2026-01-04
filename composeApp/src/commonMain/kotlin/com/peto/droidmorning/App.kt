@@ -68,7 +68,7 @@ fun AuthScreen(
                                     viewModel.signInWithGoogle(result.idToken)
                                 }
                                 is GoogleAuthResult.Failure -> {
-                                    errorMessage = result.message
+                                    errorMessage = "로그인에 실패했습니다."
                                 }
                                 GoogleAuthResult.Cancelled -> {
                                     errorMessage = "로그인이 취소되었습니다"

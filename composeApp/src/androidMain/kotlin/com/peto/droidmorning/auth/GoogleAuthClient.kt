@@ -10,9 +10,7 @@ actual class GoogleAuthClient(
             }
 
             is GoogleCredentialResult.Failure -> {
-                GoogleAuthResult.Failure(
-                    result.exception?.message ?: ERROR_LOGIN_FAILED,
-                )
+                GoogleAuthResult.Failure
             }
 
             GoogleCredentialResult.Cancel -> {
@@ -20,14 +18,9 @@ actual class GoogleAuthClient(
             }
 
             GoogleCredentialResult.Suspending -> {
-                GoogleAuthResult.Failure(ERROR_LOGIN_SUSPENDED)
+                GoogleAuthResult.Failure
             }
         }
 
     actual suspend fun signOut(): Result<Unit> = credentialManager.logOut()
-
-    companion object {
-        private const val ERROR_LOGIN_FAILED = "로그인에 실패했습니다."
-        private const val ERROR_LOGIN_SUSPENDED = "로그인 중단되었습니다."
-    }
 }

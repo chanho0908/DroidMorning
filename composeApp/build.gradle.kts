@@ -30,11 +30,16 @@ kotlin {
         summary = "DroidMorning Shared Module"
         homepage = "https://github.com/yourusername/DroidMorning"
 
-        ios.deploymentTarget = "14.0"
+        ios.deploymentTarget = "16.0"
 
         framework {
             baseName = "ComposeApp"
             isStatic = true
+        }
+
+        pod("GoogleSignIn")
+        pod("FirebaseAuth") {
+            extraOpts = listOf("-compiler-option", "-fmodules")
         }
     }
 
@@ -48,12 +53,10 @@ kotlin {
             implementation(libs.bundles.credential.manager)
         }
         commonMain.dependencies {
-            // 모듈 의존성
             implementation(project(":domain"))
             implementation(project(":data"))
             implementation(project(":presentation"))
 
-            // Compose 의존성
             implementation(compose.runtime)
             implementation(compose.foundation)
             implementation(compose.material3)
@@ -63,7 +66,6 @@ kotlin {
             implementation(libs.androidx.lifecycle.viewmodel.compose)
             implementation(libs.androidx.lifecycle.runtime.compose)
 
-            // DI
             implementation(libs.bundles.koin)
             implementation(libs.kotlinx.coroutines.core)
         }
