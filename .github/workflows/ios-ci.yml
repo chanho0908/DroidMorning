@@ -96,4 +96,6 @@ jobs:
             CODE_SIGNING_ALLOWED=NO \
             CODE_SIGN_IDENTITY="" \
             CODE_SIGN_ENTITLEMENTS="" \
-            IPHONEOS_DEPLOYMENT_TARGET=16.0
+            IPHONEOS_DEPLOYMENT_TARGET=16.0 \
+            ONLY_ACTIVE_ARCH=YES \
+            ARCHS=arm64
