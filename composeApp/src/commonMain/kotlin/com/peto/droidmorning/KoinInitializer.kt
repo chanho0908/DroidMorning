@@ -1,7 +1,6 @@
 package com.peto.droidmorning
 
-import com.peto.droidmorning.data.di.networkModule
-import com.peto.droidmorning.data.di.repositoryModule
+import com.peto.droidmorning.data.di.dataModule
 import com.peto.droidmorning.di.platformModule
 import com.peto.droidmorning.presentation.di.viewModelModule
 import org.koin.core.context.startKoin
@@ -19,8 +18,7 @@ fun initKoin(
             extraModules +
                 listOf(
                     platformModule,
-                    networkModule,
-                    repositoryModule,
+                    dataModule,
                     viewModelModule,
                 ),
         )

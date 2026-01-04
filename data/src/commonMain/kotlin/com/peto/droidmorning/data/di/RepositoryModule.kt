@@ -5,7 +5,7 @@ import com.peto.droidmorning.domain.repository.auth.AuthRepository
 import io.github.jan.supabase.SupabaseClient
 import org.koin.dsl.module
 
-val repositoryModule =
+internal val repositoryModule =
     module {
         single<AuthRepository> { DefaultAuthRepository(get<SupabaseClient>()) }
     }
