@@ -11,7 +11,7 @@ private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(
     name = TOKEN_DATASTORE_FILENAME,
 )
 
-actual fun createDataStore(): DataStore<Preferences> = DataStoreProvider.dataStore
+actual fun createTokenDataStore(): DataStore<Preferences> = DataStoreProvider.dataStore
 
 private object DataStoreProvider : KoinComponent {
     private val context: Context by inject()
