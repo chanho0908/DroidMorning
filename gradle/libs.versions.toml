@@ -33,8 +33,14 @@ koin = "4.1.1"
 # BuildKonfig
 buildkonfig = "0.17.1"
 
+# DataStore
+datastore = "1.2.0"
+
 # Supabase
 supabase = "3.2.6"
+
+# Okio
+okio = "3.16.4"
 
 # Ktlint
 ktlint = "14.0.1"
@@ -67,6 +73,7 @@ googleid = { module = "com.google.android.libraries.identity.googleid:googleid",
 kotlin-stdlib = { group = "org.jetbrains.kotlin", name = "kotlin-stdlib", version.ref = "kotlin" }
 kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlinx-coroutines" }
 kotlinx-coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "kotlinx-coroutines" }
+kotlinx-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "kotlinx-coroutines" }
 kotlinx-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "kotlinx-serialization-json" }
 
 # Ktor
@@ -87,6 +94,13 @@ supabase-bom = { group = "io.github.jan-tennert.supabase", name = "bom", version
 supabase-postgrest = { group = "io.github.jan-tennert.supabase", name = "postgrest-kt" }
 supabase-auth = { group = "io.github.jan-tennert.supabase", name = "auth-kt" }
 supabase-realtime = { group = "io.github.jan-tennert.supabase", name = "realtime-kt" }
+
+# DataStore
+androidx-datastore = { module = "androidx.datastore:datastore", version.ref = "datastore" }
+androidx-datastore-preferences = { module = "androidx.datastore:datastore-preferences", version.ref = "datastore" }
+
+# Okio
+okio = { module = "com.squareup.okio:okio", version.ref = "okio" }
 
 # Test
 junit = { module = "junit:junit", version.ref = "junit" }
@@ -137,6 +151,11 @@ supabase = [
     "supabase-auth",
     "supabase-postgrest",
     "supabase-realtime"
+]
+
+datastore = [
+    "androidx-datastore",
+    "androidx-datastore-preferences",
 ]
 
 test-unit = [

@@ -40,13 +40,17 @@ kotlin {
 
             implementation(project.dependencies.platform(libs.supabase.bom))
             implementation(libs.bundles.supabase)
+
+            implementation(libs.bundles.datastore)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
             implementation(libs.koin.test)
+            implementation(libs.kotlinx.coroutines.test)
         }
         iosMain.dependencies {
             implementation(libs.ktor.client.darwin)
+            implementation(libs.okio)
         }
     }
 }

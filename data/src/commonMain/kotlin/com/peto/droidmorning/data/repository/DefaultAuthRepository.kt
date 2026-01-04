@@ -1,38 +1,30 @@
 package com.peto.droidmorning.data.repository
 
+import com.peto.droidmorning.data.datasource.auth.local.LocalAuthDataSource
+import com.peto.droidmorning.data.datasource.auth.remote.RemoteAuthDataSource
 import com.peto.droidmorning.domain.repository.auth.AuthRepository
 import com.peto.droidmorning.domain.repository.auth.AuthType
-import io.github.jan.supabase.SupabaseClient
-import io.github.jan.supabase.auth.auth
-import io.github.jan.supabase.auth.providers.Google
-import io.github.jan.supabase.auth.providers.builtin.IDToken
 
 class DefaultAuthRepository(
-    supabaseClient: SupabaseClient,
+    private val remoteDataSource: RemoteAuthDataSource,
+    private val localDataSource: LocalAuthDataSource,
 ) : AuthRepository {
-    private val auth = supabaseClient.auth
-
-    override suspend fun signInWithGoogle(oauthIdToken: String): Result<Unit> {
-        auth.signInWith(IDToken) {
-            idToken = oauthIdToken
-            provider = Google
+    override suspend fun authType(): AuthType =
+        when (localDataSource.hasToken()) {
+            true -> AuthType.Authenticated
+            false -> AuthType.Unauthenticated
         }
-        return auth.currentUserOrNull()?.let {
-            Result.success(Unit)
-        } ?: Result.failure(Exception("Failed to get user info"))
-    }
+
+    override suspend fun signIn(oauthIdToken: String): Result<Unit> =
+        runCatching {
+            remoteDataSource.signIn(oauthIdToken)?.let { authToken ->
+                localDataSource.saveTokens(authToken)
+            }
+        }
 
     override suspend fun signOut(): Result<Unit> =
         runCatching {
-            auth.signOut()
-        }
-
-    override fun getCurrentUser(): Result<AuthType> =
-        runCatching {
-            auth
-                .currentUserOrNull()
-                ?.let { userInfo ->
-                    AuthType.Authenticated
-                } ?: AuthType.Unauthenticated
+            remoteDataSource.signOut()
+            localDataSource.clear()
         }
 }

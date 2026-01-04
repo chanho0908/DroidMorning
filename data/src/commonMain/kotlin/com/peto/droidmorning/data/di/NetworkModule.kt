@@ -9,7 +9,7 @@ import io.github.jan.supabase.postgrest.Postgrest
 import io.ktor.client.HttpClient
 import org.koin.dsl.module
 
-val networkModule =
+internal val networkModule =
     module {
         single<HttpClient> {
             HttpClientFactory.create(enableLogging = true)
