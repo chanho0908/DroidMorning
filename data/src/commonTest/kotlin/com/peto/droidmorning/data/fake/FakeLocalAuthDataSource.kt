@@ -4,22 +4,22 @@ import com.peto.droidmorning.data.datasource.auth.local.LocalAuthDataSource
 import com.peto.droidmorning.domain.model.AuthToken
 
 class FakeLocalAuthDataSource : LocalAuthDataSource {
-    private var _accessToken: String? = null
-    private var _refreshToken: String? = null
+    private var accessTokenValue: String? = null
+    private var refreshTokenValue: String? = null
 
-    override suspend fun accessToken(): String? = _accessToken
+    override suspend fun accessToken(): String? = accessTokenValue
 
-    override suspend fun refreshToken(): String? = _refreshToken
+    override suspend fun refreshToken(): String? = refreshTokenValue
 
-    override suspend fun hasToken(): Boolean = _accessToken != null && _refreshToken != null
+    override suspend fun hasToken(): Boolean = accessTokenValue != null && refreshTokenValue != null
 
     override suspend fun saveTokens(authToken: AuthToken) {
-        this._accessToken = authToken.accessToken
-        this._refreshToken = authToken.refreshToken
+        this.accessTokenValue = authToken.accessToken
+        this.refreshTokenValue = authToken.refreshToken
     }
 
     override suspend fun clear() {
-        _accessToken = null
-        _refreshToken = null
+        accessTokenValue = null
+        refreshTokenValue = null
     }
 }
