@@ -36,6 +36,11 @@ kotlin {
             baseName = "ComposeApp"
             isStatic = true
         }
+
+        pod("GoogleSignIn")
+        pod("FirebaseAuth") {
+            extraOpts = listOf("-compiler-option", "-fmodules")
+        }
     }
 
     sourceSets {
@@ -48,12 +53,10 @@ kotlin {
             implementation(libs.bundles.credential.manager)
         }
         commonMain.dependencies {
-            // 모듈 의존성
             implementation(project(":domain"))
             implementation(project(":data"))
             implementation(project(":presentation"))
 
-            // Compose 의존성
             implementation(compose.runtime)
             implementation(compose.foundation)
             implementation(compose.material3)
@@ -63,7 +66,6 @@ kotlin {
             implementation(libs.androidx.lifecycle.viewmodel.compose)
             implementation(libs.androidx.lifecycle.runtime.compose)
 
-            // DI
             implementation(libs.bundles.koin)
             implementation(libs.kotlinx.coroutines.core)
         }
