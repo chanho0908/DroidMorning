@@ -7,6 +7,7 @@ import kotlinx.coroutines.test.runTest
 import kotlin.test.BeforeTest
 import kotlin.test.Test
 import kotlin.test.assertEquals
+import kotlin.test.assertFalse
 import kotlin.test.assertTrue
 
 class DefaultAuthRepositoryTest {
@@ -58,9 +59,10 @@ class DefaultAuthRepositoryTest {
         runTest {
             // given
             val oauthIdToken = "oauthIdToken"
+            assertFalse(fakeLocalDataSource.hasToken())
 
             // when
-            val authToken = fakeRemoteDataSource.signIn(oauthIdToken)
+            repository.signIn(oauthIdToken)
 
             // then
             fakeLocalDataSource.hasToken()
