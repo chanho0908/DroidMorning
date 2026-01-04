@@ -30,7 +30,7 @@ kotlin {
         summary = "DroidMorning Shared Module"
         homepage = "https://github.com/yourusername/DroidMorning"
 
-        ios.deploymentTarget = "14.0"
+        ios.deploymentTarget = "16.0"
 
         framework {
             baseName = "ComposeApp"
