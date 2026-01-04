@@ -33,8 +33,14 @@ koin = "4.1.1"
 # BuildKonfig
 buildkonfig = "0.17.1"
 
+# DataStore
+datastore = "1.2.0"
+
 # Supabase
 supabase = "3.2.6"
+
+# Okio
+okio = "3.16.4"
 
 # Ktlint
 ktlint = "14.0.1"
@@ -88,6 +94,13 @@ supabase-postgrest = { group = "io.github.jan-tennert.supabase", name = "postgre
 supabase-auth = { group = "io.github.jan-tennert.supabase", name = "auth-kt" }
 supabase-realtime = { group = "io.github.jan-tennert.supabase", name = "realtime-kt" }
 
+# DataStore
+androidx-datastore = { module = "androidx.datastore:datastore", version.ref = "datastore" }
+androidx-datastore-preferences = { module = "androidx.datastore:datastore-preferences", version.ref = "datastore" }
+
+# Okio
+okio = { module = "com.squareup.okio:okio", version.ref = "okio" }
+
 # Test
 junit = { module = "junit:junit", version.ref = "junit" }
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
@@ -137,6 +150,11 @@ supabase = [
     "supabase-auth",
     "supabase-postgrest",
     "supabase-realtime"
+]
+
+datastore = [
+    "androidx-datastore",
+    "androidx-datastore-preferences",
 ]
 
 test-unit = [

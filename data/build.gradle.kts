@@ -40,6 +40,8 @@ kotlin {
 
             implementation(project.dependencies.platform(libs.supabase.bom))
             implementation(libs.bundles.supabase)
+
+            implementation(libs.bundles.datastore)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
@@ -47,6 +49,7 @@ kotlin {
         }
         iosMain.dependencies {
             implementation(libs.ktor.client.darwin)
+            implementation(libs.okio)
         }
     }
 }
