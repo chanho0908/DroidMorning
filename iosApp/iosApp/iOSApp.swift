@@ -26,6 +26,7 @@ struct iOSApp: App {
                 .onOpenURL { url in
                     GIDSignIn.sharedInstance.handle(url)
                 }
+            .ignoresSafeArea()
         }
     }
 }
