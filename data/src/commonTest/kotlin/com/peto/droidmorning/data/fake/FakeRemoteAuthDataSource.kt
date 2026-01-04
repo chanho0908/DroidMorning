@@ -1,35 +1,14 @@
 package com.peto.droidmorning.data.fake
 
 import com.peto.droidmorning.data.datasource.auth.remote.RemoteAuthDataSource
+import com.peto.droidmorning.domain.model.AuthToken
 
 class FakeRemoteAuthDataSource : RemoteAuthDataSource {
-    private var shouldSucceed = true
-    private var signInCallCount = 0
-    private var signOutCallCount = 0
+    override suspend fun signIn(oauthIdToken: String): AuthToken =
+        AuthToken(
+            accessToken = "newAccessToken",
+            refreshToken = "newRefreshToken",
+        )
 
-    fun setShouldSucceed(shouldSucceed: Boolean) {
-        this.shouldSucceed = shouldSucceed
-    }
-
-    fun getSignInCallCount() = signInCallCount
-
-    fun getSignOutCallCount() = signOutCallCount
-
-    override suspend fun signIn(oauthIdToken: String): Result<Unit> {
-        signInCallCount++
-        return if (shouldSucceed) {
-            Result.success(Unit)
-        } else {
-            Result.failure(Exception("Sign in failed"))
-        }
-    }
-
-    override suspend fun signOut(): Result<Unit> {
-        signOutCallCount++
-        return if (shouldSucceed) {
-            Result.success(Unit)
-        } else {
-            Result.failure(Exception("Sign out failed"))
-        }
-    }
+    override suspend fun signOut() {}
 }

@@ -1,7 +1,9 @@
 package com.peto.droidmorning.data.datasource.auth.remote
 
-interface RemoteAuthDataSource {
-    suspend fun signIn(oauthIdToken: String): Result<Unit>
+import com.peto.droidmorning.domain.model.AuthToken
 
-    suspend fun signOut(): Result<Unit>
+interface RemoteAuthDataSource {
+    suspend fun signIn(oauthIdToken: String): AuthToken?
+
+    suspend fun signOut()
 }

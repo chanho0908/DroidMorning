@@ -4,24 +4,26 @@ import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
-import com.peto.droidmorning.data.datasource.auth.local.LocalAuthDataSource
+import com.peto.droidmorning.domain.model.AuthToken
 import kotlinx.coroutines.flow.first
 
 class DefaultLocalAuthDataSource(
     private val dataStore: DataStore<Preferences>,
 ) : LocalAuthDataSource {
+    override suspend fun accessToken(): String? = getPreferences()[KEY_ACCESS_TOKEN]
+
+    override suspend fun refreshToken(): String? = getPreferences()[KEY_REFRESH_TOKEN]
+
     override suspend fun hasToken(): Boolean =
-        dataStore.data.first().let { preferences ->
-            preferences[KEY_ACCESS_TOKEN] != null && preferences[KEY_REFRESH_TOKEN] != null
+        getPreferences().let { preferences ->
+            preferences[KEY_ACCESS_TOKEN] != null &&
+                preferences[KEY_REFRESH_TOKEN] != null
         }
 
-    override suspend fun saveTokens(
-        accessToken: String,
-        refreshToken: String,
-    ) {
+    override suspend fun saveTokens(authToken: AuthToken) {
         dataStore.edit { preferences ->
-            preferences[KEY_ACCESS_TOKEN] = accessToken
-            preferences[KEY_REFRESH_TOKEN] = refreshToken
+            preferences[KEY_ACCESS_TOKEN] = authToken.accessToken
+            preferences[KEY_REFRESH_TOKEN] = authToken.refreshToken
         }
     }
 
@@ -32,7 +34,9 @@ class DefaultLocalAuthDataSource(
         }
     }
 
-    companion object Companion {
+    private suspend fun getPreferences(): Preferences = dataStore.data.first()
+
+    companion object {
         private val KEY_ACCESS_TOKEN = stringPreferencesKey("access_token")
         private val KEY_REFRESH_TOKEN = stringPreferencesKey("refresh_token")
     }

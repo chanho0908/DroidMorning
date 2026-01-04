@@ -1,5 +1,6 @@
 package com.peto.droidmorning.data.datasource.auth.remote
 
+import com.peto.droidmorning.domain.model.AuthToken
 import io.github.jan.supabase.SupabaseClient
 import io.github.jan.supabase.auth.Auth
 import io.github.jan.supabase.auth.auth
@@ -11,15 +12,18 @@ class DefaultRemoteAuthDataSource(
 ) : RemoteAuthDataSource {
     private val auth: Auth = client.auth
 
-    override suspend fun signIn(oauthIdToken: String): Result<Unit> {
+    override suspend fun signIn(oauthIdToken: String): AuthToken? {
         auth.signInWith(IDToken) {
             idToken = oauthIdToken
             provider = Google
         }
-        return auth.currentUserOrNull()?.let {
-            Result.success(Unit)
-        } ?: Result.failure(Exception("Failed to get user info"))
+        return auth.currentSessionOrNull()?.let {
+            AuthToken(
+                accessToken = it.accessToken,
+                refreshToken = it.refreshToken,
+            )
+        }
     }
 
-    override suspend fun signOut(): Result<Unit> = runCatching { auth.signOut() }
+    override suspend fun signOut() = auth.signOut()
 }
