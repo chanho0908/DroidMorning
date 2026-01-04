@@ -72,30 +72,8 @@ jobs:
       - name: Grant execute permission for gradlew
         run: chmod +x ./gradlew
 
-      - name: Generate Dummy Framework for CocoaPods
-        run: ./gradlew :composeApp:generateDummyFramework
-
-      - name: Install CocoaPods dependencies
-        working-directory: iosApp
-        run: |
-          sudo gem install cocoapods -v 1.16.2
-          pod install --repo-update
-
       - name: Build iOS Debug Framework
-        run: ./gradlew :composeApp:linkDebugFrameworkIosSimulatorArm64 --stacktrace --info
-      
-      - name: Build iOS App (Xcode)
-        working-directory: iosApp
-        run: |
-          xcodebuild clean build \
-            -workspace iosApp.xcworkspace \
-            -scheme iosApp \
-            -configuration Debug \
-            -destination 'platform=iOS Simulator,name=iPhone 15 Pro' \
-            -allowProvisioningUpdates \
-            CODE_SIGNING_ALLOWED=NO \
-            CODE_SIGN_IDENTITY="" \
-            CODE_SIGN_ENTITLEMENTS="" \
-            IPHONEOS_DEPLOYMENT_TARGET=16.0 \
-            ONLY_ACTIVE_ARCH=YES \
-            ARCHS=arm64
+        env:
+          ARCHS: arm64
+          ONLY_ACTIVE_ARCH: YES
+        run: ./gradlew :composeApp:linkDebugFrameworkIosSimulatorArm64 --stacktrace
