@@ -11,7 +11,7 @@ on:
         required: true
       IOS_GOOGLE_SERVICE_INFO_PLIST:
         required: true
-      IOS_INFO_PLIST_CONTENT:
+      IOS_INFO_PLIST:
         required: true
 
 jobs:
