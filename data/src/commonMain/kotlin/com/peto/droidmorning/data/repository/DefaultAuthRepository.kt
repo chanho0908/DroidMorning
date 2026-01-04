@@ -22,5 +22,9 @@ class DefaultAuthRepository(
             }
         }
 
-    override suspend fun signOut(): Result<Unit> = runCatching { remoteDataSource.signOut() }
+    override suspend fun signOut(): Result<Unit> =
+        runCatching {
+            remoteDataSource.signOut()
+            localDataSource.clear()
+        }
 }
