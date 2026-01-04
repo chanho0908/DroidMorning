@@ -14,4 +14,13 @@ class DefaultAuthRepository(
             true -> AuthType.Authenticated
             false -> AuthType.Unauthenticated
         }
+
+    override suspend fun signIn(oauthIdToken: String): Result<Unit> =
+        runCatching {
+            remoteDataSource.signIn(oauthIdToken)?.let { authToken ->
+                localDataSource.saveTokens(authToken)
+            }
+        }
+
+    override suspend fun signOut(): Result<Unit> = runCatching { remoteDataSource.signOut() }
 }

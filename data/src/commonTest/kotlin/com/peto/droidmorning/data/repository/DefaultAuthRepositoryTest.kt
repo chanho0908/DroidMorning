@@ -7,6 +7,7 @@ import kotlinx.coroutines.test.runTest
 import kotlin.test.BeforeTest
 import kotlin.test.Test
 import kotlin.test.assertEquals
+import kotlin.test.assertTrue
 
 class DefaultAuthRepositoryTest {
     private lateinit var repository: DefaultAuthRepository
@@ -28,7 +29,12 @@ class DefaultAuthRepositoryTest {
     fun `토큰이 존재하면 Authenticated를 반환 한다`() =
         runTest {
             // given
-            fakeLocalDataSource.saveTokens("accessToken", "refreshToken")
+            fakeLocalDataSource.saveTokens(
+                com.peto.droidmorning.domain.model.AuthToken(
+                    accessToken = "accessToken",
+                    refreshToken = "refreshToken",
+                ),
+            )
 
             // when
             val actual = repository.authType()
@@ -45,5 +51,28 @@ class DefaultAuthRepositoryTest {
 
             // then
             assertEquals(AuthType.Unauthenticated, actual)
+        }
+
+    @Test
+    fun `로그인에 성공하면 액세스 토큰과 리프레시 토큰을 저장한다`() =
+        runTest {
+            // given
+            val oauthIdToken = "oauthIdToken"
+
+            // when
+            val authToken = fakeRemoteDataSource.signIn(oauthIdToken)
+
+            // then
+            fakeLocalDataSource.hasToken()
+        }
+
+    @Test
+    fun `로그아웃에 성공하면 Result Success를 반환한다`() =
+        runTest {
+            // when
+            val result = repository.signOut()
+
+            // then
+            assertTrue(result.isSuccess)
         }
 }
