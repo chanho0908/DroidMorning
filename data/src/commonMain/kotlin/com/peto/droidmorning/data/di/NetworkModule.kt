@@ -4,6 +4,7 @@ import com.peto.droidmorning.BuildKonfig
 import com.peto.droidmorning.data.network.client.HttpClientFactory
 import io.github.jan.supabase.SupabaseClient
 import io.github.jan.supabase.auth.Auth
+import io.github.jan.supabase.auth.auth
 import io.github.jan.supabase.createSupabaseClient
 import io.github.jan.supabase.postgrest.Postgrest
 import io.ktor.client.HttpClient
@@ -24,4 +25,6 @@ internal val networkModule =
                 install(Postgrest)
             }
         }
+
+        single<Auth> { get<SupabaseClient>().auth }
     }
