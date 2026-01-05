@@ -53,7 +53,7 @@ class DefaultQuestionRepositoryTest {
             // then
             val questions = result.getOrThrow()
             assertEquals(1, questions.size)
-            assertEquals(Category.Kotlin.name, questions.first().category)
+            assertEquals(Category.Kotlin, questions.first().category)
         }
 
     @Test
@@ -82,7 +82,7 @@ class DefaultQuestionRepositoryTest {
             // then
             val questions = result.getOrThrow()
             assertEquals(1, questions.size)
-            assertEquals(Category.Coroutine.name, questions.first().category)
+            assertEquals(Category.Coroutine, questions.first().category)
         }
 
     @Test
@@ -111,7 +111,7 @@ class DefaultQuestionRepositoryTest {
             // then
             val questions = result.getOrThrow()
             assertEquals(1, questions.size)
-            assertEquals(Category.Android.name, questions.first().category)
+            assertEquals(Category.Android, questions.first().category)
         }
 
     @Test
@@ -140,7 +140,7 @@ class DefaultQuestionRepositoryTest {
             // then
             val questions = result.getOrThrow()
             assertEquals(1, questions.size)
-            assertEquals(Category.Compose.name, questions.first().category)
+            assertEquals(Category.Compose, questions.first().category)
         }
 
     @Test
