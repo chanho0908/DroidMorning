@@ -42,6 +42,7 @@ kotlin {
             implementation(libs.bundles.supabase)
 
             implementation(libs.bundles.datastore)
+            implementation(libs.napier)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)

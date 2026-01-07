@@ -31,6 +31,7 @@ kotlin {
 
             implementation(libs.bundles.koin)
             implementation(libs.kotlinx.coroutines.core)
+            implementation(libs.napier)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
