@@ -45,6 +45,9 @@ okio = "3.16.4"
 # Ktlint
 ktlint = "14.0.1"
 
+# napier
+napier = "2.7.1"
+
 # Test
 junit = "4.13.2"
 androidx-test-ext-junit = "1.3.0"
@@ -101,6 +104,9 @@ androidx-datastore-preferences = { module = "androidx.datastore:datastore-prefer
 
 # Okio
 okio = { module = "com.squareup.okio:okio", version.ref = "okio" }
+
+# Napier
+napier = { module = "io.github.aakira:napier", version.ref = "napier" }
 
 # Test
 junit = { module = "junit:junit", version.ref = "junit" }
