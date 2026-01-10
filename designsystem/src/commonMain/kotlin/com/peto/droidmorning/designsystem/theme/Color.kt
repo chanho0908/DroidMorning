@@ -57,10 +57,10 @@ val Error = Color(0xFFEF4444)
 val OnError = Color.White
 
 // Category Colors
-val CategoryKotlin = Color(0xFF8B5CF6)
-val CategoryAndroid = Color(0xFF22C55E)
-val CategoryCompose = Color(0xFF0EA5E9)
-val CategoryCoroutine = Color(0xFFF59E0B)
+val CategoryKotlin = Color(0xFF5319E7)
+val CategoryAndroid = Color(0xFF01BD56)
+val CategoryCompose = Color(0xFFD9B110)
+val CategoryCoroutine = Color(0xFF01C4C6)
 
 // Border Colors
 val Border = Color(0xFFE0D8CC)
