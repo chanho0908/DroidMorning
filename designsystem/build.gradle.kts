@@ -62,3 +62,9 @@ android {
 dependencies {
     debugImplementation(compose.uiTooling)
 }
+
+compose.resources {
+    publicResClass = true
+    nameOfResClass = "DesignRes"
+    packageOfResClass = "com.peto.droidmorning.designsystem.generated.resources"
+}
