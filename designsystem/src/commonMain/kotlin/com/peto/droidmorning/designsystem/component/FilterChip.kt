@@ -1,5 +1,6 @@
 package com.peto.droidmorning.designsystem.component
 
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.height
 import androidx.compose.material3.FilterChip
 import androidx.compose.material3.FilterChipDefaults
@@ -58,24 +59,20 @@ fun CategoryFilterChip(
 
 @Preview
 @Composable
-private fun UnSelectFilterChipPreview() {
+private fun FilterChipPreview() {
     AppTheme {
-        CategoryFilterChip(
-            text = "Filter",
-            selected = false,
-            onClick = {},
-        )
-    }
-}
+        Row {
+            CategoryFilterChip(
+                text = "Filter",
+                selected = false,
+                onClick = {},
+            )
 
-@Preview
-@Composable
-private fun SelectedPFilterChipReview() {
-    AppTheme {
-        CategoryFilterChip(
-            text = "Filter",
-            selected = true,
-            onClick = {},
-        )
+            CategoryFilterChip(
+                text = "Filter",
+                selected = true,
+                onClick = {},
+            )
+        }
     }
 }
