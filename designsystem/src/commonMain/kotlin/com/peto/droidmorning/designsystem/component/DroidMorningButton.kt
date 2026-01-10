@@ -20,14 +20,12 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.peto.droidmorning.designsystem.theme.AppTheme
-import com.peto.droidmorning.designsystem.theme.ButtonHeightLg
-import com.peto.droidmorning.designsystem.theme.ButtonMedium
-import com.peto.droidmorning.designsystem.theme.IconSm
+import com.peto.droidmorning.designsystem.theme.Dimen
 import com.peto.droidmorning.designsystem.theme.OnPrimary
 import com.peto.droidmorning.designsystem.theme.Primary
 import com.peto.droidmorning.designsystem.theme.PrimaryLight
 import com.peto.droidmorning.designsystem.theme.PrimaryOrange
-import com.peto.droidmorning.designsystem.theme.SpacingSm
+import com.peto.droidmorning.designsystem.theme.Shape
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
@@ -38,7 +36,7 @@ fun PrimaryButton(
     enabled: Boolean = true,
     icon: ImageVector? = null,
 ) {
-    val shape = ButtonMedium
+    val shape = Shape.buttonMedium
     val backgroundBrush = primaryButtonBackgroundBrush(enabled = enabled)
 
     Button(
@@ -46,7 +44,7 @@ fun PrimaryButton(
         modifier =
             modifier
                 .fillMaxWidth()
-                .height(ButtonHeightLg)
+                .height(Dimen.buttonHeightLg)
                 .clip(shape)
                 .background(backgroundBrush),
         enabled = enabled,
@@ -68,9 +66,9 @@ fun PrimaryButton(
             Icon(
                 imageVector = icon,
                 contentDescription = null,
-                modifier = Modifier.size(IconSm),
+                modifier = Modifier.size(Dimen.iconSm),
             )
-            Spacer(modifier = Modifier.width(SpacingSm))
+            Spacer(modifier = Modifier.width(Dimen.spacingSm))
         }
         Text(
             text = text,

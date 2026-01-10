@@ -17,7 +17,7 @@ fun AppTheme(
     MaterialTheme(
         colorScheme = colorScheme,
         typography = droidMorningTypography(),
-        shapes = DroidMorningShapes,
+        shapes = Shapes,
         content = content,
     )
 }

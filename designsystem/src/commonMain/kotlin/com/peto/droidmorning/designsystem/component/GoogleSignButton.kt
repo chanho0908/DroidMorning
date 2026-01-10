@@ -11,9 +11,9 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.peto.droidmorning.designsystem.generated.resources.DesignRes
 import com.peto.droidmorning.designsystem.generated.resources.btn_google_login
-import com.peto.droidmorning.designsystem.theme.ButtonHeightLg
-import com.peto.droidmorning.designsystem.theme.ButtonPill
+import com.peto.droidmorning.designsystem.theme.Dimen
 import com.peto.droidmorning.designsystem.theme.OnSurface
+import com.peto.droidmorning.designsystem.theme.Shape
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
@@ -29,8 +29,8 @@ fun GoogleSignInButton(
         modifier =
             modifier
                 .fillMaxWidth()
-                .height(ButtonHeightLg),
-        shape = ButtonPill,
+                .height(Dimen.buttonHeightLg),
+        shape = Shape.buttonPill,
         border = null,
         colors =
             ButtonDefaults.outlinedButtonColors(
