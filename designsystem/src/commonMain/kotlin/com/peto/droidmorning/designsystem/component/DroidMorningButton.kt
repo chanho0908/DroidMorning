@@ -18,7 +18,6 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.unit.dp
 import com.peto.droidmorning.designsystem.theme.AppTheme
 import com.peto.droidmorning.designsystem.theme.Dimen
 import com.peto.droidmorning.designsystem.theme.OnPrimary
@@ -48,18 +47,12 @@ fun PrimaryButton(
                 .clip(shape)
                 .background(backgroundBrush),
         enabled = enabled,
-        shape = shape,
         colors =
             ButtonDefaults.buttonColors(
                 containerColor = Color.Transparent,
                 contentColor = OnPrimary,
                 disabledContainerColor = Color.Transparent,
                 disabledContentColor = OnPrimary.copy(alpha = 0.5f),
-            ),
-        elevation =
-            ButtonDefaults.buttonElevation(
-                defaultElevation = 2.dp,
-                pressedElevation = 4.dp,
             ),
     ) {
         if (icon != null) {
