@@ -1,5 +1,6 @@
 package com.peto.droidmorning.designsystem.component
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -38,6 +39,7 @@ fun AppRadioButton(
         modifier =
             modifier
                 .heightIn(min = Dimen.touchTargetMin)
+                .clickable(enabled = enabled, onClick = onClick)
                 .semantics {
                     contentDescription =
                         "$label ${if (selected) stateSelected else stateUnselected}"
@@ -45,7 +47,7 @@ fun AppRadioButton(
     ) {
         RadioButton(
             selected = selected,
-            onClick = onClick,
+            onClick = null,
             enabled = enabled,
             colors =
                 RadioButtonDefaults.colors(
