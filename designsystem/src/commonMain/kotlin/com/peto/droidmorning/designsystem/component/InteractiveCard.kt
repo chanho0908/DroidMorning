@@ -1,6 +1,6 @@
 package com.peto.droidmorning.designsystem.component
 
-import androidx.compose.animation.core.animateDpAsState
+import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
@@ -34,14 +34,14 @@ fun InteractiveCard(
     val interactionSource = remember { MutableInteractionSource() }
     val isPressed by interactionSource.collectIsPressedAsState()
 
-    val scale by animateDpAsState(
-        targetValue = if (isPressed) 0.98.dp else 1.dp,
+    val scale by animateFloatAsState(
+        targetValue = if (isPressed) 0.98f else 1.0f,
     )
 
     Card(
         modifier =
             modifier
-                .scale(scale.value)
+                .scale(scale)
                 .clickable(
                     interactionSource = interactionSource,
                     onClick = onClick,
