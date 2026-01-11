@@ -21,6 +21,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import com.peto.droidmorning.designsystem.theme.AppTheme
 import com.peto.droidmorning.designsystem.theme.Dimen
 import com.peto.droidmorning.designsystem.theme.MutedForeground
 import com.peto.droidmorning.designsystem.theme.OnSurface
@@ -81,7 +82,7 @@ fun AppBottomSheet(
 @Preview
 @Composable
 private fun AppBottomSheetPreview() {
-    com.peto.droidmorning.designsystem.theme.AppTheme {
+    AppTheme {
         AppBottomSheet(
             onDismissRequest = {},
             title = "Bottom Sheet Title",
