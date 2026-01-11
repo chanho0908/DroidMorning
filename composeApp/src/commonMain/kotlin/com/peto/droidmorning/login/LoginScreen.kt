@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
@@ -30,7 +31,7 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.peto.droidmorning.auth.GoogleAuthClient
 import com.peto.droidmorning.common.ObserveAsEvents
-import com.peto.droidmorning.designsystem.component.GoogleSignInButton
+import com.peto.droidmorning.common.extension.noRippleClickable
 import com.peto.droidmorning.designsystem.generated.resources.DesignRes
 import com.peto.droidmorning.designsystem.generated.resources.app_name
 import com.peto.droidmorning.designsystem.generated.resources.login_cancelled
@@ -42,6 +43,8 @@ import com.peto.droidmorning.login.vm.LoginUiState
 import com.peto.droidmorning.login.vm.LoginViewModel
 import com.peto.droidmorning.login.vm.LoginViewModel.Companion.LOGIN_ENTRANCE_ANIMATION_DURATION
 import droidmorning.composeapp.generated.resources.Res
+import droidmorning.composeapp.generated.resources.btn_google_login
+import droidmorning.composeapp.generated.resources.google_sign_in_button_description
 import droidmorning.composeapp.generated.resources.img_login_background
 import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.painterResource
@@ -148,6 +151,31 @@ fun LoginContent(
             Spacer(modifier = Modifier.height(Dimen.loginButtonTopSpacing))
             GoogleSignInButton(onClick = onGoogleLoginClick)
         }
+    }
+}
+
+@Composable
+private fun GoogleSignInButton(
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier,
+) {
+    Image(
+        painter = painterResource(Res.drawable.btn_google_login),
+        contentDescription = stringResource(Res.string.google_sign_in_button_description),
+        modifier =
+            modifier
+                .fillMaxWidth()
+                .height(Dimen.buttonHeightMd)
+                .noRippleClickable(onClick = onClick),
+        contentScale = ContentScale.Fit,
+    )
+}
+
+@Preview
+@Composable
+private fun GoogleSignInButtonPreview() {
+    AppTheme {
+        GoogleSignInButton(onClick = {})
     }
 }
 
