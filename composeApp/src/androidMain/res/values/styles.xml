@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- 스플래시 화면 없이 바로 앱 시작 -->
+    <style name="AppTheme" parent="android:Theme.Material.Light.NoActionBar">
+        <!-- 투명한 배경으로 설정하여 스플래시 화면 제거 -->
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <!-- 윈도우가 투명하도록 설정 -->
+        <item name="android:windowIsTranslucent">true</item>
+        <!-- 애니메이션 비활성화 -->
+        <item name="android:windowDisablePreview">true</item>
+    </style>
+</resources>

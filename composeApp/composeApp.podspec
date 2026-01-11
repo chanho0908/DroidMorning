@@ -1,7 +1,7 @@
 Pod::Spec.new do |spec|
     spec.name                     = 'composeApp'
     spec.version                  = '1.0'
-    spec.homepage                 = 'https://github.com/yourusername/DroidMorning'
+    spec.homepage                 = 'https://github.com/chanho0908/DroidMorning'
     spec.source                   = { :http=> ''}
     spec.authors                  = ''
     spec.license                  = ''

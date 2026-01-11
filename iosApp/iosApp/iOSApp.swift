@@ -14,10 +14,6 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 
 @main
 struct iOSApp: App {
-    init() {
-        KoinInitializerKt.doInitKoin(extraModules: [], declaration: { _ in })
-    }
-
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
 
     var body: some Scene {

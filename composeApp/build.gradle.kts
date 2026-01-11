@@ -28,7 +28,7 @@ kotlin {
     cocoapods {
         version = "1.0"
         summary = "DroidMorning Shared Module"
-        homepage = "https://github.com/yourusername/DroidMorning"
+        homepage = "https://github.com/chanho0908/DroidMorning"
 
         ios.deploymentTarget = "16.0"
 
@@ -45,17 +45,17 @@ kotlin {
 
     sourceSets {
         androidMain.dependencies {
-            implementation(compose.preview)
             implementation(libs.androidx.activity.compose)
 
             implementation(libs.kotlinx.coroutines.android)
 
             implementation(libs.bundles.credential.manager)
+
+            implementation(compose.preview)
         }
         commonMain.dependencies {
             implementation(project(":domain"))
             implementation(project(":data"))
-            implementation(project(":presentation"))
             implementation(project(":designsystem"))
 
             implementation(compose.runtime)
@@ -64,6 +64,7 @@ kotlin {
             implementation(compose.ui)
             implementation(compose.components.resources)
             implementation(compose.components.uiToolingPreview)
+            implementation(libs.androidx.navigation.compose)
             implementation(libs.androidx.lifecycle.viewmodel.compose)
             implementation(libs.androidx.lifecycle.runtime.compose)
 

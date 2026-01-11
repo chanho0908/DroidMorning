@@ -3,6 +3,7 @@ package com.peto.droidmorning.designsystem.component
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
@@ -31,8 +32,7 @@ fun GoogleSignInButton(
         enabled = enabled,
         modifier =
             modifier
-                .fillMaxWidth()
-                .height(Dimen.buttonHeightLg),
+                .wrapContentSize(),
         shape = Shape.buttonPill,
         border = null,
         colors =
@@ -49,7 +49,7 @@ fun GoogleSignInButton(
             modifier =
                 Modifier
                     .fillMaxWidth()
-                    .height(Dimen.googleSignInButtonImageHeight),
+                    .height(Dimen.buttonHeightMd),
             contentScale = ContentScale.Fit,
         )
     }

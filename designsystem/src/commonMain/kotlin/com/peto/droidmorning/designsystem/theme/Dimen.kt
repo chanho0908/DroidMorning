@@ -20,7 +20,6 @@ object Dimen {
     val buttonHeightMd = 44.dp
     val buttonHeightLg = 48.dp
     val buttonHeightXl = 56.dp
-    val googleSignInButtonImageHeight = 40.dp
 
     val inputHeight = 48.dp
     val searchBarHeight = 48.dp
@@ -80,4 +79,7 @@ object Dimen {
 
     val featureItemIconSize = 24.dp
     val featureItemPadding = 14.dp
+
+    val loginTitleTopSpacing = 340.dp
+    val loginButtonTopSpacing = 100.dp
 }
