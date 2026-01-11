@@ -1,8 +1,6 @@
 package com.peto.droidmorning.designsystem.component
 
 import androidx.compose.foundation.layout.size
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Info
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -12,9 +10,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.font.FontWeight
-import com.peto.droidmorning.designsystem.theme.AppTheme
 import com.peto.droidmorning.designsystem.theme.Dimen
-import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
 fun AppAlertDialog(
@@ -60,19 +56,4 @@ fun AppAlertDialog(
         titleContentColor = MaterialTheme.colorScheme.onSurface,
         textContentColor = MaterialTheme.colorScheme.onSurfaceVariant,
     )
-}
-
-@Preview
-@Composable
-private fun AppAlertDialogPreview() {
-    AppTheme {
-        AppAlertDialog(
-            onDismissRequest = {},
-            title = "제목",
-            text = "내용을 확인해주세요.",
-            confirmButton = {},
-            dismissButton = {},
-            icon = Icons.Default.Info,
-        )
-    }
 }
