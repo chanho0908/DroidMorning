@@ -29,9 +29,12 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
+import com.peto.droidmorning.designsystem.generated.resources.DesignRes
+import com.peto.droidmorning.designsystem.generated.resources.text_area_placeholder
 import com.peto.droidmorning.designsystem.theme.AppTheme
 import com.peto.droidmorning.designsystem.theme.Dimen
 import com.peto.droidmorning.designsystem.theme.Shape
+import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
@@ -39,7 +42,7 @@ fun AppTextArea(
     value: String,
     onValueChange: (String) -> Unit,
     modifier: Modifier = Modifier,
-    placeholder: String = "입력하세요",
+    placeholder: String = stringResource(DesignRes.string.text_area_placeholder),
     enabled: Boolean = true,
     isError: Boolean = false,
     errorMessage: String? = null,
