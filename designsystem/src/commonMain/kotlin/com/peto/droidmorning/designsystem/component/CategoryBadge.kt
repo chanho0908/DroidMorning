@@ -50,19 +50,19 @@ private fun CategoryBadgePreview() {
         Column {
             CategoryBadge(
                 categoryColor = CategoryKotlin,
-                category = "Android",
+                category = "android",
             )
             CategoryBadge(
                 categoryColor = CategoryCompose,
-                category = "Kotlin",
+                category = "kotlin",
             )
             CategoryBadge(
                 categoryColor = CategoryCoroutine,
-                category = "Compose",
+                category = "compose",
             )
             CategoryBadge(
                 categoryColor = CategoryAndroid,
-                category = "Coroutine",
+                category = "coroutine",
             )
         }
     }
