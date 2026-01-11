@@ -1,8 +1,7 @@
 package com.peto.droidmorning.login
 
-import androidx.compose.animation.core.Spring
 import androidx.compose.animation.core.animateFloatAsState
-import androidx.compose.animation.core.spring
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -117,21 +116,13 @@ fun LoginContent(
     }
 
     val offsetY by animateFloatAsState(
-        targetValue = if (startAnimation) 0f else 50f,
-        animationSpec =
-            spring(
-                dampingRatio = Spring.DampingRatioMediumBouncy,
-                stiffness = Spring.StiffnessLow,
-            ),
+        targetValue = if (startAnimation) 0f else 100f,
+        animationSpec = tween(durationMillis = 1200),
     )
 
     val alpha by animateFloatAsState(
         targetValue = if (startAnimation) 1f else 0f,
-        animationSpec =
-            spring(
-                dampingRatio = Spring.DampingRatioNoBouncy,
-                stiffness = Spring.StiffnessLow,
-            ),
+        animationSpec = tween(durationMillis = 1200),
     )
 
     Box(modifier = modifier.fillMaxSize()) {
@@ -163,10 +154,7 @@ fun LoginContent(
 
             Spacer(modifier = Modifier.height(Dimen.loginButtonTopSpacing))
 
-            GoogleSignInButton(
-                onClick = onGoogleLoginClick,
-                modifier = Modifier.fillMaxWidth(),
-            )
+            GoogleSignInButton(onClick = onGoogleLoginClick)
         }
     }
 }
