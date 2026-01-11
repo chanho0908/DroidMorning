@@ -1,3 +1,5 @@
+import org.jlleitschuh.gradle.ktlint.KtlintExtension
+
 plugins {
     alias(libs.plugins.android.application) apply false
     alias(libs.plugins.android.library) apply false
@@ -17,7 +19,7 @@ allprojects {
                 .pluginId,
     )
 
-    configure<org.jlleitschuh.gradle.ktlint.KtlintExtension> {
+    configure<KtlintExtension> {
         filter {
             exclude { it.file.path.contains("/build/") }
             exclude { it.file.path.contains("/generated/") }
