@@ -2,9 +2,7 @@ package com.peto.droidmorning.designsystem.theme
 
 import androidx.compose.ui.graphics.Color
 
-val PrimaryLight = Color(0xFFFBBF24)
 val Primary = Color(0xFFF59E0B)
-val PrimaryOrange = Color(0xFFF97316)
 val PrimaryVariant = Color(0xFFD97706)
 val OnPrimary = Color.White
 
