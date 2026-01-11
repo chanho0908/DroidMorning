@@ -18,10 +18,12 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextOverflow
 import com.peto.droidmorning.designsystem.preview.QuestionCardPreviewProvider
 import com.peto.droidmorning.designsystem.preview.QuestionCardPreviewState
 import com.peto.droidmorning.designsystem.theme.AppTheme
+import com.peto.droidmorning.designsystem.theme.CategoryKotlin
 import com.peto.droidmorning.designsystem.theme.Dimen
 import com.peto.droidmorning.designsystem.theme.MutedForeground
 import com.peto.droidmorning.designsystem.theme.OnSurface
@@ -34,6 +36,7 @@ import org.jetbrains.compose.ui.tooling.preview.PreviewParameter
 fun QuestionCard(
     title: String,
     category: String,
+    categoryColor: Color,
     isSolved: Boolean,
     isFavorite: Boolean,
     onClick: () -> Unit,
@@ -54,7 +57,10 @@ fun QuestionCard(
                     horizontalArrangement = Arrangement.spacedBy(Dimen.spacingSm),
                     verticalAlignment = Alignment.CenterVertically,
                 ) {
-                    CategoryBadge(category = category)
+                    CategoryBadge(
+                        category = category,
+                        categoryColor = categoryColor,
+                    )
 
                     if (isSolved) {
                         Icon(
@@ -104,6 +110,7 @@ private fun QuestionCardPreview(
             category = state.category,
             isSolved = state.isSolved,
             isFavorite = state.isFavorite,
+            categoryColor = CategoryKotlin,
             onClick = {},
             onFavoriteClick = {},
         )
