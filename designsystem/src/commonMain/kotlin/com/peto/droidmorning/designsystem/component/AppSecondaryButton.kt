@@ -38,8 +38,8 @@ fun AppSecondaryButton(
         colors =
             ButtonDefaults.outlinedButtonColors(
                 containerColor = Color.Transparent,
-                contentColor = AppButtonDefaults.secondaryContentColor(enabled = true),
-                disabledContentColor = AppButtonDefaults.secondaryContentColor(enabled = false),
+                contentColor = AppButtonDefaults.secondaryContentColor(enabled = enabled),
+                disabledContentColor = AppButtonDefaults.secondaryContentColor(enabled = enabled),
             ),
     ) {
         icon?.let {
