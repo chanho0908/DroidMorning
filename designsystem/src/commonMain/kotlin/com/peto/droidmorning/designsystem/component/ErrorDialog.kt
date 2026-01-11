@@ -23,17 +23,22 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
+import com.peto.droidmorning.designsystem.generated.resources.DesignRes
+import com.peto.droidmorning.designsystem.generated.resources.error_dialog_default_button
+import com.peto.droidmorning.designsystem.generated.resources.error_dialog_default_title
+import com.peto.droidmorning.designsystem.generated.resources.error_dialog_icon_description
 import com.peto.droidmorning.designsystem.theme.AppTheme
 import com.peto.droidmorning.designsystem.theme.Dimen
 import com.peto.droidmorning.designsystem.theme.Shape
+import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
 fun ErrorDialog(
     onDismissRequest: () -> Unit,
-    title: String = "오류 발생",
+    title: String = stringResource(DesignRes.string.error_dialog_default_title),
     message: String,
-    buttonText: String = "확인",
+    buttonText: String = stringResource(DesignRes.string.error_dialog_default_button),
 ) {
     Dialog(
         onDismissRequest = onDismissRequest,
@@ -76,7 +81,7 @@ private fun ErrorDialogContent(
             ) {
                 Icon(
                     imageVector = Icons.Default.Error,
-                    contentDescription = "오류",
+                    contentDescription = stringResource(DesignRes.string.error_dialog_icon_description),
                     tint = MaterialTheme.colorScheme.error,
                     modifier = Modifier.size(40.dp),
                 )
