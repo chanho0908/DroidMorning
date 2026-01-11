@@ -11,10 +11,12 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.peto.droidmorning.designsystem.generated.resources.DesignRes
 import com.peto.droidmorning.designsystem.generated.resources.btn_google_login
+import com.peto.droidmorning.designsystem.generated.resources.google_sign_in_button_description
 import com.peto.droidmorning.designsystem.theme.Dimen
 import com.peto.droidmorning.designsystem.theme.OnSurface
 import com.peto.droidmorning.designsystem.theme.Shape
 import org.jetbrains.compose.resources.painterResource
+import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
@@ -42,7 +44,7 @@ fun AppGoogleSignInButton(
     ) {
         Image(
             painter = painterResource(DesignRes.drawable.btn_google_login),
-            contentDescription = "Google 로그인 버튼",
+            contentDescription = stringResource(DesignRes.string.google_sign_in_button_description),
             modifier =
                 Modifier
                     .fillMaxWidth()

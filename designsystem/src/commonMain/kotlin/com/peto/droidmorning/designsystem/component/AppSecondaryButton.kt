@@ -42,7 +42,7 @@ fun AppSecondaryButton(
                 disabledContentColor = AppButtonDefaults.secondaryContentColor(enabled = false),
             ),
     ) {
-        if (icon != null) {
+        icon?.let {
             Icon(
                 imageVector = icon,
                 contentDescription = null,
