@@ -12,6 +12,7 @@ import androidx.compose.ui.unit.dp
 import com.peto.droidmorning.designsystem.generated.resources.DesignRes
 import com.peto.droidmorning.designsystem.generated.resources.btn_google_login
 import com.peto.droidmorning.designsystem.generated.resources.google_sign_in_button_description
+import com.peto.droidmorning.designsystem.theme.AppTheme
 import com.peto.droidmorning.designsystem.theme.Dimen
 import com.peto.droidmorning.designsystem.theme.OnSurface
 import com.peto.droidmorning.designsystem.theme.Shape
@@ -56,5 +57,7 @@ fun GoogleSignInButton(
 @Preview
 @Composable
 private fun GoogleSignInButtonPreview() {
-    GoogleSignInButton(onClick = {})
+    AppTheme {
+        GoogleSignInButton(onClick = {})
+    }
 }

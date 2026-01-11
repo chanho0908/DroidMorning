@@ -9,6 +9,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
+import com.peto.droidmorning.designsystem.theme.AppTheme
 import com.peto.droidmorning.designsystem.theme.Dimen
 import com.peto.droidmorning.designsystem.theme.MutedForeground
 import org.jetbrains.compose.ui.tooling.preview.Preview
@@ -37,9 +38,11 @@ fun IconButton(
 @Preview
 @Composable
 private fun AppIconButtonPreview() {
-    IconButton(
-        onClick = {},
-        icon = Icons.Default.Favorite,
-        contentDescription = "Favorite",
-    )
+    AppTheme {
+        IconButton(
+            onClick = {},
+            icon = Icons.Default.Favorite,
+            contentDescription = "Favorite",
+        )
+    }
 }
