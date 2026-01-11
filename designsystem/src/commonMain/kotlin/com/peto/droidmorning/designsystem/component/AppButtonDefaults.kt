@@ -9,9 +9,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
 import com.peto.droidmorning.designsystem.theme.Dimen
 import com.peto.droidmorning.designsystem.theme.OnPrimary
-import com.peto.droidmorning.designsystem.theme.Primary
-import com.peto.droidmorning.designsystem.theme.PrimaryLight
-import com.peto.droidmorning.designsystem.theme.PrimaryOrange
 import com.peto.droidmorning.designsystem.theme.Shape
 
 object AppButtonDefaults {
@@ -28,15 +25,19 @@ object AppButtonDefaults {
                 fontWeight = FontWeight.Medium,
             )
 
+    @Composable
     fun primaryButtonBackgroundBrush(enabled: Boolean = true): Brush {
         val alpha = if (enabled) 1f else 0.3f
+        val primaryLight = MaterialTheme.colorScheme.primaryContainer
+        val primary = MaterialTheme.colorScheme.primary
+        val primaryOrange = MaterialTheme.colorScheme.tertiary
 
         return Brush.horizontalGradient(
             colorStops =
                 arrayOf(
-                    0.0f to PrimaryLight.copy(alpha = alpha),
-                    0.5f to Primary.copy(alpha = alpha),
-                    1.0f to PrimaryOrange.copy(alpha = alpha),
+                    0.0f to primaryLight.copy(alpha = alpha),
+                    0.5f to primary.copy(alpha = alpha),
+                    1.0f to primaryOrange.copy(alpha = alpha),
                 ),
         )
     }
