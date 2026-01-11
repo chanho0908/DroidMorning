@@ -1,5 +1,6 @@
 package com.peto.droidmorning.designsystem.component
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.heightIn
@@ -37,13 +38,14 @@ fun AppCheckbox(
         modifier =
             modifier
                 .heightIn(min = Dimen.touchTargetMin)
+                .clickable(enabled = enabled) { onCheckedChange(!checked) }
                 .semantics {
                     contentDescription = "$label ${if (checked) stateChecked else stateUnchecked}"
                 },
     ) {
         Checkbox(
             checked = checked,
-            onCheckedChange = onCheckedChange,
+            onCheckedChange = null,
             enabled = enabled,
             colors =
                 CheckboxDefaults.colors(
