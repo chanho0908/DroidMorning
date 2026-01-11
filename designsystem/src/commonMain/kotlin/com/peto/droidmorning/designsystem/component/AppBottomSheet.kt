@@ -33,7 +33,7 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 fun AppBottomSheet(
     onDismissRequest: () -> Unit,
     sheetState: SheetState = rememberModalBottomSheetState(),
-    title: String? = null,
+    title: String,
     content: @Composable ColumnScope.() -> Unit,
 ) {
     ModalBottomSheet(
@@ -56,14 +56,12 @@ fun AppBottomSheet(
                             .background(MutedForeground.copy(alpha = 0.3f)),
                 )
 
-                if (title != null) {
-                    Spacer(modifier = Modifier.height(Dimen.spacingMd))
-                    Text(
-                        text = title,
-                        style = MaterialTheme.typography.titleLarge,
-                        fontWeight = FontWeight.SemiBold,
-                    )
-                }
+                Spacer(modifier = Modifier.height(Dimen.spacingMd))
+                Text(
+                    text = title,
+                    style = MaterialTheme.typography.titleLarge,
+                    fontWeight = FontWeight.SemiBold,
+                )
             }
         },
     ) {
