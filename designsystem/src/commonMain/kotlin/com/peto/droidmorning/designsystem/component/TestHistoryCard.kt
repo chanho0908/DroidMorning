@@ -11,11 +11,14 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import com.peto.droidmorning.designsystem.generated.resources.DesignRes
+import com.peto.droidmorning.designsystem.generated.resources.test_history_card_question_count
 import com.peto.droidmorning.designsystem.theme.AppTheme
 import com.peto.droidmorning.designsystem.theme.Dimen
 import com.peto.droidmorning.designsystem.theme.MutedForeground
 import com.peto.droidmorning.designsystem.theme.OnSurface
 import com.peto.droidmorning.designsystem.theme.Primary
+import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
@@ -43,7 +46,7 @@ fun TestHistoryCard(
                 )
                 Spacer(modifier = Modifier.height(Dimen.spacingXs))
                 Text(
-                    text = "${questionCount}문제",
+                    text = "$questionCount${stringResource(DesignRes.string.test_history_card_question_count)}",
                     style = MaterialTheme.typography.bodySmall,
                     color = MutedForeground,
                 )

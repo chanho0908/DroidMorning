@@ -20,6 +20,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextOverflow
+import com.peto.droidmorning.designsystem.generated.resources.DesignRes
+import com.peto.droidmorning.designsystem.generated.resources.question_card_favorite_add
+import com.peto.droidmorning.designsystem.generated.resources.question_card_favorite_remove
+import com.peto.droidmorning.designsystem.generated.resources.question_card_solved
 import com.peto.droidmorning.designsystem.preview.QuestionCardPreviewProvider
 import com.peto.droidmorning.designsystem.preview.QuestionCardPreviewState
 import com.peto.droidmorning.designsystem.theme.AppTheme
@@ -29,6 +33,7 @@ import com.peto.droidmorning.designsystem.theme.MutedForeground
 import com.peto.droidmorning.designsystem.theme.OnSurface
 import com.peto.droidmorning.designsystem.theme.Success
 import com.peto.droidmorning.designsystem.theme.Warning
+import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 import org.jetbrains.compose.ui.tooling.preview.PreviewParameter
 
@@ -65,7 +70,7 @@ fun QuestionCard(
                     if (isSolved) {
                         Icon(
                             imageVector = Icons.Filled.CheckCircle,
-                            contentDescription = "풀이 완료",
+                            contentDescription = stringResource(DesignRes.string.question_card_solved),
                             modifier = Modifier.size(Dimen.iconXs),
                             tint = Success,
                         )
@@ -88,7 +93,14 @@ fun QuestionCard(
                 content = {
                     Icon(
                         imageVector = if (isFavorite) Icons.Filled.Star else Icons.Outlined.Star,
-                        contentDescription = if (isFavorite) "즐겨찾기 해제" else "즐겨찾기 추가",
+                        contentDescription =
+                            stringResource(
+                                if (isFavorite) {
+                                    DesignRes.string.question_card_favorite_remove
+                                } else {
+                                    DesignRes.string.question_card_favorite_add
+                                },
+                            ),
                         tint = if (isFavorite) Warning else MutedForeground,
                         modifier = Modifier.size(Dimen.iconSm),
                     )
