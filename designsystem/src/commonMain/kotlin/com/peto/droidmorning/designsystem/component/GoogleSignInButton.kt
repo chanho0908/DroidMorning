@@ -20,7 +20,7 @@ import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
-fun AppGoogleSignInButton(
+fun GoogleSignInButton(
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
@@ -56,5 +56,5 @@ fun AppGoogleSignInButton(
 @Preview
 @Composable
 private fun GoogleSignInButtonPreview() {
-    AppGoogleSignInButton(onClick = {})
+    GoogleSignInButton(onClick = {})
 }
