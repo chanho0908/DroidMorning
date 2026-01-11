@@ -34,6 +34,9 @@ import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
+import com.peto.droidmorning.designsystem.generated.resources.DesignRes
+import com.peto.droidmorning.designsystem.generated.resources.search_bar_clear
+import com.peto.droidmorning.designsystem.generated.resources.search_bar_placeholder
 import com.peto.droidmorning.designsystem.theme.AppTheme
 import com.peto.droidmorning.designsystem.theme.Border
 import com.peto.droidmorning.designsystem.theme.Dimen
@@ -42,6 +45,7 @@ import com.peto.droidmorning.designsystem.theme.OnSurface
 import com.peto.droidmorning.designsystem.theme.Primary
 import com.peto.droidmorning.designsystem.theme.Secondary
 import com.peto.droidmorning.designsystem.theme.Shape
+import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
@@ -50,7 +54,6 @@ fun AppSearchBar(
     onQueryChange: (String) -> Unit,
     onSearch: (String) -> Unit,
     modifier: Modifier = Modifier,
-    placeholder: String = "검색...",
     enabled: Boolean = true,
     onClear: (() -> Unit)? = null,
 ) {
@@ -102,7 +105,7 @@ fun AppSearchBar(
                 Box(modifier = Modifier.weight(1f)) {
                     if (query.isEmpty()) {
                         Text(
-                            text = placeholder,
+                            text = stringResource(DesignRes.string.search_bar_placeholder),
                             style = MaterialTheme.typography.bodyLarge,
                             color = MutedForeground,
                         )
@@ -119,7 +122,7 @@ fun AppSearchBar(
                     ) {
                         Icon(
                             imageVector = Icons.Default.Close,
-                            contentDescription = "검색어 지우기",
+                            contentDescription = stringResource(DesignRes.string.search_bar_clear),
                             tint = MutedForeground,
                             modifier = Modifier.size(Dimen.iconSm),
                         )

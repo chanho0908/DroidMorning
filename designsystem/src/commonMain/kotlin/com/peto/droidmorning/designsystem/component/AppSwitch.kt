@@ -13,8 +13,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
+import com.peto.droidmorning.designsystem.generated.resources.DesignRes
+import com.peto.droidmorning.designsystem.generated.resources.switch_state_off
+import com.peto.droidmorning.designsystem.generated.resources.switch_state_on
 import com.peto.droidmorning.designsystem.theme.AppTheme
 import com.peto.droidmorning.designsystem.theme.Dimen
+import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
@@ -25,6 +29,9 @@ fun AppSwitch(
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
 ) {
+    val stateOn = stringResource(DesignRes.string.switch_state_on)
+    val stateOff = stringResource(DesignRes.string.switch_state_off)
+
     Row(
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween,
@@ -57,7 +64,7 @@ fun AppSwitch(
                 ),
             modifier =
                 Modifier.semantics {
-                    contentDescription = "$label ${if (checked) "켜짐" else "꺼짐"}"
+                    contentDescription = "$label ${if (checked) stateOn else stateOff}"
                 },
         )
     }
