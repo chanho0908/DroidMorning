@@ -20,9 +20,9 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 @Composable
 fun CategoryBadge(
     category: String,
+    categoryColor: Color,
     modifier: Modifier = Modifier,
 ) {
-    val categoryColor = categoryColor(category)
     val backgroundColor = categoryColor.copy(alpha = 0.15f)
 
     Surface(
@@ -43,24 +43,27 @@ fun CategoryBadge(
     }
 }
 
-private fun categoryColor(category: String): Color =
-    when (category.lowercase()) {
-        "kotlin" -> CategoryKotlin
-        "android" -> CategoryAndroid
-        "compose" -> CategoryCompose
-        "coroutine" -> CategoryCoroutine
-        else -> CategoryAndroid
-    }
-
 @Preview
 @Composable
 private fun CategoryBadgePreview() {
     AppTheme {
         Column {
-            CategoryBadge(category = "Android")
-            CategoryBadge(category = "Kotlin")
-            CategoryBadge(category = "Compose")
-            CategoryBadge(category = "Coroutine")
+            CategoryBadge(
+                categoryColor = CategoryKotlin,
+                category = "Android",
+            )
+            CategoryBadge(
+                categoryColor = CategoryCompose,
+                category = "Kotlin",
+            )
+            CategoryBadge(
+                categoryColor = CategoryCoroutine,
+                category = "Compose",
+            )
+            CategoryBadge(
+                categoryColor = CategoryAndroid,
+                category = "Coroutine",
+            )
         }
     }
 }
