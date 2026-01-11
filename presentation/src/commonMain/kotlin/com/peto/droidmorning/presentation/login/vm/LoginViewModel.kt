@@ -18,19 +18,19 @@ sealed interface AuthState {
     data object Error : AuthState
 }
 
-class AuthViewModel(
+class LoginViewModel(
     private val authRepository: AuthRepository,
 ) : ViewModel() {
-    private val _authState = MutableStateFlow<AuthState>(AuthState.Initial)
-    val authState: StateFlow<AuthState> = _authState.asStateFlow()
+    private val _uiState = MutableStateFlow<AuthState>(AuthState.Initial)
+    val uiState: StateFlow<AuthState> = _uiState.asStateFlow()
 
     fun signInWithGoogle(idToken: String) {
         viewModelScope.launch {
-            _authState.value = AuthState.Loading
+            _uiState.value = AuthState.Loading
             authRepository
                 .signIn(idToken)
-                .onSuccess { _authState.value = AuthState.Success }
-                .onFailure { _authState.value = AuthState.Error }
+                .onSuccess { _uiState.value = AuthState.Success }
+                .onFailure { _uiState.value = AuthState.Error }
         }
     }
 
@@ -38,8 +38,8 @@ class AuthViewModel(
         viewModelScope.launch {
             authRepository
                 .signOut()
-                .onSuccess { _authState.value = AuthState.Initial }
-                .onFailure { _authState.value = AuthState.Error }
+                .onSuccess { _uiState.value = AuthState.Initial }
+                .onFailure { _uiState.value = AuthState.Error }
         }
     }
 }
