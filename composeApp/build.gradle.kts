@@ -56,6 +56,7 @@ kotlin {
             implementation(project(":domain"))
             implementation(project(":data"))
             implementation(project(":presentation"))
+            implementation(project(":designsystem"))
 
             implementation(compose.runtime)
             implementation(compose.foundation)
