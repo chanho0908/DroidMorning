@@ -12,6 +12,9 @@ import com.peto.droidmorning.designsystem.theme.OnPrimary
 import com.peto.droidmorning.designsystem.theme.Shape
 
 object AppButtonDefaults {
+    private const val DISABLED_CONTENT_ALPHA = 0.5f
+    private const val DISABLED_BACKGROUND_ALPHA = 0.3f
+
     val height: Dp = Dimen.buttonHeightLg
 
     val heightSmall: Dp = Dimen.buttonHeightMd
@@ -27,7 +30,7 @@ object AppButtonDefaults {
 
     @Composable
     fun primaryButtonBackgroundBrush(enabled: Boolean = true): Brush {
-        val alpha = if (enabled) 1f else 0.3f
+        val alpha = if (enabled) 1f else DISABLED_BACKGROUND_ALPHA
         val primaryLight = MaterialTheme.colorScheme.primaryContainer
         val primary = MaterialTheme.colorScheme.primary
         val primaryOrange = MaterialTheme.colorScheme.tertiary
@@ -47,7 +50,7 @@ object AppButtonDefaults {
         if (enabled) {
             OnPrimary
         } else {
-            OnPrimary.copy(alpha = 0.5f)
+            OnPrimary.copy(alpha = DISABLED_CONTENT_ALPHA)
         }
 
     @Composable
@@ -55,7 +58,7 @@ object AppButtonDefaults {
         if (enabled) {
             MaterialTheme.colorScheme.onSurface
         } else {
-            MaterialTheme.colorScheme.onSurface.copy(alpha = 0.5f)
+            MaterialTheme.colorScheme.onSurface.copy(alpha = DISABLED_CONTENT_ALPHA)
         }
 
     @Composable
@@ -63,7 +66,7 @@ object AppButtonDefaults {
         if (enabled) {
             MaterialTheme.colorScheme.outline
         } else {
-            MaterialTheme.colorScheme.outline.copy(alpha = 0.5f)
+            MaterialTheme.colorScheme.outline.copy(alpha = DISABLED_CONTENT_ALPHA)
         }
 
     val shape = Shape.buttonMedium
@@ -71,8 +74,4 @@ object AppButtonDefaults {
     val iconSize: Dp = Dimen.iconSm
 
     val iconSpacing: Dp = Dimen.spacingSm
-
-    const val DISABLED_ALPHA = 0.5f
-
-    const val DISABLED_BACKGROUND_ALPHA = 0.3f
 }
