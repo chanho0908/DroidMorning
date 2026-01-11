@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="app_name">Droid Morning</string>
+
     <!-- QuestionCard -->
     <string name="question_card_solved">풀이 완료</string>
     <string name="question_card_favorite_remove">즐겨찾기 해제</string>
@@ -38,4 +40,9 @@
     <!-- AppRadioButton -->
     <string name="radio_button_state_selected">선택됨</string>
     <string name="radio_button_state_unselected">선택 안됨</string>
+
+    <!-- Login Screen -->
+    <string name="login_success">로그인 성공</string>
+    <string name="login_failed">로그인 실패</string>
+    <string name="login_cancelled">로그인 취소</string>
 </resources>
