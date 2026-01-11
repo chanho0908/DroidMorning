@@ -1,10 +1,10 @@
 package com.peto.droidmorning.main
 
-import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Icon
+import androidx.compose.material3.LocalRippleConfiguration
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
@@ -12,6 +12,7 @@ import androidx.compose.material3.NavigationBarItemDefaults
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -28,55 +29,76 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 @Composable
 fun MainScreen() {
     var selectedTab by remember { mutableStateOf(BottomNavigationType.QUESTION) }
-    val interactionSource = remember { MutableInteractionSource() }
 
     Scaffold(
         modifier = Modifier.fillMaxSize(),
         bottomBar = {
-            NavigationBar(
-                containerColor = MaterialTheme.colorScheme.secondary,
-            ) {
-                BottomNavigationType.entries.forEach { navType ->
-                    NavigationBarItem(
-                        selected = selectedTab == navType,
-                        onClick = { selectedTab = navType },
-                        icon = {
-                            Icon(
-                                imageVector = navType.icon,
-                                contentDescription = stringResource(navType.label),
-                            )
-                        },
-                        label = {
-                            Text(
-                                text = stringResource(navType.label),
-                                style = MaterialTheme.typography.labelLarge,
-                            )
-                        },
-                        colors =
-                            NavigationBarItemDefaults.colors(
-                                selectedIconColor = MaterialTheme.colorScheme.primary,
-                                selectedTextColor = MaterialTheme.colorScheme.primary,
-                                unselectedIconColor = MaterialTheme.colorScheme.onSurfaceVariant,
-                                unselectedTextColor = MaterialTheme.colorScheme.onSurfaceVariant,
-                            ),
-                        interactionSource = interactionSource,
-                    )
-                }
-            }
+            BottomNavigationBar(
+                selectedTab = selectedTab,
+                onTabSelected = { selectedTab = it },
+            )
         },
     ) { paddingValues ->
-        Box(
-            modifier =
-                Modifier
-                    .fillMaxSize()
-                    .padding(paddingValues),
-        ) {
-            when (selectedTab) {
-                BottomNavigationType.QUESTION -> QuestionScreen()
-                BottomNavigationType.TEST -> TestScreen()
-                BottomNavigationType.HISTORY -> HistoryScreen()
-                BottomNavigationType.PROFILE -> ProfileScreen()
+        MainContent(
+            selectedTab = selectedTab,
+            modifier = Modifier.padding(paddingValues),
+        )
+    }
+}
+
+@Composable
+private fun BottomNavigationBar(
+    selectedTab: BottomNavigationType,
+    onTabSelected: (BottomNavigationType) -> Unit,
+    modifier: Modifier = Modifier,
+) {
+    NavigationBar(
+        containerColor = MaterialTheme.colorScheme.secondary,
+        modifier = modifier,
+    ) {
+        CompositionLocalProvider(LocalRippleConfiguration provides null) {
+            BottomNavigationType.entries.forEach { navType ->
+                NavigationBarItem(
+                    selected = selectedTab == navType,
+                    onClick = { onTabSelected(navType) },
+                    icon = {
+                        Icon(
+                            imageVector = navType.icon,
+                            contentDescription = stringResource(navType.label),
+                        )
+                    },
+                    label = {
+                        Text(
+                            text = stringResource(navType.label),
+                            style = MaterialTheme.typography.labelLarge,
+                        )
+                    },
+                    colors =
+                        NavigationBarItemDefaults.colors(
+                            selectedIconColor = MaterialTheme.colorScheme.primary,
+                            selectedTextColor = MaterialTheme.colorScheme.primary,
+                            unselectedIconColor = MaterialTheme.colorScheme.onSurfaceVariant,
+                            unselectedTextColor = MaterialTheme.colorScheme.onSurfaceVariant,
+                        ),
+                )
             }
+        }
+    }
+}
+
+@Composable
+private fun MainContent(
+    selectedTab: BottomNavigationType,
+    modifier: Modifier = Modifier,
+) {
+    Box(
+        modifier = modifier.fillMaxSize(),
+    ) {
+        when (selectedTab) {
+            BottomNavigationType.QUESTION -> QuestionScreen()
+            BottomNavigationType.TEST -> TestScreen()
+            BottomNavigationType.HISTORY -> HistoryScreen()
+            BottomNavigationType.PROFILE -> ProfileScreen()
         }
     }
 }
