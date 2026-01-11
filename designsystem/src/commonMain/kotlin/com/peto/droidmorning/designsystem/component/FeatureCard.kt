@@ -15,11 +15,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
 import com.peto.droidmorning.designsystem.theme.AppTheme
-import com.peto.droidmorning.designsystem.theme.Border
 import com.peto.droidmorning.designsystem.theme.Dimen
-import com.peto.droidmorning.designsystem.theme.OnSurface
 import com.peto.droidmorning.designsystem.theme.Shape
-import com.peto.droidmorning.designsystem.theme.Surface
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
@@ -33,12 +30,9 @@ fun FeatureCard(
             modifier
                 .fillMaxWidth()
                 .clip(Shape.featureItem)
-                .background(Surface.copy(alpha = 0.6f))
-                .border(
-                    width = 1.dp,
-                    color = Border.copy(alpha = 0.5f),
-                    shape = Shape.featureItem,
-                ).padding(Dimen.featureItemPadding),
+                .background(MaterialTheme.colorScheme.surface.copy(alpha = 0.6f))
+                .border(width = 1.dp, color = MaterialTheme.colorScheme.outline.copy(alpha = 0.5f), shape = Shape.featureItem)
+                .padding(Dimen.featureItemPadding),
     ) {
         Row(
             horizontalArrangement = Arrangement.spacedBy(Dimen.spacingMd),
@@ -51,7 +45,7 @@ fun FeatureCard(
             Text(
                 text = text,
                 style = MaterialTheme.typography.bodyMedium,
-                color = OnSurface.copy(alpha = 0.9f),
+                color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.9f),
             )
         }
     }
