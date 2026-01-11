@@ -30,4 +30,12 @@
     <!-- AppSwitch -->
     <string name="switch_state_on">켜짐</string>
     <string name="switch_state_off">꺼짐</string>
+
+    <!-- AppCheckbox -->
+    <string name="checkbox_state_checked">선택됨</string>
+    <string name="checkbox_state_unchecked">선택 안됨</string>
+
+    <!-- AppRadioButton -->
+    <string name="radio_button_state_selected">선택됨</string>
+    <string name="radio_button_state_unselected">선택 안됨</string>
 </resources>

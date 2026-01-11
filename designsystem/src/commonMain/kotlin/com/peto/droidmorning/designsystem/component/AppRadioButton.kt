@@ -14,8 +14,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
+import com.peto.droidmorning.designsystem.generated.resources.DesignRes
+import com.peto.droidmorning.designsystem.generated.resources.radio_button_state_selected
+import com.peto.droidmorning.designsystem.generated.resources.radio_button_state_unselected
 import com.peto.droidmorning.designsystem.theme.AppTheme
 import com.peto.droidmorning.designsystem.theme.Dimen
+import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
@@ -26,13 +30,16 @@ fun AppRadioButton(
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
 ) {
+    val stateSelected = stringResource(DesignRes.string.radio_button_state_selected)
+    val stateUnselected = stringResource(DesignRes.string.radio_button_state_unselected)
+
     Row(
         verticalAlignment = Alignment.CenterVertically,
         modifier =
             modifier
                 .heightIn(min = Dimen.touchTargetMin)
                 .semantics {
-                    contentDescription = "$label ${if (selected) "선택됨" else "선택 안됨"}"
+                    contentDescription = "$label ${if (selected) stateSelected else stateUnselected}"
                 },
     ) {
         RadioButton(
