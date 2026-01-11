@@ -9,8 +9,10 @@ import com.peto.droidmorning.navigation.NavGraphContributor
 import com.peto.droidmorning.navigation.NavRoutes
 
 class LoginNavGraphContributor : NavGraphContributor {
-    override val graphRoute: NavRoutes = NavRoutes.LoginGraph
-    override val startDestination: String = NavRoutes.Login.route
+    override val graphRoute: NavRoutes
+        get() = NavRoutes.LoginGraph
+    override val startDestination: String
+        get() = NavRoutes.Login.route
     override val priority: Int = 0
 
     override fun NavGraphBuilder.registerGraph(navController: NavHostController) {
@@ -19,7 +21,15 @@ class LoginNavGraphContributor : NavGraphContributor {
             startDestination = startDestination,
         ) {
             composable(NavRoutes.Login.route) {
-                LoginScreen()
+                LoginScreen(
+                    onCompleteLogin = {
+                        navController.navigate(NavRoutes.MainGraph.route) {
+                            popUpTo(NavRoutes.LoginGraph.route) {
+                                inclusive = true
+                            }
+                        }
+                    },
+                )
             }
         }
     }
