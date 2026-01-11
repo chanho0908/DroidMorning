@@ -28,6 +28,7 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 @Composable
 fun MainScreen() {
     var selectedTab by remember { mutableStateOf(BottomNavigationType.QUESTION) }
+    val interactionSource = remember { MutableInteractionSource() }
 
     Scaffold(
         modifier = Modifier.fillMaxSize(),
@@ -58,7 +59,7 @@ fun MainScreen() {
                                 unselectedIconColor = MaterialTheme.colorScheme.onSurfaceVariant,
                                 unselectedTextColor = MaterialTheme.colorScheme.onSurfaceVariant,
                             ),
-                        interactionSource = MutableInteractionSource(),
+                        interactionSource = interactionSource,
                     )
                 }
             }
