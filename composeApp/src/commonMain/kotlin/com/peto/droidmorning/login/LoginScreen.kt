@@ -1,5 +1,8 @@
 package com.peto.droidmorning.login
 
+import androidx.compose.animation.core.Spring
+import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.animation.core.spring
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -8,6 +11,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
@@ -15,11 +19,17 @@ import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.unit.dp
 import com.peto.droidmorning.auth.GoogleAuthClient
 import com.peto.droidmorning.auth.GoogleAuthResult
 import com.peto.droidmorning.common.ObserveAsEvents
@@ -100,6 +110,30 @@ fun LoginContent(
     onGoogleLoginClick: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
+    var startAnimation by remember { mutableStateOf(false) }
+
+    LaunchedEffect(Unit) {
+        startAnimation = true
+    }
+
+    val offsetY by animateFloatAsState(
+        targetValue = if (startAnimation) 0f else 50f,
+        animationSpec =
+            spring(
+                dampingRatio = Spring.DampingRatioMediumBouncy,
+                stiffness = Spring.StiffnessLow,
+            ),
+    )
+
+    val alpha by animateFloatAsState(
+        targetValue = if (startAnimation) 1f else 0f,
+        animationSpec =
+            spring(
+                dampingRatio = Spring.DampingRatioNoBouncy,
+                stiffness = Spring.StiffnessLow,
+            ),
+    )
+
     Box(modifier = modifier.fillMaxSize()) {
         Image(
             painter = painterResource(Res.drawable.img_login_background),
@@ -121,6 +155,10 @@ fun LoginContent(
                 text = stringResource(DesignRes.string.app_name),
                 color = MaterialTheme.colorScheme.onTertiaryContainer,
                 style = MaterialTheme.typography.displayMedium,
+                modifier =
+                    Modifier
+                        .offset(y = offsetY.dp)
+                        .alpha(alpha),
             )
 
             Spacer(modifier = Modifier.height(Dimen.loginButtonTopSpacing))
