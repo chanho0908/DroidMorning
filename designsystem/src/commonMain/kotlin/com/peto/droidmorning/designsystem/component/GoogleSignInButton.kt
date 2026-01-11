@@ -8,6 +8,7 @@ import androidx.compose.material3.OutlinedButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import com.peto.droidmorning.designsystem.generated.resources.DesignRes
 import com.peto.droidmorning.designsystem.generated.resources.btn_google_login
@@ -50,6 +51,7 @@ fun GoogleSignInButton(
                 Modifier
                     .fillMaxWidth()
                     .height(40.dp),
+            contentScale = ContentScale.Fit,
         )
     }
 }
