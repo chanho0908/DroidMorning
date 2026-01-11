@@ -1,6 +1,7 @@
 package com.peto.droidmorning.designsystem.component
 
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.heightIn
@@ -70,26 +71,22 @@ fun AppSwitch(
     }
 }
 
-@Preview
+@Preview(showBackground = true)
 @Composable
-private fun AppSwitchOffPreview() {
+private fun AppSwitchPreview() {
     AppTheme {
-        AppSwitch(
-            checked = false,
-            onCheckedChange = {},
-            label = "알림 받기",
-        )
-    }
-}
+        Column {
+            AppSwitch(
+                checked = false,
+                onCheckedChange = {},
+                label = "알림 받기",
+            )
 
-@Preview
-@Composable
-private fun AppSwitchOnPreview() {
-    AppTheme {
-        AppSwitch(
-            checked = true,
-            onCheckedChange = {},
-            label = "알림 받기",
-        )
+            AppSwitch(
+                checked = true,
+                onCheckedChange = {},
+                label = "알림 받기",
+            )
+        }
     }
 }

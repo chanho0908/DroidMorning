@@ -1,5 +1,6 @@
 package com.peto.droidmorning.designsystem.component
 
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.heightIn
@@ -58,26 +59,22 @@ fun AppRadioButton(
     }
 }
 
-@Preview
+@Preview(showBackground = true)
 @Composable
-private fun AppRadioButtonUnselectedPreview() {
+private fun AppRadioButtonPreview() {
     AppTheme {
-        AppRadioButton(
-            selected = false,
-            onClick = {},
-            label = "옵션 A",
-        )
-    }
-}
+        Column {
+            AppRadioButton(
+                selected = false,
+                onClick = {},
+                label = "옵션 A",
+            )
 
-@Preview
-@Composable
-private fun AppRadioButtonSelectedPreview() {
-    AppTheme {
-        AppRadioButton(
-            selected = true,
-            onClick = {},
-            label = "옵션 A",
-        )
+            AppRadioButton(
+                selected = true,
+                onClick = {},
+                label = "옵션 A",
+            )
+        }
     }
 }

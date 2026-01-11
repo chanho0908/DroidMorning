@@ -81,19 +81,3 @@ private fun ConfirmationDialogPreview() {
         )
     }
 }
-
-@Preview
-@Composable
-private fun ConfirmationDialogDestructivePreview() {
-    AppTheme {
-        ConfirmationDialog(
-            onDismissRequest = {},
-            onConfirm = {},
-            title = "계정 삭제",
-            message = "삭제하면 되돌릴 수 없어요. 정말 삭제할까요?",
-            confirmText = "삭제",
-            dismissText = "취소",
-            isDestructive = true,
-        )
-    }
-}
