@@ -4,11 +4,9 @@ import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
@@ -42,6 +40,7 @@ import com.peto.droidmorning.designsystem.theme.AppTheme
 import com.peto.droidmorning.designsystem.theme.Dimen
 import com.peto.droidmorning.login.vm.AuthUiEvent
 import com.peto.droidmorning.login.vm.LoginViewModel
+import com.peto.droidmorning.login.vm.LoginViewModel.Companion.NAVIGATE_TO_HOME_SCREEN_DURATION
 import droidmorning.composeapp.generated.resources.Res
 import droidmorning.composeapp.generated.resources.img_login_background
 import kotlinx.coroutines.launch
@@ -55,7 +54,6 @@ import org.koin.compose.viewmodel.koinViewModel
 fun LoginScreen(
     viewModel: LoginViewModel = koinViewModel(),
     googleAuthClient: GoogleAuthClient = koinInject(),
-    modifier: Modifier = Modifier,
 ) {
     val coroutineScope = rememberCoroutineScope()
     val snackbarHostState = remember { SnackbarHostState() }
@@ -90,16 +88,18 @@ fun LoginScreen(
                         is GoogleAuthResult.Success -> {
                             viewModel.signInWithGoogle(result.idToken)
                         }
+
                         is GoogleAuthResult.Failure -> {
                             snackbarHostState.showSnackbar(loginFailed)
                         }
+
                         is GoogleAuthResult.Cancelled -> {
                             snackbarHostState.showSnackbar(loginCancelled)
                         }
                     }
                 }
             },
-            modifier = modifier.padding(paddingValues),
+            modifier = Modifier.padding(paddingValues),
         )
     }
 }
@@ -117,45 +117,40 @@ fun LoginContent(
 
     val offsetY by animateFloatAsState(
         targetValue = if (startAnimation) 0f else 100f,
-        animationSpec = tween(durationMillis = 1200),
+        animationSpec = tween(durationMillis = NAVIGATE_TO_HOME_SCREEN_DURATION),
     )
 
     val alpha by animateFloatAsState(
         targetValue = if (startAnimation) 1f else 0f,
-        animationSpec = tween(durationMillis = 1200),
+        animationSpec = tween(durationMillis = NAVIGATE_TO_HOME_SCREEN_DURATION),
     )
 
-    Box(modifier = modifier.fillMaxSize()) {
-        Image(
-            painter = painterResource(Res.drawable.img_login_background),
-            contentDescription = null,
-            modifier = Modifier.fillMaxSize(),
-            contentScale = ContentScale.Crop,
-        )
+    Image(
+        painter = painterResource(Res.drawable.img_login_background),
+        contentDescription = null,
+        modifier = Modifier.fillMaxSize(),
+        contentScale = ContentScale.Crop,
+    )
 
-        Column(
+    Column(
+        modifier = modifier.fillMaxSize(),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally,
+    ) {
+        Spacer(modifier = Modifier.height(Dimen.loginTitleTopSpacing))
+        Text(
+            text = stringResource(DesignRes.string.app_name),
+            color = MaterialTheme.colorScheme.onTertiaryContainer,
+            style = MaterialTheme.typography.displayMedium,
             modifier =
                 Modifier
-                    .fillMaxSize()
-                    .padding(Dimen.screenPaddingHorizontal),
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Center,
-        ) {
-            Spacer(modifier = Modifier.height(Dimen.loginTitleTopSpacing))
-            Text(
-                text = stringResource(DesignRes.string.app_name),
-                color = MaterialTheme.colorScheme.onTertiaryContainer,
-                style = MaterialTheme.typography.displayMedium,
-                modifier =
-                    Modifier
-                        .offset(y = offsetY.dp)
-                        .alpha(alpha),
-            )
+                    .offset(y = offsetY.dp)
+                    .alpha(alpha),
+        )
 
-            Spacer(modifier = Modifier.height(Dimen.loginButtonTopSpacing))
+        Spacer(modifier = Modifier.height(Dimen.loginButtonTopSpacing))
 
-            GoogleSignInButton(onClick = onGoogleLoginClick)
-        }
+        GoogleSignInButton(onClick = onGoogleLoginClick)
     }
 }
 
