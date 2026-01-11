@@ -8,7 +8,6 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
 import com.peto.droidmorning.designsystem.theme.Dimen
-import com.peto.droidmorning.designsystem.theme.OnPrimary
 import com.peto.droidmorning.designsystem.theme.Shape
 
 object AppButtonDefaults {
@@ -48,9 +47,9 @@ object AppButtonDefaults {
     @Composable
     fun primaryContentColor(enabled: Boolean = true): Color =
         if (enabled) {
-            OnPrimary
+            MaterialTheme.colorScheme.onPrimary
         } else {
-            OnPrimary.copy(alpha = CONTENT_ALPHA)
+            MaterialTheme.colorScheme.onPrimary.copy(alpha = CONTENT_ALPHA)
         }
 
     @Composable
