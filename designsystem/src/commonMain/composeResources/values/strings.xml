@@ -20,9 +20,6 @@
     <string name="search_bar_placeholder">검색...</string>
     <string name="search_bar_clear">검색어 지우기</string>
 
-    <!-- AppGoogleSignInButton -->
-    <string name="google_sign_in_button_description">Google 로그인 버튼</string>
-
     <!-- TestHistoryCard -->
     <string name="test_history_card_question_count">문제</string>
 
@@ -42,7 +39,18 @@
     <string name="radio_button_state_unselected">선택 안됨</string>
 
     <!-- Login Screen -->
-    <string name="login_success">로그인 성공</string>
     <string name="login_failed">로그인 실패</string>
     <string name="login_cancelled">로그인 취소</string>
+
+    <!-- Main Screen -->
+    <string name="main_search_placeholder">문제 검색...</string>
+    <string name="main_filter_category">카테고리</string>
+    <string name="main_filter_solved">푼 문제</string>
+    <string name="main_filter_favorite">즐겨찾기</string>
+
+    <!-- Content Description -->
+    <string name="content_desc_search_icon">검색 아이콘</string>
+    <string name="content_desc_filter_icon">필터 아이콘</string>
+    <string name="content_desc_check_icon">체크 아이콘</string>
+    <string name="content_desc_star_icon">별 아이콘</string>
 </resources>

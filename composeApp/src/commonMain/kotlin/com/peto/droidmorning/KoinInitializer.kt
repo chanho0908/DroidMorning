@@ -1,7 +1,7 @@
 package com.peto.droidmorning
 
 import com.peto.droidmorning.data.di.dataModule
-import com.peto.droidmorning.di.appNavigationModule
+import com.peto.droidmorning.di.navigationModule
 import com.peto.droidmorning.di.platformModule
 import com.peto.droidmorning.di.viewModelModule
 import org.koin.core.context.startKoin
@@ -21,7 +21,7 @@ fun initKoin(
                     platformModule,
                     dataModule,
                     viewModelModule,
-                    appNavigationModule,
+                    navigationModule,
                 ),
         )
     }

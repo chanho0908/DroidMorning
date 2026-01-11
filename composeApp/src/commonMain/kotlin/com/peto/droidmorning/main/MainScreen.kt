@@ -1,0 +1,90 @@
+package com.peto.droidmorning.main
+
+import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.NavigationBar
+import androidx.compose.material3.NavigationBarItem
+import androidx.compose.material3.NavigationBarItemDefaults
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.Modifier
+import com.peto.droidmorning.designsystem.theme.AppTheme
+import com.peto.droidmorning.history.HistoryScreen
+import com.peto.droidmorning.profile.ProfileScreen
+import com.peto.droidmorning.question.QuestionScreen
+import com.peto.droidmorning.test.TestScreen
+import org.jetbrains.compose.resources.stringResource
+import org.jetbrains.compose.ui.tooling.preview.Preview
+
+@Composable
+fun MainScreen() {
+    var selectedTab by remember { mutableStateOf(BottomNavigationType.QUESTION) }
+    val interactionSource = remember { MutableInteractionSource() }
+
+    Scaffold(
+        modifier = Modifier.fillMaxSize(),
+        bottomBar = {
+            NavigationBar(
+                containerColor = MaterialTheme.colorScheme.secondary,
+            ) {
+                BottomNavigationType.entries.forEach { navType ->
+                    NavigationBarItem(
+                        selected = selectedTab == navType,
+                        onClick = { selectedTab = navType },
+                        icon = {
+                            Icon(
+                                imageVector = navType.icon,
+                                contentDescription = stringResource(navType.label),
+                            )
+                        },
+                        label = {
+                            Text(
+                                text = stringResource(navType.label),
+                                style = MaterialTheme.typography.labelLarge,
+                            )
+                        },
+                        colors =
+                            NavigationBarItemDefaults.colors(
+                                selectedIconColor = MaterialTheme.colorScheme.primary,
+                                selectedTextColor = MaterialTheme.colorScheme.primary,
+                                unselectedIconColor = MaterialTheme.colorScheme.onSurfaceVariant,
+                                unselectedTextColor = MaterialTheme.colorScheme.onSurfaceVariant,
+                            ),
+                        interactionSource = interactionSource,
+                    )
+                }
+            }
+        },
+    ) { paddingValues ->
+        Box(
+            modifier =
+                Modifier
+                    .fillMaxSize()
+                    .padding(paddingValues),
+        ) {
+            when (selectedTab) {
+                BottomNavigationType.QUESTION -> QuestionScreen()
+                BottomNavigationType.TEST -> TestScreen()
+                BottomNavigationType.HISTORY -> HistoryScreen()
+                BottomNavigationType.PROFILE -> ProfileScreen()
+            }
+        }
+    }
+}
+
+@Preview
+@Composable
+fun MainScreenPreview() {
+    AppTheme {
+        MainScreen()
+    }
+}

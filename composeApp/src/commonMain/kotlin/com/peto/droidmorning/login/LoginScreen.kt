@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
@@ -27,20 +28,23 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.peto.droidmorning.auth.GoogleAuthClient
 import com.peto.droidmorning.common.ObserveAsEvents
-import com.peto.droidmorning.designsystem.component.GoogleSignInButton
+import com.peto.droidmorning.common.extension.noRippleClickable
 import com.peto.droidmorning.designsystem.generated.resources.DesignRes
 import com.peto.droidmorning.designsystem.generated.resources.app_name
 import com.peto.droidmorning.designsystem.generated.resources.login_cancelled
 import com.peto.droidmorning.designsystem.generated.resources.login_failed
-import com.peto.droidmorning.designsystem.generated.resources.login_success
 import com.peto.droidmorning.designsystem.theme.AppTheme
 import com.peto.droidmorning.designsystem.theme.Dimen
 import com.peto.droidmorning.login.vm.AuthUiEvent
+import com.peto.droidmorning.login.vm.LoginUiState
 import com.peto.droidmorning.login.vm.LoginViewModel
 import com.peto.droidmorning.login.vm.LoginViewModel.Companion.LOGIN_ENTRANCE_ANIMATION_DURATION
 import droidmorning.composeapp.generated.resources.Res
+import droidmorning.composeapp.generated.resources.btn_google_login
+import droidmorning.composeapp.generated.resources.google_sign_in_button_description
 import droidmorning.composeapp.generated.resources.img_login_background
 import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.painterResource
@@ -51,13 +55,14 @@ import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
 fun LoginScreen(
+    onCompleteLogin: () -> Unit,
     viewModel: LoginViewModel = koinViewModel(),
     googleAuthClient: GoogleAuthClient = koinInject(),
 ) {
+    val uiState by viewModel.uiState.collectAsStateWithLifecycle()
     val coroutineScope = rememberCoroutineScope()
     val snackbarHostState = remember { SnackbarHostState() }
 
-    val loginSuccess = stringResource(DesignRes.string.login_success)
     val loginFailed = stringResource(DesignRes.string.login_failed)
     val loginCancelled = stringResource(DesignRes.string.login_cancelled)
 
@@ -76,9 +81,7 @@ fun LoginScreen(
             }
 
             AuthUiEvent.NavigateToHomeScreen -> {
-                coroutineScope.launch {
-                    snackbarHostState.showSnackbar(loginSuccess)
-                }
+                onCompleteLogin()
             }
         }
     }
@@ -87,6 +90,7 @@ fun LoginScreen(
         snackbarHost = { SnackbarHost(snackbarHostState) },
     ) { paddingValues ->
         LoginContent(
+            uiState = uiState,
             onGoogleLoginClick = {
                 coroutineScope.launch {
                     val result = googleAuthClient.signIn()
@@ -100,6 +104,7 @@ fun LoginScreen(
 
 @Composable
 fun LoginContent(
+    uiState: LoginUiState,
     onGoogleLoginClick: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
@@ -142,9 +147,35 @@ fun LoginContent(
                     .alpha(alpha),
         )
 
-        Spacer(modifier = Modifier.height(Dimen.loginButtonTopSpacing))
+        if (uiState.showLoginButton) {
+            Spacer(modifier = Modifier.height(Dimen.loginButtonTopSpacing))
+            GoogleSignInButton(onClick = onGoogleLoginClick)
+        }
+    }
+}
 
-        GoogleSignInButton(onClick = onGoogleLoginClick)
+@Composable
+private fun GoogleSignInButton(
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier,
+) {
+    Image(
+        painter = painterResource(Res.drawable.btn_google_login),
+        contentDescription = stringResource(Res.string.google_sign_in_button_description),
+        modifier =
+            modifier
+                .fillMaxWidth()
+                .height(Dimen.buttonHeightMd)
+                .noRippleClickable(onClick = onClick),
+        contentScale = ContentScale.Fit,
+    )
+}
+
+@Preview
+@Composable
+private fun GoogleSignInButtonPreview() {
+    AppTheme {
+        GoogleSignInButton(onClick = {})
     }
 }
 
@@ -154,6 +185,7 @@ private fun LoginContentPreview() {
     AppTheme {
         LoginContent(
             onGoogleLoginClick = {},
+            uiState = LoginUiState(showLoginButton = true),
         )
     }
 }
