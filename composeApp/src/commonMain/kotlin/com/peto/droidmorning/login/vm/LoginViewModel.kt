@@ -2,6 +2,7 @@ package com.peto.droidmorning.login.vm
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.peto.droidmorning.auth.GoogleAuthResult
 import com.peto.droidmorning.domain.repository.auth.AuthRepository
 import com.peto.droidmorning.domain.repository.auth.AuthType
 import kotlinx.coroutines.channels.Channel
@@ -28,22 +29,30 @@ class LoginViewModel(
         }
     }
 
-    fun signInWithGoogle(idToken: String) {
+    fun handleGoogleAuthResult(result: GoogleAuthResult) {
+        when (result) {
+            is GoogleAuthResult.Success -> signInWithGoogle(result.idToken)
+            is GoogleAuthResult.Failure -> sendUiEvent(AuthUiEvent.ShowLoginFailMessage)
+            is GoogleAuthResult.Cancelled -> sendUiEvent(AuthUiEvent.ShowLoginCancelledMessage)
+        }
+    }
+
+    private fun signInWithGoogle(idToken: String) {
         viewModelScope.launch {
             authRepository
                 .signIn(idToken)
                 .onSuccess {
-                    delay(1000)
+                    delay(LOGIN_ENTRANCE_ANIMATION_DURATION.toLong())
                     sendUiEvent(AuthUiEvent.NavigateToHomeScreen)
                 }.onFailure { sendUiEvent(AuthUiEvent.ShowLoginFailMessage) }
         }
     }
 
-    fun sendUiEvent(event: AuthUiEvent) {
+    private fun sendUiEvent(event: AuthUiEvent) {
         viewModelScope.launch { _uiEvent.send(event) }
     }
 
     companion object {
-        const val NAVIGATE_TO_HOME_SCREEN_DURATION = 1000
+        const val LOGIN_ENTRANCE_ANIMATION_DURATION = 1000
     }
 }

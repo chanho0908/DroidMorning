@@ -28,7 +28,6 @@ import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import com.peto.droidmorning.auth.GoogleAuthClient
-import com.peto.droidmorning.auth.GoogleAuthResult
 import com.peto.droidmorning.common.ObserveAsEvents
 import com.peto.droidmorning.designsystem.component.GoogleSignInButton
 import com.peto.droidmorning.designsystem.generated.resources.DesignRes
@@ -40,7 +39,7 @@ import com.peto.droidmorning.designsystem.theme.AppTheme
 import com.peto.droidmorning.designsystem.theme.Dimen
 import com.peto.droidmorning.login.vm.AuthUiEvent
 import com.peto.droidmorning.login.vm.LoginViewModel
-import com.peto.droidmorning.login.vm.LoginViewModel.Companion.NAVIGATE_TO_HOME_SCREEN_DURATION
+import com.peto.droidmorning.login.vm.LoginViewModel.Companion.LOGIN_ENTRANCE_ANIMATION_DURATION
 import droidmorning.composeapp.generated.resources.Res
 import droidmorning.composeapp.generated.resources.img_login_background
 import kotlinx.coroutines.launch
@@ -70,6 +69,12 @@ fun LoginScreen(
                 }
             }
 
+            AuthUiEvent.ShowLoginCancelledMessage -> {
+                coroutineScope.launch {
+                    snackbarHostState.showSnackbar(loginCancelled)
+                }
+            }
+
             AuthUiEvent.NavigateToHomeScreen -> {
                 coroutineScope.launch {
                     snackbarHostState.showSnackbar(loginSuccess)
@@ -84,19 +89,8 @@ fun LoginScreen(
         LoginContent(
             onGoogleLoginClick = {
                 coroutineScope.launch {
-                    when (val result = googleAuthClient.signIn()) {
-                        is GoogleAuthResult.Success -> {
-                            viewModel.signInWithGoogle(result.idToken)
-                        }
-
-                        is GoogleAuthResult.Failure -> {
-                            snackbarHostState.showSnackbar(loginFailed)
-                        }
-
-                        is GoogleAuthResult.Cancelled -> {
-                            snackbarHostState.showSnackbar(loginCancelled)
-                        }
-                    }
+                    val result = googleAuthClient.signIn()
+                    viewModel.handleGoogleAuthResult(result)
                 }
             },
             modifier = Modifier.padding(paddingValues),
@@ -117,12 +111,12 @@ fun LoginContent(
 
     val offsetY by animateFloatAsState(
         targetValue = if (startAnimation) 0f else 100f,
-        animationSpec = tween(durationMillis = NAVIGATE_TO_HOME_SCREEN_DURATION),
+        animationSpec = tween(durationMillis = LOGIN_ENTRANCE_ANIMATION_DURATION),
     )
 
     val alpha by animateFloatAsState(
         targetValue = if (startAnimation) 1f else 0f,
-        animationSpec = tween(durationMillis = NAVIGATE_TO_HOME_SCREEN_DURATION),
+        animationSpec = tween(durationMillis = LOGIN_ENTRANCE_ANIMATION_DURATION),
     )
 
     Image(
