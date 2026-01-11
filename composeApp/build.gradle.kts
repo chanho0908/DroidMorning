@@ -71,6 +71,7 @@ kotlin {
 
             implementation(libs.bundles.koin)
             implementation(libs.kotlinx.coroutines.core)
+            implementation(libs.kotlinx.collections.immutable)
             implementation(libs.napier)
         }
         commonTest.dependencies {
