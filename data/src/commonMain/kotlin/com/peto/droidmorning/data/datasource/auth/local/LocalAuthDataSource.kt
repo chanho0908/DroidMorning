@@ -1,15 +1,11 @@
 package com.peto.droidmorning.data.datasource.auth.local
 
-import com.peto.droidmorning.domain.model.AuthToken
-
 interface LocalAuthDataSource {
-    suspend fun accessToken(): String?
+    suspend fun userId(): String?
 
-    suspend fun refreshToken(): String?
+    suspend fun hasUserId(): Boolean
 
-    suspend fun hasToken(): Boolean
-
-    suspend fun saveTokens(authToken: AuthToken)
+    suspend fun save(userId: String)
 
     suspend fun clear()
 }

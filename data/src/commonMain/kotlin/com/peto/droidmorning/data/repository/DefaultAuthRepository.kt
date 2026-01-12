@@ -10,15 +10,15 @@ class DefaultAuthRepository(
     private val localDataSource: LocalAuthDataSource,
 ) : AuthRepository {
     override suspend fun authType(): AuthType =
-        when (localDataSource.hasToken()) {
+        when (localDataSource.hasUserId()) {
             true -> AuthType.Authenticated
             false -> AuthType.Unauthenticated
         }
 
     override suspend fun signIn(oauthIdToken: String): Result<Unit> =
         runCatching {
-            remoteDataSource.signIn(oauthIdToken)?.let { authToken ->
-                localDataSource.saveTokens(authToken)
+            remoteDataSource.signIn(oauthIdToken)?.let { userId ->
+                localDataSource.save(userId)
             }
         }
 

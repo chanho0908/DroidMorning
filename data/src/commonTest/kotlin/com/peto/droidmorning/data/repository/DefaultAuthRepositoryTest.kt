@@ -27,15 +27,10 @@ class DefaultAuthRepositoryTest {
     }
 
     @Test
-    fun `토큰이 존재하면 Authenticated를 반환 한다`() =
+    fun `UserId가 존재하면 Authenticated를 반환 한다`() =
         runTest {
             // given
-            fakeLocalDataSource.saveTokens(
-                com.peto.droidmorning.domain.model.AuthToken(
-                    accessToken = "accessToken",
-                    refreshToken = "refreshToken",
-                ),
-            )
+            fakeLocalDataSource.save("test-user-id")
 
             // when
             val actual = repository.authType()
@@ -45,7 +40,7 @@ class DefaultAuthRepositoryTest {
         }
 
     @Test
-    fun `토큰이 존재하지 않으면 UnAuthenticated를 반환 한다`() =
+    fun `UserId가 존재하지 않으면 UnAuthenticated를 반환 한다`() =
         runTest {
             // when
             val actual = repository.authType()
@@ -55,17 +50,17 @@ class DefaultAuthRepositoryTest {
         }
 
     @Test
-    fun `로그인에 성공하면 액세스 토큰과 리프레시 토큰을 저장한다`() =
+    fun `로그인에 성공하면 UserId를 저장한다`() =
         runTest {
             // given
             val oauthIdToken = "oauthIdToken"
-            assertFalse(fakeLocalDataSource.hasToken())
+            assertFalse(fakeLocalDataSource.hasUserId())
 
             // when
             repository.signIn(oauthIdToken)
 
             // then
-            fakeLocalDataSource.hasToken()
+            assertTrue(fakeLocalDataSource.hasUserId())
         }
 
     @Test
