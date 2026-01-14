@@ -5,10 +5,13 @@ enum class Category {
     Coroutine,
     Android,
     Compose,
-    Unknown,
+    OOP,
     ;
 
     companion object {
-        fun from(value: String): Category = entries.firstOrNull { it.name.equals(value, ignoreCase = true) } ?: Unknown
+        fun name(value: String): Category =
+            entries
+                .firstOrNull { it.name.equals(value, ignoreCase = true) }
+                ?: throw IllegalArgumentException("Unknown category: $value")
     }
 }
