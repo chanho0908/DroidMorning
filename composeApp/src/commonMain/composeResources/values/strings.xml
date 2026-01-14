@@ -7,4 +7,20 @@
 
     <!-- GoogleSignInButton -->
     <string name="google_sign_in_button_description">Google 로그인 버튼</string>
+
+    <!-- Question List -->
+    <string name="question_search_placeholder">문제 검색...</string>
+    <string name="question_filter_category">카테고리</string>
+    <string name="question_filter_solved">푼 문제</string>
+    <string name="question_filter_favorites">즐겨찾기</string>
+    <string name="question_empty_state">문제가 없습니다</string>
+    <string name="question_empty_search">검색 결과가 없습니다</string>
+    <string name="question_error_title">오류 발생</string>
+    <string name="question_retry">다시 시도</string>
+    
+    <string name="category_kotlin">Kotlin</string>
+    <string name="category_coroutine">Coroutine</string>
+    <string name="category_android">Android</string>
+    <string name="category_compose">Compose</string>
+    <string name="category_oop">OOP</string>
 </resources>

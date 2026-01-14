@@ -2,30 +2,36 @@ package com.peto.droidmorning.data.repository
 
 import com.peto.droidmorning.data.datasource.question.remote.RemoteQuestionDataSource
 import com.peto.droidmorning.domain.model.Category
-import com.peto.droidmorning.domain.model.Question
+import com.peto.droidmorning.domain.model.Questions
 import com.peto.droidmorning.domain.repository.QuestionRepository
 
 class DefaultQuestionRepository(
     private val remoteQuestionDataSource: RemoteQuestionDataSource,
 ) : QuestionRepository {
-    override suspend fun fetchQuestions(): Result<List<Question>> =
+    override suspend fun fetchQuestions(): Result<Questions> =
         runCatching {
-            remoteQuestionDataSource
-                .fetchQuestions()
-                .map { it.toDomain() }
+            val result =
+                remoteQuestionDataSource
+                    .fetchQuestions()
+                    .map { it.toDomain() }
+            Questions(result)
         }
 
-    override suspend fun fetchQuestionsByCategory(category: Category): Result<List<Question>> =
+    override suspend fun fetchQuestionsByCategory(category: Category): Result<Questions> =
         runCatching {
-            remoteQuestionDataSource
-                .fetchQuestionsByCategory(category.name)
-                .map { response -> response.toDomain() }
+            val result =
+                remoteQuestionDataSource
+                    .fetchQuestionsByCategory(category.name)
+                    .map { response -> response.toDomain() }
+            Questions(result)
         }
 
-    override suspend fun searchQuestions(query: String): Result<List<Question>> =
+    override suspend fun searchQuestions(query: String): Result<Questions> =
         runCatching {
-            remoteQuestionDataSource
-                .searchQuestions(query)
-                .map { response -> response.toDomain() }
+            val result =
+                remoteQuestionDataSource
+                    .searchQuestions(query)
+                    .map { response -> response.toDomain() }
+            Questions(result)
         }
 }

@@ -95,7 +95,10 @@ private fun MainContent(
         modifier = modifier.fillMaxSize(),
     ) {
         when (selectedTab) {
-            BottomNavigationType.QUESTION -> QuestionScreen()
+            BottomNavigationType.QUESTION ->
+                QuestionScreen(
+                    onNavigateToDetail = {},
+                )
             BottomNavigationType.TEST -> TestScreen()
             BottomNavigationType.HISTORY -> HistoryScreen()
             BottomNavigationType.PROFILE -> ProfileScreen()
