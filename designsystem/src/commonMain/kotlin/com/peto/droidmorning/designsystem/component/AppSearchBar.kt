@@ -6,6 +6,7 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.collectIsFocusedAsState
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -54,15 +55,12 @@ fun AppSearchBar(
     onQueryChange: (String) -> Unit,
     onSearch: (String) -> Unit,
     modifier: Modifier = Modifier,
-    enabled: Boolean = true,
-    onClear: (() -> Unit)? = null,
 ) {
     val interactionSource = remember { MutableInteractionSource() }
     val isFocused by interactionSource.collectIsFocusedAsState()
 
     val borderColor by animateColorAsState(
         targetValue = if (isFocused) Primary else Border,
-        label = "border_color",
     )
 
     BasicTextField(
@@ -76,7 +74,6 @@ fun AppSearchBar(
                 .background(Secondary)
                 .border(1.dp, borderColor, Shape.buttonPill)
                 .padding(horizontal = Dimen.spacingMd),
-        enabled = enabled,
         singleLine = true,
         textStyle = MaterialTheme.typography.bodyLarge.copy(color = OnSurface),
         cursorBrush = SolidColor(Primary),
@@ -116,7 +113,6 @@ fun AppSearchBar(
                     IconButton(
                         onClick = {
                             onQueryChange("")
-                            onClear?.invoke()
                         },
                         modifier = Modifier.size(Dimen.touchTargetMin),
                     ) {
@@ -137,22 +133,18 @@ fun AppSearchBar(
 @Composable
 private fun AppSearchBarPreview() {
     AppTheme {
-        AppSearchBar(
-            query = "Compose",
-            onQueryChange = {},
-            onSearch = {},
-        )
-    }
-}
+        Column {
+            AppSearchBar(
+                query = "Compose",
+                onQueryChange = {},
+                onSearch = {},
+            )
 
-@Preview
-@Composable
-private fun AppSearchBarEmptyPreview() {
-    AppTheme {
-        AppSearchBar(
-            query = "",
-            onQueryChange = {},
-            onSearch = {},
-        )
+            AppSearchBar(
+                query = "",
+                onQueryChange = {},
+                onSearch = {},
+            )
+        }
     }
 }

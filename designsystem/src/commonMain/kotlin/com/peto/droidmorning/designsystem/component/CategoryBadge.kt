@@ -15,11 +15,12 @@ import com.peto.droidmorning.designsystem.theme.CategoryCoroutine
 import com.peto.droidmorning.designsystem.theme.CategoryKotlin
 import com.peto.droidmorning.designsystem.theme.Dimen
 import com.peto.droidmorning.designsystem.theme.Shape
+import com.peto.droidmorning.domain.model.Category
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
 fun CategoryBadge(
-    category: String,
+    category: Category,
     categoryColor: Color,
     modifier: Modifier = Modifier,
 ) {
@@ -31,7 +32,7 @@ fun CategoryBadge(
         color = backgroundColor,
     ) {
         Text(
-            text = category,
+            text = category.name,
             style = MaterialTheme.typography.labelMedium,
             color = categoryColor,
             modifier =
@@ -50,19 +51,23 @@ private fun CategoryBadgePreview() {
         Column {
             CategoryBadge(
                 categoryColor = CategoryKotlin,
-                category = "android",
+                category = Category.Kotlin,
             )
             CategoryBadge(
                 categoryColor = CategoryCompose,
-                category = "kotlin",
+                category = Category.Compose,
             )
             CategoryBadge(
                 categoryColor = CategoryCoroutine,
-                category = "compose",
+                category = Category.Coroutine,
             )
             CategoryBadge(
                 categoryColor = CategoryAndroid,
-                category = "coroutine",
+                category = Category.Android,
+            )
+            CategoryBadge(
+                categoryColor = CategoryAndroid,
+                category = Category.Android,
             )
         }
     }

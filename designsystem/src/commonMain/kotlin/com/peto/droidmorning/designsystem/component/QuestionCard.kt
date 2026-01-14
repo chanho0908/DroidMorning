@@ -18,7 +18,6 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextOverflow
 import com.peto.droidmorning.designsystem.generated.resources.DesignRes
 import com.peto.droidmorning.designsystem.generated.resources.question_card_favorite_add
@@ -27,12 +26,17 @@ import com.peto.droidmorning.designsystem.generated.resources.question_card_solv
 import com.peto.droidmorning.designsystem.preview.QuestionCardPreviewProvider
 import com.peto.droidmorning.designsystem.preview.QuestionCardPreviewState
 import com.peto.droidmorning.designsystem.theme.AppTheme
+import com.peto.droidmorning.designsystem.theme.CategoryAndroid
+import com.peto.droidmorning.designsystem.theme.CategoryCompose
+import com.peto.droidmorning.designsystem.theme.CategoryCoroutine
 import com.peto.droidmorning.designsystem.theme.CategoryKotlin
+import com.peto.droidmorning.designsystem.theme.CategoryOOP
 import com.peto.droidmorning.designsystem.theme.Dimen
 import com.peto.droidmorning.designsystem.theme.MutedForeground
 import com.peto.droidmorning.designsystem.theme.OnSurface
 import com.peto.droidmorning.designsystem.theme.Success
 import com.peto.droidmorning.designsystem.theme.Warning
+import com.peto.droidmorning.domain.model.Category
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 import org.jetbrains.compose.ui.tooling.preview.PreviewParameter
@@ -40,8 +44,7 @@ import org.jetbrains.compose.ui.tooling.preview.PreviewParameter
 @Composable
 fun QuestionCard(
     title: String,
-    category: String,
-    categoryColor: Color,
+    category: Category,
     isSolved: Boolean,
     isFavorite: Boolean,
     onClick: () -> Unit,
@@ -64,7 +67,7 @@ fun QuestionCard(
                 ) {
                     CategoryBadge(
                         category = category,
-                        categoryColor = categoryColor,
+                        categoryColor = categoryColor(category),
                     )
 
                     if (isSolved) {
@@ -110,6 +113,16 @@ fun QuestionCard(
     }
 }
 
+@Composable
+private fun categoryColor(category: Category) =
+    when (category) {
+        Category.Kotlin -> CategoryKotlin
+        Category.Coroutine -> CategoryCoroutine
+        Category.Android -> CategoryAndroid
+        Category.Compose -> CategoryCompose
+        Category.OOP -> CategoryOOP
+    }
+
 @Preview
 @Composable
 private fun QuestionCardPreview(
@@ -122,7 +135,6 @@ private fun QuestionCardPreview(
             category = state.category,
             isSolved = state.isSolved,
             isFavorite = state.isFavorite,
-            categoryColor = CategoryKotlin,
             onClick = {},
             onFavoriteClick = {},
         )
