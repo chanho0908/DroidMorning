@@ -13,15 +13,9 @@ data class Filter(
 
     fun applySearchQuery(query: String): Filter = copy(searchQuery = SearchQuery(query))
 
-    fun updateCategory(category: Category): Filter =
-        copy(
-            categories =
-                if (categories.contains(category)) {
-                    categories.remove(category)
-                } else {
-                    categories.add(category)
-                },
-        )
+    fun addCategory(category: Category): Filter = copy(categories = categories.add(category))
+
+    fun removeCategory(category: Category): Filter = copy(categories = categories.remove(category))
 
     fun applySolvedFilter(): Filter = copy(solved = true)
     fun clearSolvedFilter(): Filter = copy(solved = false)

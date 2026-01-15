@@ -40,8 +40,11 @@ data class QuestionUiState(
     fun updateSearchQuery(query: String): QuestionUiState =
         copy(filter = filter.applySearchQuery(query))
 
-    fun toggleCategory(category: Category): QuestionUiState =
-        copy(filter = filter.updateCategory(category))
+    fun addCategory(category: Category): QuestionUiState =
+        copy(filter = filter.addCategory(category))
+
+    fun removeCategory(category: Category): QuestionUiState =
+        copy(filter = filter.removeCategory(category))
 
     fun toggleCategoryFilters(): QuestionUiState =
         copy(showCategoryFilters = !showCategoryFilters)

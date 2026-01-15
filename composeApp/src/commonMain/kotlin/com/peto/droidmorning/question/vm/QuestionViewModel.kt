@@ -34,7 +34,13 @@ class QuestionViewModel(
     }
 
     fun onCategoryToggle(category: Category) {
-        _uiState.update { it.toggleCategory(category) }
+        _uiState.update {
+            if (it.selectedCategories.contains(category)) {
+                it.removeCategory(category)
+            } else {
+                it.addCategory(category)
+            }
+        }
         applyFilter()
     }
 

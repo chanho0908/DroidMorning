@@ -86,22 +86,22 @@ class FilterTest {
     }
 
     @Test
-    fun `카테고리가 없는 Filter에서 카테고리를 토글하면 카테고리가 추가된다`() {
+    fun `카테고리가 없는 Filter에 카테고리를 추가하면 해당 카테고리가 포함된다`() {
         // Given
 
         // When
-        val result = emptyFilter.updateCategory(Category.Kotlin)
+        val result = emptyFilter.addCategory(Category.Kotlin)
 
         // Then
         assertTrue(result.categories.contains(Category.Kotlin))
     }
 
     @Test
-    fun `카테고리가 있는 Filter에서 같은 카테고리를 토글하면 제거된다`() {
+    fun `카테고리가 있는 Filter에서 해당 카테고리를 제거하면 비게 된다`() {
         // Given
 
         // When
-        val result = filterWithCategory.updateCategory(Category.Kotlin)
+        val result = filterWithCategory.removeCategory(Category.Kotlin)
 
         // Then
         assertAll(
@@ -111,11 +111,11 @@ class FilterTest {
     }
 
     @Test
-    fun `Kotlin 카테고리가 있는 Filter에서 Android 카테고리를 토글하면 둘 다 포함한다`() {
+    fun `Kotlin 카테고리가 있는 Filter에 Android 카테고리를 추가하면 둘 다 포함한다`() {
         // Given
 
         // When
-        val result = filterWithCategory.updateCategory(Category.Android)
+        val result = filterWithCategory.addCategory(Category.Android)
 
         // Then
         assertAll(
