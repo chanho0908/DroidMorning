@@ -24,7 +24,7 @@ class DefaultQuestionRepositoryTest {
             assertTrue(result.isSuccess)
             val questions = result.getOrThrow()
             assertEquals(3, questions.size)
-            assertEquals("질문 1", questions.first().title)
+            assertEquals("질문 1", questions.toList().first().title)
         }
 
     @Test
@@ -53,7 +53,7 @@ class DefaultQuestionRepositoryTest {
             // then
             val questions = result.getOrThrow()
             assertEquals(1, questions.size)
-            assertEquals(Category.Kotlin, questions.first().category)
+            assertEquals(Category.Kotlin, questions.toList().first().category)
         }
 
     @Test
@@ -82,7 +82,7 @@ class DefaultQuestionRepositoryTest {
             // then
             val questions = result.getOrThrow()
             assertEquals(1, questions.size)
-            assertEquals(Category.Coroutine, questions.first().category)
+            assertEquals(Category.Coroutine, questions.toList().first().category)
         }
 
     @Test
@@ -111,7 +111,7 @@ class DefaultQuestionRepositoryTest {
             // then
             val questions = result.getOrThrow()
             assertEquals(1, questions.size)
-            assertEquals(Category.Android, questions.first().category)
+            assertEquals(Category.Android, questions.toList().first().category)
         }
 
     @Test
@@ -140,7 +140,7 @@ class DefaultQuestionRepositoryTest {
             // then
             val questions = result.getOrThrow()
             assertEquals(1, questions.size)
-            assertEquals(Category.Compose, questions.first().category)
+            assertEquals(Category.Compose, questions.toList().first().category)
         }
 
     @Test
@@ -161,6 +161,6 @@ class DefaultQuestionRepositoryTest {
             // then
             val questions = result.getOrThrow()
             assertEquals(1, questions.size)
-            assertEquals("Kotlin Coroutines", questions.first().title)
+            assertEquals("Kotlin Coroutines", questions.toList().first().title)
         }
 }
