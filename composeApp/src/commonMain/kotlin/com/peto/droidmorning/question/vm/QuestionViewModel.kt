@@ -60,7 +60,7 @@ class QuestionViewModel(
                 _uiState.update { it.filtering() }
                 sendUiEvent(QuestionUiEvent.ScrollToTop)
                 delay(500)
-                _uiState.update { it.filterCompleted() }
+                _uiState.update { it.filterClear() }
             }
     }
 

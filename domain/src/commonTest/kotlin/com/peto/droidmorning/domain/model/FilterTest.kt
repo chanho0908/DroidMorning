@@ -19,8 +19,8 @@ class FilterTest {
         emptyFilter = Filter()
         filterWithQuery = Filter(searchQuery = SearchQuery("kotlin"))
         filterWithCategory = Filter(categories = Categories(setOf(Category.Kotlin)))
-        filterWithSolved = Filter(showSolvedOnly = true)
-        filterWithFavorites = Filter(showFavoritesOnly = true)
+        filterWithSolved = Filter(solved = true)
+        filterWithFavorites = Filter(liked = true)
     }
 
     @Test
@@ -74,14 +74,14 @@ class FilterTest {
         val newQuery = "kotlin coroutine"
 
         // When
-        val result = emptyFilter.updateSearchQuery(newQuery)
+        val result = emptyFilter.applySearchQuery(newQuery)
 
         // Then
         assertAll(
             { assertEquals(newQuery, result.searchQuery.value) },
             { assertEquals(emptyFilter.categories, result.categories) },
-            { assertEquals(emptyFilter.showSolvedOnly, result.showSolvedOnly) },
-            { assertEquals(emptyFilter.showFavoritesOnly, result.showFavoritesOnly) },
+            { assertEquals(emptyFilter.solved, result.solved) },
+            { assertEquals(emptyFilter.liked, result.liked) },
         )
     }
 
@@ -90,7 +90,7 @@ class FilterTest {
         // Given
 
         // When
-        val result = emptyFilter.toggleCategory(Category.Kotlin)
+        val result = emptyFilter.updateCategory(Category.Kotlin)
 
         // Then
         assertTrue(result.categories.contains(Category.Kotlin))
@@ -101,7 +101,7 @@ class FilterTest {
         // Given
 
         // When
-        val result = filterWithCategory.toggleCategory(Category.Kotlin)
+        val result = filterWithCategory.updateCategory(Category.Kotlin)
 
         // Then
         assertAll(
@@ -115,7 +115,7 @@ class FilterTest {
         // Given
 
         // When
-        val result = filterWithCategory.toggleCategory(Category.Android)
+        val result = filterWithCategory.updateCategory(Category.Android)
 
         // Then
         assertAll(
@@ -129,43 +129,43 @@ class FilterTest {
         // Given
 
         // When
-        val result = emptyFilter.toggleSolvedFilter()
+        val result = emptyFilter.applySolvedFilter()
 
         // Then
-        assertTrue(result.showSolvedOnly)
+        assertTrue(result.solved)
     }
 
     @Test
-    fun `풀이 완료 필터가 활성화된 상태에서 토글하면 비활성화된다`() {
+    fun `풀이 완료 필터가 활성화된 상태에서 clear하면 비활성화된다`() {
         // Given
 
         // When
-        val result = filterWithSolved.toggleSolvedFilter()
+        val result = filterWithSolved.clearSolvedFilter()
 
         // Then
-        assertFalse(result.showSolvedOnly)
+        assertFalse(result.solved)
     }
 
     @Test
-    fun `즐겨찾기 필터가 비활성화된 상태에서 토글하면 활성화된다`() {
+    fun `즐겨찾기 필터가 비활성화된 상태에서 apply하면 활성화된다`() {
         // Given
 
         // When
-        val result = emptyFilter.toggleFavoritesFilter()
+        val result = emptyFilter.applyFavoritesFilter()
 
         // Then
-        assertTrue(result.showFavoritesOnly)
+        assertTrue(result.liked)
     }
 
     @Test
-    fun `즐겨찾기 필터가 활성화된 상태에서 토글하면 비활성화된다`() {
+    fun `즐겨찾기 필터가 활성화된 상태에서 clear하면 비활성화된다`() {
         // Given
 
         // When
-        val result = filterWithFavorites.toggleFavoritesFilter()
+        val result = filterWithFavorites.clearFavoritesFilter()
 
         // Then
-        assertFalse(result.showFavoritesOnly)
+        assertFalse(result.liked)
     }
 
     @Test
@@ -175,8 +175,8 @@ class FilterTest {
             Filter(
                 searchQuery = SearchQuery("kotlin"),
                 categories = Categories(setOf(Category.Kotlin)),
-                showSolvedOnly = true,
-                showFavoritesOnly = true,
+                solved = true,
+                liked = true,
             )
 
         // When

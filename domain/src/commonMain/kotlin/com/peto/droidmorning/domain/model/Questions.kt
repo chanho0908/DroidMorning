@@ -12,8 +12,8 @@ data class Questions(
     fun applyFilters(filter: Filter): Questions =
         filterBySearchQuery(filter.searchQuery)
             .filterByCategory(filter.categories)
-            .filterBySolved(filter.showSolvedOnly)
-            .filterByFavorite(filter.showFavoritesOnly)
+            .filterBySolved(filter.solved)
+            .filterByFavorite(filter.liked)
 
     private fun filterBySearchQuery(query: SearchQuery): Questions {
         if (query.isEmpty()) return this

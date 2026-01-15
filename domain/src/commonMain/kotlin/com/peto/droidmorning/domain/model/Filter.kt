@@ -2,19 +2,18 @@ package com.peto.droidmorning.domain.model
 
 data class Filter(
     val searchQuery: SearchQuery = SearchQuery(""),
-    val categories: Categories = Categories(),
-    val showSolvedOnly: Boolean = false,
-    val showFavoritesOnly: Boolean = false,
+    val categories: Categories = Categories(emptySet()),
+    val solved: Boolean = false,
+    val liked: Boolean = false,
 ) {
     fun isEmpty(): Boolean =
         searchQuery.isEmpty() &&
-            categories.isEmpty() &&
-            !showSolvedOnly &&
-            !showFavoritesOnly
+                categories.isEmpty() &&
+                !solved && !liked
 
-    fun updateSearchQuery(query: String): Filter = copy(searchQuery = SearchQuery(query))
+    fun applySearchQuery(query: String): Filter = copy(searchQuery = SearchQuery(query))
 
-    fun toggleCategory(category: Category): Filter =
+    fun updateCategory(category: Category): Filter =
         copy(
             categories =
                 if (categories.contains(category)) {
@@ -24,7 +23,9 @@ data class Filter(
                 },
         )
 
-    fun toggleSolvedFilter(): Filter = copy(showSolvedOnly = !showSolvedOnly)
+    fun applySolvedFilter(): Filter = copy(solved = true)
+    fun clearSolvedFilter(): Filter = copy(solved = false)
 
-    fun toggleFavoritesFilter(): Filter = copy(showFavoritesOnly = !showFavoritesOnly)
+    fun applyFavoritesFilter(): Filter = copy(liked = true)
+    fun clearFavoritesFilter(): Filter = copy(liked = false)
 }

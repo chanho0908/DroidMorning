@@ -159,7 +159,7 @@ class QuestionsTest {
     @Test
     fun `풀이 완료 필터를 적용하면 풀이 완료된 질문만 반환한다`() {
         // Given
-        val filter = Filter(showSolvedOnly = true)
+        val filter = Filter(solved = true)
 
         // When
         val result = mixedSolvedQuestions.applyFilters(filter)
@@ -174,7 +174,7 @@ class QuestionsTest {
     @Test
     fun `즐겨찾기 필터를 적용하면 즐겨찾기된 질문만 반환한다`() {
         // Given
-        val filter = Filter(showFavoritesOnly = true)
+        val filter = Filter(liked = true)
 
         // When
         val result = mixedFavoriteQuestions.applyFilters(filter)
@@ -202,7 +202,7 @@ class QuestionsTest {
             Filter(
                 searchQuery = SearchQuery("Kotlin"),
                 categories = Categories(setOf(Category.Kotlin)),
-                showSolvedOnly = true,
+                solved = true,
             )
 
         // When
