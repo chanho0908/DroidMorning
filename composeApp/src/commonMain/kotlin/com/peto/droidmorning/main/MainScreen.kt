@@ -18,13 +18,13 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
 import com.peto.droidmorning.designsystem.theme.AppTheme
 import com.peto.droidmorning.history.HistoryScreen
 import com.peto.droidmorning.profile.ProfileScreen
 import com.peto.droidmorning.question.QuestionScreen
 import com.peto.droidmorning.test.TestScreen
 import org.jetbrains.compose.resources.stringResource
-import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
 fun MainScreen() {

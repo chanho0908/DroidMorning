@@ -19,6 +19,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewParameter
 import com.peto.droidmorning.designsystem.generated.resources.DesignRes
 import com.peto.droidmorning.designsystem.generated.resources.question_card_favorite_add
 import com.peto.droidmorning.designsystem.generated.resources.question_card_favorite_remove
@@ -38,8 +40,6 @@ import com.peto.droidmorning.designsystem.theme.Success
 import com.peto.droidmorning.designsystem.theme.Warning
 import com.peto.droidmorning.domain.model.Category
 import org.jetbrains.compose.resources.stringResource
-import org.jetbrains.compose.ui.tooling.preview.Preview
-import org.jetbrains.compose.ui.tooling.preview.PreviewParameter
 
 @Composable
 fun QuestionCard(

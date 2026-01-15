@@ -16,6 +16,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.scale
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.peto.droidmorning.designsystem.theme.AppTheme
 import com.peto.droidmorning.designsystem.theme.Border
@@ -23,7 +24,6 @@ import com.peto.droidmorning.designsystem.theme.Dimen
 import com.peto.droidmorning.designsystem.theme.Primary
 import com.peto.droidmorning.designsystem.theme.Shape
 import com.peto.droidmorning.designsystem.theme.Surface
-import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
 fun InteractiveCard(

@@ -24,7 +24,7 @@ androidx-credentials = "1.5.0"
 googleid = "1.1.1"
 
 # Compose
-compose-multiplatform = "1.9.3"
+compose-multiplatform = "1.10.0"
 
 # Network
 ktor = "3.3.3"

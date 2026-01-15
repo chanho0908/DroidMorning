@@ -8,6 +8,7 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
 import com.peto.droidmorning.designsystem.component.QuestionCard
 import com.peto.droidmorning.designsystem.theme.AppTheme
 import com.peto.droidmorning.designsystem.theme.Dimen
@@ -15,7 +16,6 @@ import com.peto.droidmorning.domain.model.Category
 import com.peto.droidmorning.domain.model.Question
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.persistentListOf
-import org.jetbrains.compose.ui.tooling.preview.Preview
 import kotlin.time.Instant
 
 @Composable

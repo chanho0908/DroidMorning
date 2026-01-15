@@ -8,6 +8,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.peto.droidmorning.designsystem.theme.AppTheme
 import com.peto.droidmorning.designsystem.theme.Border
@@ -16,7 +17,6 @@ import com.peto.droidmorning.designsystem.theme.OnSecondary
 import com.peto.droidmorning.designsystem.theme.Primary
 import com.peto.droidmorning.designsystem.theme.Secondary
 import com.peto.droidmorning.designsystem.theme.Shape
-import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
 fun CategoryFilterChip(

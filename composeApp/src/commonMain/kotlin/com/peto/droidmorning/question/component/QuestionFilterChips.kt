@@ -10,6 +10,7 @@ import androidx.compose.material.icons.outlined.CheckCircle
 import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
 import com.peto.droidmorning.designsystem.component.CategoryFilterChip
 import com.peto.droidmorning.designsystem.theme.AppTheme
 import com.peto.droidmorning.designsystem.theme.Dimen
@@ -21,7 +22,6 @@ import droidmorning.composeapp.generated.resources.question_filter_solved
 import kotlinx.collections.immutable.ImmutableSet
 import kotlinx.collections.immutable.persistentSetOf
 import org.jetbrains.compose.resources.stringResource
-import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
 fun QuestionFilterChips(
