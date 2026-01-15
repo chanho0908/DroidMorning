@@ -46,25 +46,15 @@ kotlin {
     sourceSets {
         androidMain.dependencies {
             implementation(libs.androidx.activity.compose)
-
             implementation(libs.kotlinx.coroutines.android)
-
             implementation(libs.bundles.credential.manager)
-
-            implementation(compose.preview)
         }
         commonMain.dependencies {
             implementation(project(":domain"))
             implementation(project(":data"))
             implementation(project(":designsystem"))
 
-            implementation(compose.runtime)
-            implementation(compose.foundation)
-            implementation(compose.material3)
-            implementation(compose.materialIconsExtended)
-            implementation(compose.ui)
-            implementation(compose.components.resources)
-            implementation(compose.components.uiToolingPreview)
+            implementation(libs.bundles.compose.multiplatform)
             implementation(libs.androidx.navigation.compose)
             implementation(libs.androidx.lifecycle.viewmodel.compose)
             implementation(libs.androidx.lifecycle.runtime.compose)
@@ -121,7 +111,7 @@ android {
 }
 
 dependencies {
-    debugImplementation(compose.uiTooling)
+    debugImplementation(libs.compose.ui.tooling)
 }
 
 // compose.resources {

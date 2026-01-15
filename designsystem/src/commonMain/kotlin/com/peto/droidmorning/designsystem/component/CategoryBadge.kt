@@ -8,6 +8,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.tooling.preview.Preview
 import com.peto.droidmorning.designsystem.theme.AppTheme
 import com.peto.droidmorning.designsystem.theme.CategoryAndroid
 import com.peto.droidmorning.designsystem.theme.CategoryCompose
@@ -17,7 +18,6 @@ import com.peto.droidmorning.designsystem.theme.CategoryOOP
 import com.peto.droidmorning.designsystem.theme.Dimen
 import com.peto.droidmorning.designsystem.theme.Shape
 import com.peto.droidmorning.domain.model.Category
-import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
 fun CategoryBadge(

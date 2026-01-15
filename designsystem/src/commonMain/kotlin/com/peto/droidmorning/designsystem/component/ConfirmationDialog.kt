@@ -8,12 +8,12 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import com.peto.droidmorning.designsystem.generated.resources.DesignRes
 import com.peto.droidmorning.designsystem.generated.resources.confirmation_dialog_default_confirm
 import com.peto.droidmorning.designsystem.generated.resources.confirmation_dialog_default_dismiss
 import com.peto.droidmorning.designsystem.theme.AppTheme
 import org.jetbrains.compose.resources.stringResource
-import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
 fun ConfirmationDialog(
