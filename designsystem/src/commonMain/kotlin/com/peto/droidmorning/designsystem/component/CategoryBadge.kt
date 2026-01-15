@@ -13,6 +13,7 @@ import com.peto.droidmorning.designsystem.theme.CategoryAndroid
 import com.peto.droidmorning.designsystem.theme.CategoryCompose
 import com.peto.droidmorning.designsystem.theme.CategoryCoroutine
 import com.peto.droidmorning.designsystem.theme.CategoryKotlin
+import com.peto.droidmorning.designsystem.theme.CategoryOOP
 import com.peto.droidmorning.designsystem.theme.Dimen
 import com.peto.droidmorning.designsystem.theme.Shape
 import com.peto.droidmorning.domain.model.Category
@@ -66,8 +67,8 @@ private fun CategoryBadgePreview() {
                 category = Category.Android,
             )
             CategoryBadge(
-                categoryColor = CategoryAndroid,
-                category = Category.Android,
+                categoryColor = CategoryOOP,
+                category = Category.OOP,
             )
         }
     }
