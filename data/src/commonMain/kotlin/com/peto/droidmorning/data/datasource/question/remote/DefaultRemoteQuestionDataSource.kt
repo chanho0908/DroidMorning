@@ -8,21 +8,21 @@ import io.github.jan.supabase.postgrest.rpc
 
 class DefaultRemoteQuestionDataSource(
     private val postgrest: Postgrest,
-    auth: Auth,
+    private val auth: Auth,
 ) : RemoteQuestionDataSource {
-    private val uid: String =
+    private fun uid(): String =
         auth.currentSessionOrNull()?.user?.id
             ?: throw IllegalStateException("User not logged in")
 
     override suspend fun fetchQuestions(): List<QuestionResponse> {
-        val params = mapOf(RPC_FETCH_QUESTIONS_PARAM_NAME to uid)
+        val params = mapOf(RPC_FETCH_QUESTIONS_PARAM_NAME to uid())
         return postgrest
             .rpc(RPC_FETCH_QUESTIONS, params)
             .decodeList<QuestionResponse>()
     }
 
     override suspend fun addLike(questionId: Long) {
-        val request = LikeRequest(uid, questionId)
+        val request = LikeRequest(uid(), questionId)
         postgrest
             .from(FAVORITES_TABLE)
             .insert(request)
@@ -33,7 +33,7 @@ class DefaultRemoteQuestionDataSource(
             .from(FAVORITES_TABLE)
             .delete {
                 filter {
-                    eq(USER_ID_COLUMN, uid)
+                    eq(USER_ID_COLUMN, uid())
                     eq(QUESTION_ID_COLUMN, questionId)
                 }
             }
