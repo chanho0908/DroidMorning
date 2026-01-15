@@ -10,5 +10,6 @@ class FakeRemoteQuestionDataSource(
 
     override suspend fun fetchQuestionsByCategory(category: String): List<QuestionResponse> = questions.filter { it.category == category }
 
-    override suspend fun searchQuestions(query: String): List<QuestionResponse> = questions.filter { it.title.contains(query) }
+    override suspend fun searchQuestions(query: String): List<QuestionResponse> =
+        questions.filter { it.title.contains(query, ignoreCase = true) }
 }

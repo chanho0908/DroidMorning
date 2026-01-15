@@ -9,4 +9,8 @@ data class Question(
     val sourceUrl: String,
     val createdAt: Instant,
     val updatedAt: Instant,
-)
+    val isSolved: Boolean = false,
+    val isFavorite: Boolean = false,
+) {
+    fun isTitleMatched(query: SearchQuery): Boolean = title.contains(query.value, ignoreCase = true)
+}
