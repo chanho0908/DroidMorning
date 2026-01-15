@@ -8,8 +8,9 @@ data class Filter(
 ) {
     fun isEmpty(): Boolean =
         searchQuery.isEmpty() &&
-                categories.isEmpty() &&
-                !solved && !liked
+            categories.isEmpty() &&
+            !solved &&
+            !liked
 
     fun applySearchQuery(query: String): Filter = copy(searchQuery = SearchQuery(query))
 
@@ -18,8 +19,10 @@ data class Filter(
     fun removeCategory(category: Category): Filter = copy(categories = categories.remove(category))
 
     fun applySolvedFilter(): Filter = copy(solved = true)
+
     fun clearSolvedFilter(): Filter = copy(solved = false)
 
     fun applyFavoritesFilter(): Filter = copy(liked = true)
+
     fun clearFavoritesFilter(): Filter = copy(liked = false)
 }

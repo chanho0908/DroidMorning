@@ -34,39 +34,27 @@ data class QuestionUiState(
                 .toImmutableList()
         }
 
-    fun updateQuestions(questions: Questions): QuestionUiState =
-        copy(allQuestions = questions, isLoading = false)
+    fun updateQuestions(questions: Questions): QuestionUiState = copy(allQuestions = questions, isLoading = false)
 
-    fun updateSearchQuery(query: String): QuestionUiState =
-        copy(filter = filter.applySearchQuery(query))
+    fun updateSearchQuery(query: String): QuestionUiState = copy(filter = filter.applySearchQuery(query))
 
-    fun addCategory(category: Category): QuestionUiState =
-        copy(filter = filter.addCategory(category))
+    fun addCategory(category: Category): QuestionUiState = copy(filter = filter.addCategory(category))
 
-    fun removeCategory(category: Category): QuestionUiState =
-        copy(filter = filter.removeCategory(category))
+    fun removeCategory(category: Category): QuestionUiState = copy(filter = filter.removeCategory(category))
 
-    fun toggleCategoryFilters(): QuestionUiState =
-        copy(showCategoryFilters = !showCategoryFilters)
+    fun toggleCategoryFilters(): QuestionUiState = copy(showCategoryFilters = !showCategoryFilters)
 
-    fun applySolvedFilter(): QuestionUiState =
-        copy(filter = filter.applySolvedFilter())
+    fun applySolvedFilter(): QuestionUiState = copy(filter = filter.applySolvedFilter())
 
-    fun clearSolvedFilter(): QuestionUiState =
-        copy(filter = filter.clearSolvedFilter())
+    fun clearSolvedFilter(): QuestionUiState = copy(filter = filter.clearSolvedFilter())
 
-    fun applyFavoritesFilter(): QuestionUiState =
-        copy(filter = filter.applyFavoritesFilter())
+    fun applyFavoritesFilter(): QuestionUiState = copy(filter = filter.applyFavoritesFilter())
 
-    fun clearFavoritesFilter(): QuestionUiState =
-        copy(filter = filter.clearFavoritesFilter())
+    fun clearFavoritesFilter(): QuestionUiState = copy(filter = filter.clearFavoritesFilter())
 
-    fun loading(isLoading: Boolean): QuestionUiState =
-        copy(isLoading = isLoading)
+    fun loading(isLoading: Boolean): QuestionUiState = copy(isLoading = isLoading)
 
-    fun filtering(): QuestionUiState =
-        copy(isFiltering = true)
+    fun filtering(): QuestionUiState = copy(isFiltering = true)
 
-    fun filterClear(): QuestionUiState =
-        copy(isFiltering = false)
+    fun filterClear(): QuestionUiState = copy(isFiltering = false)
 }
