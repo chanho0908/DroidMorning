@@ -59,12 +59,12 @@ class QuestionViewModel(
         applyFilter()
     }
 
-    fun onFavoritesFilterToggle() {
+    fun onLikedFilterToggle() {
         _uiState.update {
-            if (it.showFavoritesOnly) {
-                it.clearFavoritesFilter()
+            if (it.showLikedOnly) {
+                it.clearLikedFilter()
             } else {
-                it.applyFavoritesFilter()
+                it.applyLikedFilter()
             }
         }
         applyFilter()
@@ -82,8 +82,8 @@ class QuestionViewModel(
             }
     }
 
-    fun onFavoriteToggle(questionId: Long) {
-        // TODO: Implement favorite toggle
+    fun onLikeToggle(questionId: Long) {
+        // TODO: Implement like toggle
     }
 
     private fun loadQuestions() {

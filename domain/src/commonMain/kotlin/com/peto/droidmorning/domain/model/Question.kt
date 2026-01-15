@@ -10,7 +10,7 @@ data class Question(
     val createdAt: Instant,
     val updatedAt: Instant,
     val isSolved: Boolean,
-    val isFavorite: Boolean,
+    val isLiked: Boolean,
 ) {
     fun isTitleMatched(query: SearchQuery): Boolean = title.contains(query.value, ignoreCase = true)
 }

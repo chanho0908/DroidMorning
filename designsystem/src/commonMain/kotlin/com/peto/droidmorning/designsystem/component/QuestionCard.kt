@@ -46,9 +46,9 @@ fun QuestionCard(
     title: String,
     category: Category,
     isSolved: Boolean,
-    isFavorite: Boolean,
+    isLiked: Boolean,
     onClick: () -> Unit,
-    onFavoriteClick: () -> Unit,
+    onLikeClick: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     InteractiveCard(
@@ -92,19 +92,19 @@ fun QuestionCard(
             }
 
             IconButton(
-                onClick = onFavoriteClick,
+                onClick = onLikeClick,
                 content = {
                     Icon(
-                        imageVector = if (isFavorite) Icons.Filled.Star else Icons.Outlined.Star,
+                        imageVector = if (isLiked) Icons.Filled.Star else Icons.Outlined.Star,
                         contentDescription =
                             stringResource(
-                                if (isFavorite) {
+                                if (isLiked) {
                                     DesignRes.string.question_card_favorite_remove
                                 } else {
                                     DesignRes.string.question_card_favorite_add
                                 },
                             ),
-                        tint = if (isFavorite) Warning else MutedForeground,
+                        tint = if (isLiked) Warning else MutedForeground,
                         modifier = Modifier.size(Dimen.iconSm),
                     )
                 },
@@ -134,9 +134,9 @@ private fun QuestionCardPreview(
             title = state.title,
             category = state.category,
             isSolved = state.isSolved,
-            isFavorite = state.isFavorite,
+            isLiked = state.isFavorite,
             onClick = {},
-            onFavoriteClick = {},
+            onLikeClick = {},
         )
     }
 }

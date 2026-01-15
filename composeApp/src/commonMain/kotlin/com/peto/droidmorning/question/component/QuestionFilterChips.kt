@@ -27,10 +27,10 @@ import org.jetbrains.compose.resources.stringResource
 fun QuestionFilterChips(
     selectedCategories: ImmutableSet<Category>,
     showSolvedOnly: Boolean,
-    showFavoritesOnly: Boolean,
+    showLikedOnly: Boolean,
     onToggleCategoryFilters: () -> Unit,
     onSolvedFilterToggle: () -> Unit,
-    onFavoritesFilterToggle: () -> Unit,
+    onLikedFilterToggle: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Row(
@@ -63,8 +63,8 @@ fun QuestionFilterChips(
 
         CategoryFilterChip(
             text = stringResource(Res.string.question_filter_favorites),
-            selected = showFavoritesOnly,
-            onClick = onFavoritesFilterToggle,
+            selected = showLikedOnly,
+            onClick = onLikedFilterToggle,
             leadingIcon = {
                 Icon(
                     imageVector = Icons.Filled.Star,
@@ -82,10 +82,10 @@ private fun QuestionFilterChipsPreview() {
         QuestionFilterChips(
             selectedCategories = persistentSetOf(),
             showSolvedOnly = false,
-            showFavoritesOnly = false,
+            showLikedOnly = false,
             onToggleCategoryFilters = {},
             onSolvedFilterToggle = {},
-            onFavoritesFilterToggle = {},
+            onLikedFilterToggle = {},
         )
     }
 }
@@ -97,10 +97,10 @@ private fun QuestionFilterChipsSelectedPreview() {
         QuestionFilterChips(
             selectedCategories = persistentSetOf(Category.Kotlin, Category.Android),
             showSolvedOnly = true,
-            showFavoritesOnly = true,
+            showLikedOnly = true,
             onToggleCategoryFilters = {},
             onSolvedFilterToggle = {},
-            onFavoritesFilterToggle = {},
+            onLikedFilterToggle = {},
         )
     }
 }

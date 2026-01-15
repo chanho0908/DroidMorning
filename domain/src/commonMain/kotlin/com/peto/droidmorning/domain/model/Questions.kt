@@ -13,7 +13,7 @@ data class Questions(
         filterBySearchQuery(filter.searchQuery)
             .filterByCategory(filter.categories)
             .filterBySolved(filter.solved)
-            .filterByFavorite(filter.liked)
+            .filterByLiked(filter.liked)
 
     private fun filterBySearchQuery(query: SearchQuery): Questions {
         if (query.isEmpty()) return this
@@ -40,9 +40,9 @@ data class Questions(
         return copy(values = values.filter { it.isSolved })
     }
 
-    private fun filterByFavorite(showFavoritesOnly: Boolean): Questions {
-        if (!showFavoritesOnly) return this
-        return copy(values = values.filter { it.isFavorite })
+    private fun filterByLiked(showLikedOnly: Boolean): Questions {
+        if (!showLikedOnly) return this
+        return copy(values = values.filter { it.isLiked })
     }
 
     fun toList(): List<Question> = values.toList()

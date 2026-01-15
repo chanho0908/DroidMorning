@@ -23,7 +23,7 @@ data class QuestionUiState(
     val selectedCategories: ImmutableSet<Category>
         get() = filter.categories.toSet().toImmutableSet()
     val showSolvedOnly: Boolean get() = filter.solved
-    val showFavoritesOnly: Boolean get() = filter.liked
+    val showLikedOnly: Boolean get() = filter.liked
 
     val filteredQuestions: ImmutableList<Question>
         get() {
@@ -48,9 +48,9 @@ data class QuestionUiState(
 
     fun clearSolvedFilter(): QuestionUiState = copy(filter = filter.clearSolvedFilter())
 
-    fun applyFavoritesFilter(): QuestionUiState = copy(filter = filter.applyFavoritesFilter())
+    fun applyLikedFilter(): QuestionUiState = copy(filter = filter.applyLikedFilter())
 
-    fun clearFavoritesFilter(): QuestionUiState = copy(filter = filter.clearFavoritesFilter())
+    fun clearLikedFilter(): QuestionUiState = copy(filter = filter.clearLikedFilter())
 
     fun loading(isLoading: Boolean): QuestionUiState = copy(isLoading = isLoading)
 

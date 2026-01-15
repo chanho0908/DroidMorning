@@ -18,7 +18,7 @@ data class QuestionResponse(
     @SerialName("updated_at")
     val updatedAt: Instant,
     @SerialName("is_favorited")
-    val isFavorited: Boolean = false,
+    val isLiked: Boolean = false,
     @SerialName("is_solved")
     val isSolved: Boolean = false,
 ) {
@@ -31,6 +31,6 @@ data class QuestionResponse(
             createdAt = createdAt,
             updatedAt = updatedAt,
             isSolved = isSolved,
-            isFavorite = isFavorited,
+            isLiked = isLiked,
         )
 }
