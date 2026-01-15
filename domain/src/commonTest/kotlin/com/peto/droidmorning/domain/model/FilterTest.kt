@@ -151,7 +151,7 @@ class FilterTest {
         // Given
 
         // When
-        val result = emptyFilter.applyFavoritesFilter()
+        val result = emptyFilter.applyLikedFilter()
 
         // Then
         assertTrue(result.liked)
@@ -162,7 +162,7 @@ class FilterTest {
         // Given
 
         // When
-        val result = filterWithFavorites.clearFavoritesFilter()
+        val result = filterWithFavorites.clearLikedFilter()
 
         // Then
         assertFalse(result.liked)

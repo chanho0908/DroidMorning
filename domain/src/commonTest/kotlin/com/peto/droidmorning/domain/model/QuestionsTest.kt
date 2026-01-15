@@ -49,9 +49,9 @@ class QuestionsTest {
         mixedFavoriteQuestions =
             Questions(
                 listOf(
-                    createQuestion(id = 1, isFavorite = true),
-                    createQuestion(id = 2, isFavorite = false),
-                    createQuestion(id = 3, isFavorite = true),
+                    createQuestion(id = 1, isLiked = true),
+                    createQuestion(id = 2, isLiked = false),
+                    createQuestion(id = 3, isLiked = true),
                 ),
             )
     }
@@ -61,7 +61,7 @@ class QuestionsTest {
         title: String = "Test Question",
         category: Category = Category.Kotlin,
         isSolved: Boolean = false,
-        isFavorite: Boolean = false,
+        isLiked: Boolean = false,
     ) = Question(
         id = id,
         title = title,
@@ -70,7 +70,7 @@ class QuestionsTest {
         createdAt = Instant.fromEpochMilliseconds(0),
         updatedAt = Instant.fromEpochMilliseconds(0),
         isSolved = isSolved,
-        isFavorite = isFavorite,
+        isLiked = isLiked,
     )
 
     @Test
@@ -182,7 +182,7 @@ class QuestionsTest {
         // Then
         assertAll(
             { assertEquals(2, result.size) },
-            { assertTrue(result.toList().all { it.isFavorite }) },
+            { assertTrue(result.toList().all { it.isLiked }) },
         )
     }
 

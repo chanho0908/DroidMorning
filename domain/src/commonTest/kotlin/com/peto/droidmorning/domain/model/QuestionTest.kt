@@ -20,7 +20,7 @@ class QuestionTest {
         category: Category = Category.Kotlin,
         sourceUrl: String = "https://example.com",
         isSolved: Boolean = false,
-        isFavorite: Boolean = false,
+        isLiked: Boolean = false,
     ) = Question(
         id = id,
         title = title,
@@ -29,7 +29,7 @@ class QuestionTest {
         createdAt = Instant.fromEpochMilliseconds(0),
         updatedAt = Instant.fromEpochMilliseconds(0),
         isSolved = isSolved,
-        isFavorite = isFavorite,
+        isLiked = isLiked,
     )
 
     @Test
