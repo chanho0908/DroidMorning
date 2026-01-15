@@ -52,6 +52,18 @@ data class QuestionUiState(
 
     fun clearLikedFilter(): QuestionUiState = copy(filter = filter.clearLikedFilter())
 
+    fun toggleQuestionLike(questionId: Long): QuestionUiState {
+        val updatedList =
+            allQuestions.toList().map { question ->
+                if (question.id == questionId) {
+                    question.copy(isLiked = !question.isLiked)
+                } else {
+                    question
+                }
+            }
+        return copy(allQuestions = Questions(updatedList))
+    }
+
     fun loading(isLoading: Boolean): QuestionUiState = copy(isLoading = isLoading)
 
     fun filtering(): QuestionUiState = copy(isFiltering = true)

@@ -83,7 +83,21 @@ class QuestionViewModel(
     }
 
     fun onLikeToggle(questionId: Long) {
-        // TODO: Implement like toggle
+        viewModelScope.launch {
+            val currentQuestion = _uiState.value.filteredQuestions.find { it.id == questionId } ?: return@launch
+            val isCurrentlyLiked = currentQuestion.isLiked
+
+            _uiState.update { it.toggleQuestionLike(questionId) }
+
+            questionRepository
+                .toggleQuestionLike(questionId, isCurrentlyLiked)
+                .onFailure {
+                    _uiState.update { state ->
+                        state.toggleQuestionLike(questionId)
+                    }
+                    sendUiEvent(QuestionUiEvent.ShowError)
+                }
+        }
     }
 
     private fun loadQuestions() {
