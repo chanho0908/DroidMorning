@@ -46,25 +46,17 @@ data class QuestionUiState(
     fun toggleCategoryFilters(): QuestionUiState =
         copy(showCategoryFilters = !showCategoryFilters)
 
-    fun toggleSolvedFilter(): QuestionUiState =
-        copy(
-            filter =
-                if (filter.solved) {
-                    filter.clearSolvedFilter()
-                } else {
-                    filter.applySolvedFilter()
-                },
-        )
+    fun applySolvedFilter(): QuestionUiState =
+        copy(filter = filter.applySolvedFilter())
 
-    fun toggleFavoritesFilter(): QuestionUiState =
-        copy(
-            filter =
-                if (filter.liked) {
-                    filter.clearFavoritesFilter()
-                } else {
-                    filter.applyFavoritesFilter()
-                },
-        )
+    fun clearSolvedFilter(): QuestionUiState =
+        copy(filter = filter.clearSolvedFilter())
+
+    fun applyFavoritesFilter(): QuestionUiState =
+        copy(filter = filter.applyFavoritesFilter())
+
+    fun clearFavoritesFilter(): QuestionUiState =
+        copy(filter = filter.clearFavoritesFilter())
 
     fun loading(isLoading: Boolean): QuestionUiState =
         copy(isLoading = isLoading)

@@ -43,12 +43,24 @@ class QuestionViewModel(
     }
 
     fun onSolvedFilterToggle() {
-        _uiState.update { it.toggleSolvedFilter() }
+        _uiState.update {
+            if (it.showSolvedOnly) {
+                it.clearSolvedFilter()
+            } else {
+                it.applySolvedFilter()
+            }
+        }
         applyFilter()
     }
 
     fun onFavoritesFilterToggle() {
-        _uiState.update { it.toggleFavoritesFilter() }
+        _uiState.update {
+            if (it.showFavoritesOnly) {
+                it.clearFavoritesFilter()
+            } else {
+                it.applyFavoritesFilter()
+            }
+        }
         applyFilter()
     }
 
