@@ -1,7 +1,6 @@
 package com.peto.droidmorning.data.repository
 
 import com.peto.droidmorning.data.datasource.question.remote.RemoteQuestionDataSource
-import com.peto.droidmorning.domain.model.Category
 import com.peto.droidmorning.domain.model.Questions
 import com.peto.droidmorning.domain.repository.QuestionRepository
 
@@ -17,21 +16,16 @@ class DefaultQuestionRepository(
             Questions(result)
         }
 
-    override suspend fun fetchQuestionsByCategory(category: Category): Result<Questions> =
+    override suspend fun toggleQuestionLike(
+        questionId: Long,
+        isCurrentlyLiked: Boolean,
+    ): Result<Boolean> =
         runCatching {
-            val result =
-                remoteQuestionDataSource
-                    .fetchQuestionsByCategory(category.name)
-                    .map { response -> response.toDomain() }
-            Questions(result)
-        }
-
-    override suspend fun searchQuestions(query: String): Result<Questions> =
-        runCatching {
-            val result =
-                remoteQuestionDataSource
-                    .searchQuestions(query)
-                    .map { response -> response.toDomain() }
-            Questions(result)
+            if (isCurrentlyLiked) {
+                remoteQuestionDataSource.removeLike(questionId)
+            } else {
+                remoteQuestionDataSource.addLike(questionId)
+            }
+            true
         }
 }

@@ -17,6 +17,10 @@ data class QuestionResponse(
     val createdAt: Instant,
     @SerialName("updated_at")
     val updatedAt: Instant,
+    @SerialName("is_favorited")
+    val isLiked: Boolean = false,
+    @SerialName("is_solved")
+    val isSolved: Boolean = false,
 ) {
     fun toDomain(): Question =
         Question(
@@ -26,5 +30,7 @@ data class QuestionResponse(
             sourceUrl = sourceUrl,
             createdAt = createdAt,
             updatedAt = updatedAt,
+            isSolved = isSolved,
+            isLiked = isLiked,
         )
 }

@@ -22,7 +22,7 @@ data class Filter(
 
     fun clearSolvedFilter(): Filter = copy(solved = false)
 
-    fun applyFavoritesFilter(): Filter = copy(liked = true)
+    fun applyLikedFilter(): Filter = copy(liked = true)
 
-    fun clearFavoritesFilter(): Filter = copy(liked = false)
+    fun clearLikedFilter(): Filter = copy(liked = false)
 }

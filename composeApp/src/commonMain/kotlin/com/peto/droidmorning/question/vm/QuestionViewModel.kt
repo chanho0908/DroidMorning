@@ -59,12 +59,12 @@ class QuestionViewModel(
         applyFilter()
     }
 
-    fun onFavoritesFilterToggle() {
+    fun onLikedFilterToggle() {
         _uiState.update {
-            if (it.showFavoritesOnly) {
-                it.clearFavoritesFilter()
+            if (it.showLikedOnly) {
+                it.clearLikedFilter()
             } else {
-                it.applyFavoritesFilter()
+                it.applyLikedFilter()
             }
         }
         applyFilter()
@@ -82,8 +82,22 @@ class QuestionViewModel(
             }
     }
 
-    fun onFavoriteToggle(questionId: Long) {
-        // TODO: Implement favorite toggle
+    fun onLikeToggle(questionId: Long) {
+        viewModelScope.launch {
+            val currentQuestion = _uiState.value.filteredQuestions.find { it.id == questionId } ?: return@launch
+            val isCurrentlyLiked = currentQuestion.isLiked
+
+            _uiState.update { it.toggleQuestionLike(questionId) }
+
+            questionRepository
+                .toggleQuestionLike(questionId, isCurrentlyLiked)
+                .onFailure {
+                    _uiState.update { state ->
+                        state.toggleQuestionLike(questionId)
+                    }
+                    sendUiEvent(QuestionUiEvent.ShowError)
+                }
+        }
     }
 
     private fun loadQuestions() {

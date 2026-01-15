@@ -50,7 +50,7 @@ fun QuestionScreen(
         uiState.searchQuery,
         uiState.selectedCategories,
         uiState.showSolvedOnly,
-        uiState.showFavoritesOnly,
+        uiState.showLikedOnly,
     ) {
         if (listState.firstVisibleItemIndex > 0) {
             listState.scrollToItem(0)
@@ -79,9 +79,9 @@ fun QuestionScreen(
         onCategoryToggle = viewModel::onCategoryToggle,
         onToggleCategoryFilters = viewModel::onToggleCategoryFilters,
         onSolvedFilterToggle = viewModel::onSolvedFilterToggle,
-        onFavoritesFilterToggle = viewModel::onFavoritesFilterToggle,
+        onLikedFilterToggle = viewModel::onLikedFilterToggle,
         onQuestionClick = {},
-        onFavoriteToggle = viewModel::onFavoriteToggle,
+        onLikeToggle = viewModel::onLikeToggle,
     )
 }
 
@@ -93,9 +93,9 @@ private fun QuestionScreenContent(
     onCategoryToggle: (Category) -> Unit,
     onToggleCategoryFilters: () -> Unit,
     onSolvedFilterToggle: () -> Unit,
-    onFavoritesFilterToggle: () -> Unit,
+    onLikedFilterToggle: () -> Unit,
     onQuestionClick: (Long) -> Unit,
-    onFavoriteToggle: (Long) -> Unit,
+    onLikeToggle: (Long) -> Unit,
 ) {
     Column(
         modifier =
@@ -115,10 +115,10 @@ private fun QuestionScreenContent(
         QuestionFilterChips(
             selectedCategories = uiState.selectedCategories,
             showSolvedOnly = uiState.showSolvedOnly,
-            showFavoritesOnly = uiState.showFavoritesOnly,
+            showLikedOnly = uiState.showLikedOnly,
             onToggleCategoryFilters = onToggleCategoryFilters,
             onSolvedFilterToggle = onSolvedFilterToggle,
-            onFavoritesFilterToggle = onFavoritesFilterToggle,
+            onLikedFilterToggle = onLikedFilterToggle,
         )
 
         Spacer(modifier = Modifier.height(Dimen.spacingMd))
@@ -156,7 +156,7 @@ private fun QuestionScreenContent(
                     QuestionList(
                         questions = uiState.filteredQuestions,
                         onQuestionClick = onQuestionClick,
-                        onFavoriteToggle = onFavoriteToggle,
+                        onLikeToggle = onLikeToggle,
                         listState = listState,
                     )
                 }

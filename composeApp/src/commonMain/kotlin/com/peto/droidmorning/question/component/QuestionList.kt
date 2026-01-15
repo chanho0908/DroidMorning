@@ -22,7 +22,7 @@ import kotlin.time.Instant
 fun QuestionList(
     questions: ImmutableList<Question>,
     onQuestionClick: (Long) -> Unit,
-    onFavoriteToggle: (Long) -> Unit,
+    onLikeToggle: (Long) -> Unit,
     modifier: Modifier = Modifier,
     listState: LazyListState = rememberLazyListState(),
 ) {
@@ -40,9 +40,9 @@ fun QuestionList(
                 title = question.title,
                 category = question.category,
                 isSolved = question.isSolved,
-                isFavorite = question.isFavorite,
+                isLiked = question.isLiked,
                 onClick = { onQuestionClick(question.id) },
-                onFavoriteClick = { onFavoriteToggle(question.id) },
+                onLikeClick = { onLikeToggle(question.id) },
             )
         }
     }
@@ -55,7 +55,7 @@ private fun QuestionListEmptyPreview() {
         QuestionList(
             questions = persistentListOf(),
             onQuestionClick = {},
-            onFavoriteToggle = {},
+            onLikeToggle = {},
         )
     }
 }
@@ -75,11 +75,11 @@ private fun QuestionListSinglePreview() {
                         createdAt = Instant.fromEpochMilliseconds(0),
                         updatedAt = Instant.fromEpochMilliseconds(0),
                         isSolved = false,
-                        isFavorite = false,
+                        isLiked = false,
                     ),
                 ),
             onQuestionClick = {},
-            onFavoriteToggle = {},
+            onLikeToggle = {},
         )
     }
 }
@@ -99,7 +99,7 @@ private fun QuestionListMultiplePreview() {
                         createdAt = Instant.fromEpochMilliseconds(0),
                         updatedAt = Instant.fromEpochMilliseconds(0),
                         isSolved = true,
-                        isFavorite = true,
+                        isLiked = true,
                     ),
                     Question(
                         id = 2L,
@@ -109,7 +109,7 @@ private fun QuestionListMultiplePreview() {
                         createdAt = Instant.fromEpochMilliseconds(0),
                         updatedAt = Instant.fromEpochMilliseconds(0),
                         isSolved = false,
-                        isFavorite = true,
+                        isLiked = true,
                     ),
                     Question(
                         id = 3L,
@@ -119,7 +119,7 @@ private fun QuestionListMultiplePreview() {
                         createdAt = Instant.fromEpochMilliseconds(0),
                         updatedAt = Instant.fromEpochMilliseconds(0),
                         isSolved = true,
-                        isFavorite = false,
+                        isLiked = false,
                     ),
                     Question(
                         id = 4L,
@@ -129,7 +129,7 @@ private fun QuestionListMultiplePreview() {
                         createdAt = Instant.fromEpochMilliseconds(0),
                         updatedAt = Instant.fromEpochMilliseconds(0),
                         isSolved = false,
-                        isFavorite = false,
+                        isLiked = false,
                     ),
                     Question(
                         id = 5L,
@@ -139,11 +139,11 @@ private fun QuestionListMultiplePreview() {
                         createdAt = Instant.fromEpochMilliseconds(0),
                         updatedAt = Instant.fromEpochMilliseconds(0),
                         isSolved = false,
-                        isFavorite = false,
+                        isLiked = false,
                     ),
                 ),
             onQuestionClick = {},
-            onFavoriteToggle = {},
+            onLikeToggle = {},
         )
     }
 }

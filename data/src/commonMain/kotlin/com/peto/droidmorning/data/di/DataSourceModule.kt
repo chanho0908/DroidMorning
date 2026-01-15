@@ -12,5 +12,5 @@ internal val dataSourceModule =
     module {
         single<LocalAuthDataSource> { DefaultLocalAuthDataSource(get()) }
         single<RemoteAuthDataSource> { DefaultRemoteAuthDataSource(get()) }
-        single<RemoteQuestionDataSource> { DefaultRemoteQuestionDataSource(get()) }
+        single<RemoteQuestionDataSource> { DefaultRemoteQuestionDataSource(get(), get()) }
     }
