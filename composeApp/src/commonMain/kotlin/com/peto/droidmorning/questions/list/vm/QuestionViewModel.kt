@@ -1,4 +1,4 @@
-package com.peto.droidmorning.question.vm
+package com.peto.droidmorning.questions.list.vm
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

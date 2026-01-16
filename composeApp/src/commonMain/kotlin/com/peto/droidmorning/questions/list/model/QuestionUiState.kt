@@ -1,4 +1,4 @@
-package com.peto.droidmorning.question.vm
+package com.peto.droidmorning.questions.list.model
 
 import androidx.compose.runtime.Stable
 import com.peto.droidmorning.domain.model.Category

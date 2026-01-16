@@ -1,4 +1,4 @@
-package com.peto.droidmorning.question
+package com.peto.droidmorning.questions.list
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -23,13 +23,13 @@ import com.peto.droidmorning.common.ObserveAsEvents
 import com.peto.droidmorning.designsystem.component.AppSearchBar
 import com.peto.droidmorning.designsystem.theme.Dimen
 import com.peto.droidmorning.domain.model.Category
-import com.peto.droidmorning.question.component.CategoryChips
-import com.peto.droidmorning.question.component.EmptyQuestion
-import com.peto.droidmorning.question.component.QuestionFilterChips
-import com.peto.droidmorning.question.component.QuestionList
-import com.peto.droidmorning.question.vm.QuestionUiEvent
-import com.peto.droidmorning.question.vm.QuestionUiState
-import com.peto.droidmorning.question.vm.QuestionViewModel
+import com.peto.droidmorning.questions.component.CategoryChips
+import com.peto.droidmorning.questions.component.EmptyQuestion
+import com.peto.droidmorning.questions.component.QuestionFilterChips
+import com.peto.droidmorning.questions.component.QuestionList
+import com.peto.droidmorning.questions.vm.QuestionUiEvent
+import com.peto.droidmorning.questions.vm.QuestionUiState
+import com.peto.droidmorning.questions.vm.QuestionViewModel
 import droidmorning.composeapp.generated.resources.Res
 import droidmorning.composeapp.generated.resources.question_empty_search
 import droidmorning.composeapp.generated.resources.question_empty_state
@@ -80,7 +80,7 @@ fun QuestionScreen(
         onToggleCategoryFilters = viewModel::onToggleCategoryFilters,
         onSolvedFilterToggle = viewModel::onSolvedFilterToggle,
         onLikedFilterToggle = viewModel::onLikedFilterToggle,
-        onQuestionClick = {},
+        onQuestionClick = onNavigateToDetail,
         onLikeToggle = viewModel::onLikeToggle,
     )
 }

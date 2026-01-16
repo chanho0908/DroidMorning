@@ -1,4 +1,4 @@
-package com.peto.droidmorning.question.vm
+package com.peto.droidmorning.questions.list.model
 
 sealed interface QuestionUiEvent {
     data class NavigateToQuestionDetail(
