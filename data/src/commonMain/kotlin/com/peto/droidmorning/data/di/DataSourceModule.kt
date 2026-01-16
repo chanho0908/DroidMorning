@@ -1,5 +1,7 @@
 package com.peto.droidmorning.data.di
 
+import com.peto.droidmorning.data.datasource.answer.remote.DefaultRemoteAnswerDataSource
+import com.peto.droidmorning.data.datasource.answer.remote.RemoteAnswerDataSource
 import com.peto.droidmorning.data.datasource.auth.local.DefaultLocalAuthDataSource
 import com.peto.droidmorning.data.datasource.auth.local.LocalAuthDataSource
 import com.peto.droidmorning.data.datasource.auth.remote.DefaultRemoteAuthDataSource
@@ -13,4 +15,5 @@ internal val dataSourceModule =
         single<LocalAuthDataSource> { DefaultLocalAuthDataSource(get()) }
         single<RemoteAuthDataSource> { DefaultRemoteAuthDataSource(get()) }
         single<RemoteQuestionDataSource> { DefaultRemoteQuestionDataSource(get(), get()) }
+        single<RemoteAnswerDataSource> { DefaultRemoteAnswerDataSource(get(), get()) }
     }
