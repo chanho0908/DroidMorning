@@ -1,7 +1,7 @@
 package com.peto.droidmorning.data.fake
 
 import com.peto.droidmorning.data.datasource.question.remote.RemoteQuestionDataSource
-import com.peto.droidmorning.data.model.QuestionResponse
+import com.peto.droidmorning.data.model.response.QuestionResponse
 
 class FakeRemoteQuestionDataSource(
     private val questions: List<QuestionResponse>,

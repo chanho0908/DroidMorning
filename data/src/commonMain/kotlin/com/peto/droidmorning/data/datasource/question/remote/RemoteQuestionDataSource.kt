@@ -1,6 +1,6 @@
 package com.peto.droidmorning.data.datasource.question.remote
 
-import com.peto.droidmorning.data.model.QuestionResponse
+import com.peto.droidmorning.data.model.response.QuestionResponse
 
 interface RemoteQuestionDataSource {
     suspend fun fetchQuestions(): List<QuestionResponse>
