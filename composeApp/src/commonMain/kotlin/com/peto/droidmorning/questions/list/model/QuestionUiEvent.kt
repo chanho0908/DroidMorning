@@ -5,7 +5,5 @@ sealed interface QuestionUiEvent {
         val questionId: Long,
     ) : QuestionUiEvent
 
-    data object ShowError : QuestionUiEvent
-
     data object ScrollToTop : QuestionUiEvent
 }

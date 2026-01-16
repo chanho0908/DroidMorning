@@ -23,13 +23,13 @@ import com.peto.droidmorning.common.ObserveAsEvents
 import com.peto.droidmorning.designsystem.component.AppSearchBar
 import com.peto.droidmorning.designsystem.theme.Dimen
 import com.peto.droidmorning.domain.model.Category
-import com.peto.droidmorning.questions.component.CategoryChips
-import com.peto.droidmorning.questions.component.EmptyQuestion
-import com.peto.droidmorning.questions.component.QuestionFilterChips
-import com.peto.droidmorning.questions.component.QuestionList
-import com.peto.droidmorning.questions.vm.QuestionUiEvent
-import com.peto.droidmorning.questions.vm.QuestionUiState
-import com.peto.droidmorning.questions.vm.QuestionViewModel
+import com.peto.droidmorning.questions.list.component.CategoryChips
+import com.peto.droidmorning.questions.list.component.EmptyQuestion
+import com.peto.droidmorning.questions.list.component.QuestionFilterChips
+import com.peto.droidmorning.questions.list.component.QuestionList
+import com.peto.droidmorning.questions.list.model.QuestionUiEvent
+import com.peto.droidmorning.questions.list.model.QuestionUiState
+import com.peto.droidmorning.questions.list.vm.QuestionViewModel
 import droidmorning.composeapp.generated.resources.Res
 import droidmorning.composeapp.generated.resources.question_empty_search
 import droidmorning.composeapp.generated.resources.question_empty_state
@@ -61,8 +61,6 @@ fun QuestionScreen(
         when (event) {
             is QuestionUiEvent.NavigateToQuestionDetail -> {
                 onNavigateToDetail(event.questionId)
-            }
-            is QuestionUiEvent.ShowError -> {
             }
             is QuestionUiEvent.ScrollToTop -> {
                 coroutineScope.launch {

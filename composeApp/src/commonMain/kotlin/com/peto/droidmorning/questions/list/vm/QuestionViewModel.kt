@@ -4,6 +4,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.peto.droidmorning.domain.model.Category
 import com.peto.droidmorning.domain.repository.QuestionRepository
+import com.peto.droidmorning.questions.list.model.QuestionUiEvent
+import com.peto.droidmorning.questions.list.model.QuestionUiState
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.delay
@@ -92,10 +94,7 @@ class QuestionViewModel(
             questionRepository
                 .toggleQuestionLike(questionId, isCurrentlyLiked)
                 .onFailure {
-                    _uiState.update { state ->
-                        state.toggleQuestionLike(questionId)
-                    }
-                    sendUiEvent(QuestionUiEvent.ShowError)
+                    _uiState.update { state -> state.toggleQuestionLike(questionId) }
                 }
         }
     }
@@ -109,7 +108,6 @@ class QuestionViewModel(
                     _uiState.update { it.updateQuestions(questions) }
                 }.onFailure {
                     _uiState.update { it.loading(false) }
-                    sendUiEvent(QuestionUiEvent.ShowError)
                 }
         }
     }

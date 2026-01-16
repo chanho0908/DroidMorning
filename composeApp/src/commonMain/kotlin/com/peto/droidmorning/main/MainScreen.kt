@@ -22,12 +22,12 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.peto.droidmorning.designsystem.theme.AppTheme
 import com.peto.droidmorning.history.HistoryScreen
 import com.peto.droidmorning.profile.ProfileScreen
-import com.peto.droidmorning.question.QuestionScreen
+import com.peto.droidmorning.questions.list.QuestionScreen
 import com.peto.droidmorning.test.TestScreen
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
-fun MainScreen() {
+fun MainScreen(onNavigateToQuestionDetail: (Long) -> Unit = {}) {
     var selectedTab by remember { mutableStateOf(BottomNavigationType.QUESTION) }
 
     Scaffold(
@@ -41,6 +41,7 @@ fun MainScreen() {
     ) { paddingValues ->
         MainContent(
             selectedTab = selectedTab,
+            onNavigateToQuestionDetail = onNavigateToQuestionDetail,
             modifier = Modifier.padding(paddingValues),
         )
     }
@@ -89,6 +90,7 @@ private fun BottomNavigationBar(
 @Composable
 private fun MainContent(
     selectedTab: BottomNavigationType,
+    onNavigateToQuestionDetail: (Long) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Box(
@@ -97,7 +99,7 @@ private fun MainContent(
         when (selectedTab) {
             BottomNavigationType.QUESTION ->
                 QuestionScreen(
-                    onNavigateToDetail = {},
+                    onNavigateToDetail = onNavigateToQuestionDetail,
                 )
             BottomNavigationType.TEST -> TestScreen()
             BottomNavigationType.HISTORY -> HistoryScreen()
