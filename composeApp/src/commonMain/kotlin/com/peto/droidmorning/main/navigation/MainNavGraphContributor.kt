@@ -21,7 +21,11 @@ class MainNavGraphContributor : NavGraphContributor {
             startDestination = startDestination,
         ) {
             composable(NavRoutes.Main.route) {
-                MainScreen()
+                MainScreen(
+                    onNavigateToQuestionDetail = { questionId ->
+                        navController.navigate(NavRoutes.QuestionDetail.createRoute(questionId))
+                    },
+                )
             }
         }
     }

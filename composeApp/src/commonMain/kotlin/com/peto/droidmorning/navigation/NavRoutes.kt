@@ -1,7 +1,11 @@
 package com.peto.droidmorning.navigation
 
+import kotlinx.serialization.Serializable
+import kotlinx.serialization.Transient
+
+@Serializable
 sealed class NavRoutes(
-    val route: String,
+    @Transient val route: String = "",
 ) {
     data object LoginGraph : NavRoutes("login_graph")
 
@@ -16,4 +20,17 @@ sealed class NavRoutes(
     data object History : NavRoutes("history")
 
     data object Profile : NavRoutes("profile")
+
+    data object QuestionDetailGraph : NavRoutes("question_detail_graph")
+
+    @Serializable
+    data class QuestionDetail(
+        val questionId: Long,
+    ) : NavRoutes(route = ROUTE) {
+        companion object {
+            const val ROUTE: String = "question_detail/{questionId}"
+
+            fun createRoute(questionId: Long): String = "question_detail/$questionId"
+        }
+    }
 }
