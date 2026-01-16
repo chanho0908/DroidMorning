@@ -18,11 +18,12 @@ object Dimen {
 
     val buttonHeightSm = 36.dp
     val buttonHeightMd = 44.dp
-    val buttonHeightLg = 48.dp
+    val buttonHeightLg = 52.dp
     val buttonHeightXl = 56.dp
 
     val inputHeight = 48.dp
     val searchBarHeight = 48.dp
+    val textFieldHeightLarge = 200.dp
 
     val bottomNavHeight = 64.dp
     val bottomNavItemSize = 56.dp

@@ -1,6 +1,5 @@
 package com.peto.droidmorning.designsystem.component
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -12,10 +11,9 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import com.peto.droidmorning.designsystem.theme.AppTheme
 
 @Composable
@@ -27,23 +25,28 @@ fun AppPrimaryButton(
     icon: ImageVector? = null,
 ) {
     val shape = AppButtonDefaults.shape
-    val backgroundBrush = AppButtonDefaults.primaryButtonBackgroundBrush(enabled = enabled)
+    val backgroundColor = AppButtonDefaults.primaryButtonBackgroundColor(enabled = enabled)
 
     Button(
         onClick = onClick,
         modifier =
             modifier
                 .fillMaxWidth()
-                .height(AppButtonDefaults.height)
-                .clip(shape)
-                .background(backgroundBrush),
+                .height(AppButtonDefaults.height),
         enabled = enabled,
+        shape = shape,
         colors =
             ButtonDefaults.buttonColors(
-                containerColor = Color.Transparent,
+                containerColor = backgroundColor,
                 contentColor = AppButtonDefaults.primaryContentColor(enabled = true),
-                disabledContainerColor = Color.Transparent,
+                disabledContainerColor = backgroundColor,
                 disabledContentColor = AppButtonDefaults.primaryContentColor(enabled = false),
+            ),
+        elevation =
+            ButtonDefaults.buttonElevation(
+                defaultElevation = AppButtonDefaults.elevation,
+                pressedElevation = AppButtonDefaults.pressedElevation,
+                disabledElevation = 0.dp,
             ),
     ) {
         if (icon != null) {
