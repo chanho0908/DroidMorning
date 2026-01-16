@@ -5,6 +5,7 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.compose.multiplatform)
     alias(libs.plugins.kotlin.compose)
+    alias(libs.plugins.kotlin.serialization)
     kotlin("native.cocoapods")
 }
 
@@ -61,8 +62,10 @@ kotlin {
 
             implementation(libs.bundles.koin)
             implementation(libs.kotlinx.coroutines.core)
+            implementation(libs.kotlinx.serialization.json)
             implementation(libs.kotlinx.collections.immutable)
             implementation(libs.napier)
+            implementation(libs.kotlinx.datetime)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
@@ -113,9 +116,3 @@ android {
 dependencies {
     debugImplementation(libs.compose.ui.tooling)
 }
-
-// compose.resources {
-//    publicResClass = false
-//    nameOfResClass = "Res"
-//    packageOfResClass = "com.peto.droidmorning.composeapp.generated.resources"
-// }
