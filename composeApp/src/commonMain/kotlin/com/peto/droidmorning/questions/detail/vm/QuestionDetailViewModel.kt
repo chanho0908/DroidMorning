@@ -31,8 +31,9 @@ class QuestionDetailViewModel(
             questionRepository
                 .fetchQuestions()
                 .onSuccess { questions ->
-                    questions.toList().find { it.id == questionId }?.let {
-                        _uiState.update { it.updateQuestion(it.question) }
+                    val question = questions.toList().find { it.id == questionId }
+                    if (question != null) {
+                        _uiState.update { it.updateQuestion(question) }
                         loadAnswers()
                     }
                 }
