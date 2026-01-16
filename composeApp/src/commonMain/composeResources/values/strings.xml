@@ -23,4 +23,43 @@
     <string name="category_android">Android</string>
     <string name="category_compose">Compose</string>
     <string name="category_oop">OOP</string>
+
+    <!-- Question Detail Screen -->
+    <string name="question_detail_title">문제 상세</string>
+    <string name="back">뒤로가기</string>
+    <string name="favorite">즐겨찾기</string>
+    <string name="answer_completed">답변 완료</string>
+    
+    <!-- My Answer Section -->
+    <string name="my_answer">내 답변</string>
+    <string name="edit">수정</string>
+    <string name="delete">삭제</string>
+    <string name="cancel">취소</string>
+    <string name="save">저장</string>
+    <string name="last_modified">마지막 수정: %s</string>
+    <string name="no_answer_yet">아직 작성한 답변이 없습니다</string>
+    <string name="answer_placeholder">답변을 입력하세요</string>
+    
+    <!-- Delete Confirmation -->
+    <string name="delete_answer_title">답변 삭제</string>
+    <string name="delete_answer_confirm_message">정말 이 답변을 삭제하시겠습니까?</string>
+    <string name="delete_answer_confirm">정말 이 답변을 삭제하시겠습니까?</string>
+    <string name="delete_history_confirm">이 답변을 삭제하시겠습니까?</string>
+    
+    <!-- Answer History Section -->
+    <string name="answer_history_count">답변 히스토리</string>
+    
+    <!-- Bottom Action -->
+    <string name="add_answer">답변 추가하기</string>
+    
+    <!-- Add Answer Screen -->
+    <string name="add_answer_title">답변 작성</string>
+    <string name="add_answer_placeholder">면접에서 이 질문을 받았을 때 어떻게 답변할지 적어보세요</string>
+
+    <!-- Date Formatting -->
+    <string name="date_format">%s.%s.%s</string>
+    <string name="last_modified_format">마지막 수정: %s</string>
+    <string name="date_suffix_year">.</string>
+    <string name="date_suffix_month">.</string>
+    <string name="last_modified_prefix">마지막 수정: </string>
 </resources>
