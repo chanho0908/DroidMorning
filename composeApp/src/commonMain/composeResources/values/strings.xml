@@ -25,7 +25,6 @@
     <string name="category_oop">OOP</string>
 
     <!-- Question Detail Screen -->
-    <string name="question_detail_title">문제 상세</string>
     <string name="back">뒤로가기</string>
     <string name="favorite">즐겨찾기</string>
     <string name="answer_completed">답변 완료</string>
