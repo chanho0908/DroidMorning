@@ -68,12 +68,6 @@ fun AnswerHistory(
                 style = MaterialTheme.typography.titleMedium,
                 fontWeight = FontWeight.Bold,
             )
-
-            Text(
-                text = "(${historyAnswers.size})",
-                style = MaterialTheme.typography.titleMedium,
-                fontWeight = FontWeight.Bold,
-            )
         }
 
         Column(

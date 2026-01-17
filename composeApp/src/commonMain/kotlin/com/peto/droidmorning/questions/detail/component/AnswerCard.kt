@@ -88,10 +88,7 @@ fun AnswerCard(
                 if (onEdit != null || onDelete != null) {
                     Row(horizontalArrangement = Arrangement.spacedBy(Dimen.spacingXxs)) {
                         onEdit?.let {
-                            IconButton(
-                                onClick = onEdit,
-                                modifier = Modifier.size(Dimen.iconLg),
-                            ) {
+                            IconButton(onClick = onEdit) {
                                 Icon(
                                     imageVector = Icons.Outlined.Edit,
                                     contentDescription = stringResource(Res.string.edit),
@@ -102,10 +99,7 @@ fun AnswerCard(
                         }
 
                         onDelete?.let {
-                            IconButton(
-                                onClick = onDelete,
-                                modifier = Modifier.size(Dimen.iconLg),
-                            ) {
+                            IconButton(onClick = onDelete) {
                                 Icon(
                                     imageVector = Icons.Outlined.Delete,
                                     contentDescription = stringResource(Res.string.delete),

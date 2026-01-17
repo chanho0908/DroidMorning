@@ -1,9 +1,9 @@
 package com.peto.droidmorning.common.util
 
-import kotlinx.datetime.Instant
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.number
 import kotlinx.datetime.toLocalDateTime
+import kotlin.time.Instant
 
 object DateFormatter {
     private const val DATE_SEPARATOR = "."
