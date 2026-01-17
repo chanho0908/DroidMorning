@@ -19,6 +19,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.key
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -77,11 +78,13 @@ fun AnswerHistory(
                     .padding(start = Dimen.spacingBase),
         ) {
             historyAnswers.forEachIndexed { index, answer ->
-                HistoryItem(
-                    answer = answer,
-                    isLast = index == historyAnswers.size - 1,
-                    onDeleteAnswer = onDeleteAnswer,
-                )
+                key(answer.id) {
+                    HistoryItem(
+                        answer = answer,
+                        isLast = index == historyAnswers.size - 1,
+                        onDeleteAnswer = onDeleteAnswer,
+                    )
+                }
             }
         }
     }

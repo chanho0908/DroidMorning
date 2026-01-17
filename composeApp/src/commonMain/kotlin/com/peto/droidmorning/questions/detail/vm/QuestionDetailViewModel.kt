@@ -42,7 +42,11 @@ class QuestionDetailViewModel(
                     if (question != null) {
                         _uiState.update { it.updateQuestion(question) }
                         loadAnswers()
+                    } else {
+                        _uiState.update { it.loading(false) }
                     }
+                }.onFailure {
+                    _uiState.update { it.loading(false) }
                 }
         }
     }

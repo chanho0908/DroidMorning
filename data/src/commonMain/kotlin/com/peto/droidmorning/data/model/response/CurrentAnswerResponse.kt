@@ -1,9 +1,9 @@
 package com.peto.droidmorning.data.model.response
 
 import com.peto.droidmorning.domain.model.Answer
-import kotlinx.datetime.Instant
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
+import kotlin.time.Instant
 
 @Serializable
 data class CurrentAnswerResponse(
