@@ -1,7 +1,7 @@
 package com.peto.droidmorning.data.datasource.question.remote
 
-import com.peto.droidmorning.data.model.LikeRequest
-import com.peto.droidmorning.data.model.QuestionResponse
+import com.peto.droidmorning.data.model.request.LikeRequest
+import com.peto.droidmorning.data.model.response.QuestionResponse
 import io.github.jan.supabase.auth.Auth
 import io.github.jan.supabase.postgrest.Postgrest
 import io.github.jan.supabase.postgrest.rpc

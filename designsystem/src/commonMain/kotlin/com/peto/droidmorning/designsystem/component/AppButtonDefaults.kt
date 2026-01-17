@@ -2,11 +2,11 @@ package com.peto.droidmorning.designsystem.component
 
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.dp
 import com.peto.droidmorning.designsystem.theme.Dimen
 import com.peto.droidmorning.designsystem.theme.Shape
 
@@ -28,20 +28,9 @@ object AppButtonDefaults {
             )
 
     @Composable
-    fun primaryButtonBackgroundBrush(enabled: Boolean = true): Brush {
-        val alpha = if (enabled) 1f else BACKGROUND_ALPHA
-        val primaryLight = MaterialTheme.colorScheme.primaryContainer
-        val primary = MaterialTheme.colorScheme.primary
-        val primaryOrange = MaterialTheme.colorScheme.tertiary
-
-        return Brush.horizontalGradient(
-            colorStops =
-                arrayOf(
-                    0.0f to primaryLight.copy(alpha = alpha),
-                    0.5f to primary.copy(alpha = alpha),
-                    1.0f to primaryOrange.copy(alpha = alpha),
-                ),
-        )
+    fun primaryButtonBackgroundColor(enabled: Boolean = true): Color {
+        val alpha = if (enabled) 1f else 0.5f
+        return MaterialTheme.colorScheme.primary.copy(alpha = alpha)
     }
 
     @Composable
@@ -73,4 +62,8 @@ object AppButtonDefaults {
     val iconSize: Dp = Dimen.iconSm
 
     val iconSpacing: Dp = Dimen.spacingSm
+
+    val elevation: Dp = Dimen.cardElevation
+
+    val pressedElevation: Dp = 4.dp
 }

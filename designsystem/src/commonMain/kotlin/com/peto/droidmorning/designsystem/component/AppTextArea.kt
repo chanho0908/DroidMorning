@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.text.BasicTextField
@@ -47,6 +48,7 @@ fun AppTextArea(
     isError: Boolean = false,
     errorMessage: String? = null,
     maxCharacters: Int? = null,
+    minLines: Int = 3,
     keyboardOptions: KeyboardOptions =
         KeyboardOptions(
             capitalization = KeyboardCapitalization.Sentences,
@@ -86,6 +88,7 @@ fun AppTextArea(
             modifier =
                 Modifier
                     .fillMaxWidth()
+                    .heightIn(min = (minLines * 24).dp)
                     .clip(Shape.inputField)
                     .background(MaterialTheme.colorScheme.secondary)
                     .border(1.dp, borderColor, Shape.inputField)

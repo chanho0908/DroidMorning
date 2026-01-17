@@ -1,12 +1,12 @@
-package com.peto.droidmorning.data.model
+package com.peto.droidmorning.data.model.request
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class LikeRequest(
-    @SerialName("user_id")
+data class RpcDefaultRequest(
+    @SerialName("p_user_id")
     val userId: String,
-    @SerialName("question_id")
+    @SerialName("p_question_id")
     val questionId: Long,
 )

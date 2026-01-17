@@ -20,8 +20,13 @@ class MainNavGraphContributor : NavGraphContributor {
             route = graphRoute.route,
             startDestination = startDestination,
         ) {
-            composable(NavRoutes.Main.route) {
-                MainScreen()
+            composable(NavRoutes.Main.route) { backStackEntry ->
+                MainScreen(
+                    onNavigateToQuestionDetail = { questionId ->
+                        navController.navigate(NavRoutes.QuestionDetail.createRoute(questionId))
+                    },
+                    savedStateHandle = backStackEntry.savedStateHandle,
+                )
             }
         }
     }

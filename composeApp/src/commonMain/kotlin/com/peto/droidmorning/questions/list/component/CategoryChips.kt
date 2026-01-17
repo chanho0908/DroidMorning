@@ -1,4 +1,4 @@
-package com.peto.droidmorning.question.component
+package com.peto.droidmorning.questions.list.component
 
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement

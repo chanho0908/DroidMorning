@@ -1,4 +1,4 @@
-package com.peto.droidmorning.data.model
+package com.peto.droidmorning.data.model.response
 
 import com.peto.droidmorning.domain.model.Category
 import com.peto.droidmorning.domain.model.Question
@@ -18,9 +18,9 @@ data class QuestionResponse(
     @SerialName("updated_at")
     val updatedAt: Instant,
     @SerialName("is_favorited")
-    val isLiked: Boolean = false,
+    val isLiked: Boolean,
     @SerialName("is_solved")
-    val isSolved: Boolean = false,
+    val isSolved: Boolean,
 ) {
     fun toDomain(): Question =
         Question(

@@ -1,6 +1,6 @@
 package com.peto.droidmorning.data.fixture
 
-import com.peto.droidmorning.data.model.QuestionResponse
+import com.peto.droidmorning.data.model.response.QuestionResponse
 import com.peto.droidmorning.domain.model.Category
 import kotlin.time.Instant
 
@@ -20,6 +20,8 @@ object QuestionResponseFixture {
             sourceUrl = sourceUrl,
             createdAt = createdAt,
             updatedAt = updatedAt,
+            isLiked = true,
+            isSolved = true,
         )
 
     fun questionResponseList(size: Int = 3): List<QuestionResponse> =
