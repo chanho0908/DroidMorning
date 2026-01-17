@@ -5,10 +5,14 @@ import androidx.lifecycle.viewModelScope
 import com.peto.droidmorning.domain.repository.AnswerRepository
 import com.peto.droidmorning.domain.repository.QuestionRepository
 import com.peto.droidmorning.questions.detail.model.AnswerUiModel
+import com.peto.droidmorning.questions.detail.model.QuestionDetailUiEvent
 import com.peto.droidmorning.questions.detail.model.QuestionDetailUiState
+import com.peto.droidmorning.questions.detail.model.QuestionUpdateResult
 import com.peto.droidmorning.questions.detail.model.toUiModel
+import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
@@ -19,6 +23,9 @@ class QuestionDetailViewModel(
 ) : ViewModel() {
     private val _uiState = MutableStateFlow(QuestionDetailUiState.initial())
     val uiState = _uiState.asStateFlow()
+
+    private val _uiEvent = Channel<QuestionDetailUiEvent>(Channel.BUFFERED)
+    val uiEvent = _uiEvent.receiveAsFlow()
 
     init {
         loadQuestionDetail()
@@ -144,6 +151,16 @@ class QuestionDetailViewModel(
             _uiState.update {
                 it.updateQuestion(currentQuestion.copy(isSolved = isSolved))
             }
+        }
+    }
+
+    fun onNavigateBack() {
+        viewModelScope.launch {
+            val result =
+                _uiState.value.question.run {
+                    QuestionUpdateResult(isLiked, isSolved)
+                }
+            _uiEvent.send(QuestionDetailUiEvent.NavigateBack(result))
         }
     }
 }

@@ -18,11 +18,13 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.peto.droidmorning.common.ObserveAsEvents
 import com.peto.droidmorning.designsystem.component.AppSearchBar
 import com.peto.droidmorning.designsystem.theme.Dimen
 import com.peto.droidmorning.domain.model.Category
+import com.peto.droidmorning.questions.detail.navigation.QuestionDetailNavGraph
 import com.peto.droidmorning.questions.list.component.CategoryChips
 import com.peto.droidmorning.questions.list.component.EmptyQuestion
 import com.peto.droidmorning.questions.list.component.QuestionFilterChips
@@ -41,10 +43,32 @@ import org.koin.compose.viewmodel.koinViewModel
 fun QuestionScreen(
     viewModel: QuestionViewModel = koinViewModel(),
     onNavigateToDetail: (Long) -> Unit,
+    savedStateHandle: SavedStateHandle? = null,
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
     val listState = rememberLazyListState()
     val coroutineScope = rememberCoroutineScope()
+
+    LaunchedEffect(savedStateHandle) {
+        savedStateHandle
+            ?.getStateFlow(QuestionDetailNavGraph.KEY_QUESTION_ID, -1L)
+            ?.collect { questionId ->
+                if (questionId != -1L) {
+                    val isLiked = savedStateHandle.get<Boolean>(QuestionDetailNavGraph.KEY_IS_LIKED) ?: false
+                    val isSolved = savedStateHandle.get<Boolean>(QuestionDetailNavGraph.KEY_IS_SOLVED) ?: false
+
+                    viewModel.updateQuestionFromDetail(
+                        questionId = questionId,
+                        isLiked = isLiked,
+                        isSolved = isSolved,
+                    )
+
+                    savedStateHandle[QuestionDetailNavGraph.KEY_QUESTION_ID] = -1L
+                    savedStateHandle.remove<Boolean>(QuestionDetailNavGraph.KEY_IS_LIKED)
+                    savedStateHandle.remove<Boolean>(QuestionDetailNavGraph.KEY_IS_SOLVED)
+                }
+            }
+    }
 
     LaunchedEffect(
         uiState.searchQuery,

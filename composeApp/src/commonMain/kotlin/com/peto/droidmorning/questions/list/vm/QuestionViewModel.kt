@@ -99,6 +99,16 @@ class QuestionViewModel(
         }
     }
 
+    fun updateQuestionFromDetail(
+        questionId: Long,
+        isLiked: Boolean,
+        isSolved: Boolean,
+    ) {
+        _uiState.update {
+            it.updateQuestion(questionId, isLiked, isSolved)
+        }
+    }
+
     private fun loadQuestions() {
         viewModelScope.launch {
             _uiState.update { it.loading(true) }

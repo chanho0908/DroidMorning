@@ -64,6 +64,25 @@ data class QuestionUiState(
         return copy(allQuestions = Questions(updatedList))
     }
 
+    /**
+     * 특정 문제의 좋아요와 해결 상태를 업데이트
+     */
+    fun updateQuestion(
+        questionId: Long,
+        isLiked: Boolean,
+        isSolved: Boolean,
+    ): QuestionUiState {
+        val updatedList =
+            allQuestions.toList().map { question ->
+                if (question.id == questionId) {
+                    question.copy(isLiked = isLiked, isSolved = isSolved)
+                } else {
+                    question
+                }
+            }
+        return copy(allQuestions = Questions(updatedList))
+    }
+
     fun loading(isLoading: Boolean): QuestionUiState = copy(isLoading = isLoading)
 
     fun filtering(): QuestionUiState = copy(isFiltering = true)

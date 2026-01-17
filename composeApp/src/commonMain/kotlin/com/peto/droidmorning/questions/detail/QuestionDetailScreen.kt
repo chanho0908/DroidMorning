@@ -32,6 +32,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.peto.droidmorning.common.ObserveAsEvents
 import com.peto.droidmorning.designsystem.component.AppPrimaryButton
 import com.peto.droidmorning.designsystem.theme.AppTheme
 import com.peto.droidmorning.designsystem.theme.Dimen
@@ -40,7 +41,9 @@ import com.peto.droidmorning.questions.detail.component.AnswerHistory
 import com.peto.droidmorning.questions.detail.component.MyAnswer
 import com.peto.droidmorning.questions.detail.component.QuestionInfo
 import com.peto.droidmorning.questions.detail.model.AnswerUiModel
+import com.peto.droidmorning.questions.detail.model.QuestionDetailUiEvent
 import com.peto.droidmorning.questions.detail.model.QuestionDetailUiState
+import com.peto.droidmorning.questions.detail.model.QuestionUpdateResult
 import com.peto.droidmorning.questions.detail.preview.QuestionDetailPreviewParameterProvider
 import com.peto.droidmorning.questions.detail.vm.QuestionDetailViewModel
 import droidmorning.composeapp.generated.resources.Res
@@ -55,15 +58,23 @@ import org.koin.core.parameter.parametersOf
 @Composable
 fun QuestionDetailScreen(
     questionId: Long,
-    onNavigateBack: () -> Unit,
+    onNavigateBack: (QuestionUpdateResult) -> Unit,
     viewModel: QuestionDetailViewModel = koinViewModel { parametersOf(questionId) },
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
     var showAddAnswerSheet by remember { mutableStateOf(false) }
 
+    ObserveAsEvents(viewModel.uiEvent) { event ->
+        when (event) {
+            is QuestionDetailUiEvent.NavigateBack -> {
+                onNavigateBack(event.result)
+            }
+        }
+    }
+
     QuestionDetailScreenContent(
         uiState = uiState,
-        onNavigateBack = onNavigateBack,
+        onNavigateBack = viewModel::onNavigateBack,
         onToggleFavorite = viewModel::onToggleFavorite,
         onShowAddAnswerSheet = { showAddAnswerSheet = true },
         onUpdateAnswer = { answer, content -> viewModel.onUpdateAnswer(answer, content) },

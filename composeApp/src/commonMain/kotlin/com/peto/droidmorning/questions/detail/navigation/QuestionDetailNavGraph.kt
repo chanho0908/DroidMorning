@@ -28,11 +28,25 @@ class QuestionDetailNavGraph : NavGraphContributor {
             ) { backStackEntry ->
                 val args = backStackEntry.toRoute<NavRoutes.QuestionDetail>()
                 val questionId = args.questionId
+
                 QuestionDetailScreen(
                     questionId = questionId,
-                    onNavigateBack = { navController.popBackStack() },
+                    onNavigateBack = { result ->
+                        navController.previousBackStackEntry?.savedStateHandle?.apply {
+                            set(KEY_QUESTION_ID, questionId)
+                            set(KEY_IS_LIKED, result.isLiked)
+                            set(KEY_IS_SOLVED, result.isSolved)
+                        }
+                        navController.popBackStack()
+                    },
                 )
             }
         }
+    }
+
+    companion object {
+        const val KEY_QUESTION_ID = "question_id"
+        const val KEY_IS_LIKED = "is_liked"
+        const val KEY_IS_SOLVED = "is_solved"
     }
 }

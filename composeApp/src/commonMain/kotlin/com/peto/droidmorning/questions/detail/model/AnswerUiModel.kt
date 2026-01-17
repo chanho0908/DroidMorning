@@ -14,9 +14,7 @@ sealed class AnswerUiModel {
         override val content: String,
         override val createdDate: String,
         override val updatedDate: String,
-    ) : AnswerUiModel() {
-        val isEditable: Boolean = true
-    }
+    ) : AnswerUiModel()
 
     data class History(
         val id: Long,
@@ -29,9 +27,6 @@ sealed class AnswerUiModel {
     }
 }
 
-/**
- * Domain Answer를 UI AnswerUiModel로 변환
- */
 fun Answer.toUiModel(): AnswerUiModel =
     when (this) {
         is Answer.Current ->
