@@ -1,5 +1,7 @@
 package com.peto.droidmorning.domain.model
 
+import com.peto.droidmorning.domain.model.category.Category
+import com.peto.droidmorning.domain.model.question.Question
 import kotlin.test.BeforeTest
 import kotlin.test.Test
 import kotlin.test.assertFalse
