@@ -6,6 +6,8 @@ import com.peto.droidmorning.data.datasource.auth.local.DefaultLocalAuthDataSour
 import com.peto.droidmorning.data.datasource.auth.local.LocalAuthDataSource
 import com.peto.droidmorning.data.datasource.auth.remote.DefaultRemoteAuthDataSource
 import com.peto.droidmorning.data.datasource.auth.remote.RemoteAuthDataSource
+import com.peto.droidmorning.data.datasource.exam.remote.DefaultRemoteExamDataSource
+import com.peto.droidmorning.data.datasource.exam.remote.RemoteExamDataSource
 import com.peto.droidmorning.data.datasource.question.remote.DefaultRemoteQuestionDataSource
 import com.peto.droidmorning.data.datasource.question.remote.RemoteQuestionDataSource
 import org.koin.dsl.module
@@ -16,4 +18,5 @@ internal val dataSourceModule =
         single<RemoteAuthDataSource> { DefaultRemoteAuthDataSource(get()) }
         single<RemoteQuestionDataSource> { DefaultRemoteQuestionDataSource(get(), get()) }
         single<RemoteAnswerDataSource> { DefaultRemoteAnswerDataSource(get(), get()) }
+        single<RemoteExamDataSource> { DefaultRemoteExamDataSource(get(), get()) }
     }
