@@ -21,6 +21,7 @@ class DroidMorningFeaturePlugin : Plugin<Project> {
             apply(libs.findPlugin("kotlin-multiplatform").get().get().pluginId)
             apply(libs.findPlugin("compose-multiplatform").get().get().pluginId)
             apply(libs.findPlugin("kotlin-compose").get().get().pluginId)
+            apply(libs.findPlugin("kotlin-serialization").get().get().pluginId)
         }
 
         apply<KotlinMultiPlatformPlugin>()
@@ -35,9 +36,26 @@ class DroidMorningFeaturePlugin : Plugin<Project> {
                     dependencies {
                         implementation(project(":domain"))
                         implementation(project(":designsystem"))
+                        
+                        // Navigation & Lifecycle
                         implementation(libs.library("androidx-navigation-compose"))
+                        implementation(libs.library("androidx-lifecycle-viewmodel-compose"))
                         implementation(libs.library("androidx-lifecycle-runtime-compose"))
-                        implementation(libs.library("koin-compose-viewmodel"))
+                        
+                        // Dependency Injection
+                        implementation(libs.bundle("koin"))
+                        
+                        // Kotlinx
+                        implementation(libs.library("kotlinx-coroutines-core"))
+                        implementation(libs.library("kotlinx-serialization-json"))
+                        implementation(libs.library("kotlinx-datetime"))
+                    }
+                }
+                commonTest {
+                    dependencies {
+                        implementation(libs.library("kotlin-test"))
+                        implementation(libs.library("koin-test"))
+                        implementation(libs.library("kotlinx-coroutines-test"))
                     }
                 }
             }

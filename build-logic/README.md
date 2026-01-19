@@ -18,9 +18,16 @@ plugins {
 ```
 
 **포함 설정:**
-- Kotlin Multiplatform (Android + iOS)
-- Compose Multiplatform
-- 기본 의존성 (domain, designsystem, navigation, lifecycle, koin)
+- Kotlin Multiplatform (Android JVM 11 + iOS)
+- Compose Multiplatform (UI, Material3, Navigation)
+- Kotlin Serialization (JSON 직렬화)
+- 기본 의존성:
+  - **프로젝트**: domain, designsystem
+  - **Navigation**: androidx-navigation-compose
+  - **Lifecycle**: androidx-lifecycle-viewmodel-compose, androidx-lifecycle-runtime-compose
+  - **DI**: koin bundle (core, compose, compose-viewmodel)
+  - **Kotlinx**: coroutines-core, serialization-json, datetime
+  - **테스트**: kotlin-test, koin-test, kotlinx-coroutines-test
 
 **사용 예시:**
 ```kotlin
@@ -33,11 +40,10 @@ kotlin {
     sourceSets {
         commonMain.dependencies {
             // feature 플러그인이 자동으로 추가하는 의존성:
-            // - project(":domain")
-            // - project(":designsystem")
-            // - androidx-navigation-compose
-            // - androidx-lifecycle-runtime-compose
-            // - koin-compose-viewmodel
+            // ✅ domain, designsystem 프로젝트
+            // ✅ navigation, lifecycle, koin
+            // ✅ coroutines, serialization, datetime
+            // ✅ Compose Multiplatform (UI, Material3 등)
             
             // 추가 의존성만 여기에 작성
             implementation(libs.ktor.client.core)

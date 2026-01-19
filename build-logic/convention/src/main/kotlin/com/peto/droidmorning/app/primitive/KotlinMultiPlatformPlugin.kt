@@ -20,7 +20,7 @@ class KotlinMultiPlatformPlugin : Plugin<Project> {
         extensions.configure<KotlinMultiplatformExtension> {
             tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile::class.java) {
                 compilerOptions {
-                    jvmTarget.set(JvmTarget.JVM_17)
+                    jvmTarget.set(JvmTarget.JVM_11)
                 }
             }
 
