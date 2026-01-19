@@ -38,7 +38,6 @@ internal fun Project.composeMultiplatformDependencies() {
     }
 
     dependencies {
-        "debugImplementation"(composeDependencies.uiTooling)
-        "debugImplementation"(composeDependencies.preview)
+        "debugImplementation"("org.jetbrains.compose.ui:ui-tooling:1.10.0")
     }
 }
