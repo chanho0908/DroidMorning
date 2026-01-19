@@ -8,7 +8,7 @@ class FakeRemoteQuestionDataSource(
 ) : RemoteQuestionDataSource {
     private val likedQuestions = mutableSetOf<Long>()
 
-    override suspend fun fetchQuestions(): List<QuestionResponse> = questions
+    override suspend fun fetchExamQuestions(): List<QuestionResponse> = questions
 
     override suspend fun addLike(questionId: Long) {
         likedQuestions.add(questionId)

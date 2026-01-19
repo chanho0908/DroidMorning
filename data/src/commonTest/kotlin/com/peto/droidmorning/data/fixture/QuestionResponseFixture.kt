@@ -1,7 +1,7 @@
 package com.peto.droidmorning.data.fixture
 
 import com.peto.droidmorning.data.model.response.QuestionResponse
-import com.peto.droidmorning.domain.model.Category
+import com.peto.droidmorning.domain.model.category.Category
 import kotlin.time.Instant
 
 object QuestionResponseFixture {

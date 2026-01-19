@@ -53,7 +53,6 @@ class DefaultQuestionRepositoryTest {
             val repository = DefaultQuestionRepository(fakeDataSource)
             val questionId = 1L
 
-            // 먼저 좋아요 추가
             fakeDataSource.addLike(questionId)
 
             // when
