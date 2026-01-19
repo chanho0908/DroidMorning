@@ -1,4 +1,8 @@
-package com.peto.droidmorning.domain.model
+package com.peto.droidmorning.domain.model.question
+
+import com.peto.droidmorning.domain.model.Filter
+import com.peto.droidmorning.domain.model.SearchQuery
+import com.peto.droidmorning.domain.model.category.Categories
 
 data class Questions(
     private val values: List<Question>,

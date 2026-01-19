@@ -1,5 +1,6 @@
 package com.peto.droidmorning.domain.model
 
+import com.peto.droidmorning.domain.model.category.Category
 import kotlin.test.BeforeTest
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -22,7 +23,7 @@ class CategoryTest {
         // Given
 
         // When
-        val result = Category.name(validCategoryName)
+        val result = Category.from(validCategoryName)
 
         // Then
         assertEquals(Category.Kotlin, result)
@@ -33,7 +34,7 @@ class CategoryTest {
         // Given
 
         // When
-        val result = Category.name(uppercaseCategoryName)
+        val result = Category.from(uppercaseCategoryName)
 
         // Then
         assertEquals(Category.Android, result)
@@ -44,7 +45,7 @@ class CategoryTest {
         // Given
 
         // When
-        val result = Category.name(mixedCaseCategoryName)
+        val result = Category.from(mixedCaseCategoryName)
 
         // Then
         assertEquals(Category.Compose, result)
@@ -56,7 +57,7 @@ class CategoryTest {
         val categoryName = "coroutine"
 
         // When
-        val result = Category.name(categoryName)
+        val result = Category.from(categoryName)
 
         // Then
         assertEquals(Category.Coroutine, result)
@@ -68,7 +69,7 @@ class CategoryTest {
         val categoryName = "oop"
 
         // When
-        val result = Category.name(categoryName)
+        val result = Category.from(categoryName)
 
         // Then
         assertEquals(Category.OOP, result)
@@ -82,7 +83,7 @@ class CategoryTest {
         // When & Then
         val exception =
             assertFailsWith<IllegalArgumentException> {
-                Category.name(invalidCategoryName)
+                Category.from(invalidCategoryName)
             }
         assertEquals("Unknown category: InvalidCategory", exception.message)
     }
@@ -94,7 +95,7 @@ class CategoryTest {
 
         // When & Then
         assertFailsWith<IllegalArgumentException> {
-            Category.name(emptyCategoryName)
+            Category.from(emptyCategoryName)
         }
     }
 }

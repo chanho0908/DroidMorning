@@ -22,13 +22,14 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import com.peto.droidmorning.designsystem.component.ConfirmDialog
+import com.peto.droidmorning.designsystem.generated.resources.DesignRes
+import com.peto.droidmorning.designsystem.generated.resources.cancel
+import com.peto.droidmorning.designsystem.generated.resources.remove
 import com.peto.droidmorning.designsystem.theme.AppTheme
 import com.peto.droidmorning.designsystem.theme.Dimen
 import com.peto.droidmorning.questions.detail.model.AnswerUiModel
 import com.peto.droidmorning.questions.detail.preview.AnswerUiModelPreviewParameterProvider
 import droidmorning.composeapp.generated.resources.Res
-import droidmorning.composeapp.generated.resources.cancel
-import droidmorning.composeapp.generated.resources.delete
 import droidmorning.composeapp.generated.resources.delete_answer_confirm_message
 import droidmorning.composeapp.generated.resources.delete_answer_title
 import droidmorning.composeapp.generated.resources.my_answer
@@ -108,8 +109,8 @@ fun MyAnswer(
                         },
                         title = stringResource(Res.string.delete_answer_title),
                         message = stringResource(Res.string.delete_answer_confirm_message),
-                        confirmText = stringResource(Res.string.delete),
-                        cancelText = stringResource(Res.string.cancel),
+                        confirmText = stringResource(DesignRes.string.remove),
+                        cancelText = stringResource(DesignRes.string.cancel),
                         icon = Icons.Outlined.Delete,
                         iconTint = MaterialTheme.colorScheme.error,
                         iconBackgroundColor = MaterialTheme.colorScheme.errorContainer,

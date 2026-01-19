@@ -1,6 +1,8 @@
 package com.peto.droidmorning.domain.model
 
 import com.peto.droidmorning.domain.assertAll
+import com.peto.droidmorning.domain.model.category.Categories
+import com.peto.droidmorning.domain.model.category.Category
 import kotlin.test.BeforeTest
 import kotlin.test.Test
 import kotlin.test.assertEquals

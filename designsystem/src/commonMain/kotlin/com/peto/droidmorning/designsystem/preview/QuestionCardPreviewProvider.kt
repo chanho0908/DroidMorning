@@ -1,7 +1,7 @@
 package com.peto.droidmorning.designsystem.preview
 
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
-import com.peto.droidmorning.domain.model.Category
+import com.peto.droidmorning.domain.model.category.Category
 
 data class QuestionCardPreviewState(
     val title: String,

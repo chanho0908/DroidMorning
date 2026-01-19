@@ -21,7 +21,7 @@ import com.peto.droidmorning.designsystem.component.CategoryBadge
 import com.peto.droidmorning.designsystem.extension.color
 import com.peto.droidmorning.designsystem.theme.AppTheme
 import com.peto.droidmorning.designsystem.theme.Dimen
-import com.peto.droidmorning.domain.model.Category
+import com.peto.droidmorning.domain.model.category.Category
 import droidmorning.composeapp.generated.resources.Res
 import droidmorning.composeapp.generated.resources.answer_completed
 import org.jetbrains.compose.resources.stringResource

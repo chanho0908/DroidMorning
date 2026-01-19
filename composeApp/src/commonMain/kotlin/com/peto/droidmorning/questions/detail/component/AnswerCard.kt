@@ -19,12 +19,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
+import com.peto.droidmorning.designsystem.generated.resources.DesignRes
+import com.peto.droidmorning.designsystem.generated.resources.cancel
 import com.peto.droidmorning.designsystem.theme.AppTheme
 import com.peto.droidmorning.designsystem.theme.Dimen
 import com.peto.droidmorning.questions.detail.model.AnswerUiModel
 import com.peto.droidmorning.questions.detail.preview.AnswerCardPreviewParameterProvider
 import droidmorning.composeapp.generated.resources.Res
-import droidmorning.composeapp.generated.resources.delete
 import droidmorning.composeapp.generated.resources.edit
 import droidmorning.composeapp.generated.resources.last_modified_prefix
 import org.jetbrains.compose.resources.stringResource
@@ -102,7 +103,7 @@ fun AnswerCard(
                             IconButton(onClick = onDelete) {
                                 Icon(
                                     imageVector = Icons.Outlined.Delete,
-                                    contentDescription = stringResource(Res.string.delete),
+                                    contentDescription = stringResource(DesignRes.string.cancel),
                                     tint = MaterialTheme.colorScheme.error,
                                     modifier = Modifier.size(Dimen.iconSm),
                                 )

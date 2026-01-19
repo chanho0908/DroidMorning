@@ -28,12 +28,13 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.tooling.preview.Preview
+import com.peto.droidmorning.designsystem.generated.resources.DesignRes
+import com.peto.droidmorning.designsystem.generated.resources.cancel
 import com.peto.droidmorning.designsystem.theme.AppTheme
 import com.peto.droidmorning.designsystem.theme.Dimen
 import droidmorning.composeapp.generated.resources.Res
 import droidmorning.composeapp.generated.resources.add_answer_placeholder
 import droidmorning.composeapp.generated.resources.add_answer_title
-import droidmorning.composeapp.generated.resources.cancel
 import droidmorning.composeapp.generated.resources.save
 import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.stringResource
@@ -104,12 +105,12 @@ private fun AddAnswerBottomSheetContent(
                             }
                         },
                     ) {
-                        Text(stringResource(Res.string.cancel))
+                        Text(stringResource(DesignRes.string.cancel))
                     }
 
                     TextButton(
                         onClick = {
-                            if (draftAnswer.trim().isNotEmpty()) {
+                            if (draftAnswer.isNotEmpty()) {
                                 scope.launch {
                                     onSave(draftAnswer)
                                     sheetState.hide()

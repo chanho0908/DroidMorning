@@ -23,11 +23,12 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.peto.droidmorning.designsystem.component.AppPrimaryButton
 import com.peto.droidmorning.designsystem.component.AppTextArea
+import com.peto.droidmorning.designsystem.generated.resources.DesignRes
+import com.peto.droidmorning.designsystem.generated.resources.cancel
 import com.peto.droidmorning.designsystem.theme.AppTheme
 import com.peto.droidmorning.designsystem.theme.Dimen
 import droidmorning.composeapp.generated.resources.Res
 import droidmorning.composeapp.generated.resources.answer_placeholder
-import droidmorning.composeapp.generated.resources.cancel
 import droidmorning.composeapp.generated.resources.save
 import org.jetbrains.compose.resources.stringResource
 
@@ -65,7 +66,7 @@ fun EditAnswerCard(
             ) {
                 TextButton(onClick = onCancel) {
                     Text(
-                        stringResource(Res.string.cancel),
+                        stringResource(DesignRes.string.cancel),
                         color = MaterialTheme.colorScheme.onSurfaceVariant,
                     )
                 }

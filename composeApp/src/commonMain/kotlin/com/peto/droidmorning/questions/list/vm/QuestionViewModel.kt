@@ -2,7 +2,7 @@ package com.peto.droidmorning.questions.list.vm
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.peto.droidmorning.domain.model.Category
+import com.peto.droidmorning.domain.model.category.Category
 import com.peto.droidmorning.domain.repository.QuestionRepository
 import com.peto.droidmorning.questions.list.model.QuestionUiEvent
 import com.peto.droidmorning.questions.list.model.QuestionUiState

@@ -1,11 +1,11 @@
 package com.peto.droidmorning.questions.list.model
 
 import androidx.compose.runtime.Stable
-import com.peto.droidmorning.domain.model.Category
 import com.peto.droidmorning.domain.model.Filter
-import com.peto.droidmorning.domain.model.Question
-import com.peto.droidmorning.domain.model.Questions
 import com.peto.droidmorning.domain.model.SearchQuery
+import com.peto.droidmorning.domain.model.category.Category
+import com.peto.droidmorning.domain.model.question.Question
+import com.peto.droidmorning.domain.model.question.Questions
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.ImmutableSet
 import kotlinx.collections.immutable.toImmutableList
@@ -16,7 +16,7 @@ data class QuestionUiState(
     private val allQuestions: Questions = Questions(emptyList()),
     val filter: Filter = Filter(),
     val showCategoryFilters: Boolean = false,
-    val isLoading: Boolean = false,
+    val isLoading: Boolean = true,
     val isFiltering: Boolean = false,
 ) {
     val searchQuery: SearchQuery get() = filter.searchQuery
@@ -64,9 +64,6 @@ data class QuestionUiState(
         return copy(allQuestions = Questions(updatedList))
     }
 
-    /**
-     * 특정 문제의 좋아요와 해결 상태를 업데이트
-     */
     fun updateQuestion(
         questionId: Long,
         isLiked: Boolean,
