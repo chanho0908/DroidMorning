@@ -12,7 +12,7 @@ enum class Category {
         fun from(value: String): Category =
             entries
                 .find { it.name.equals(value, ignoreCase = true) }
-                ?: error("$UNKNOWN_CATEGORY_EXCEPTION $value")
+                ?: throw IllegalArgumentException("$UNKNOWN_CATEGORY_EXCEPTION $value")
 
         private const val UNKNOWN_CATEGORY_EXCEPTION = "Unknown category:"
     }

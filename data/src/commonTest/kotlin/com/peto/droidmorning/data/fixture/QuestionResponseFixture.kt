@@ -1,5 +1,7 @@
 package com.peto.droidmorning.data.fixture
 
+import com.peto.droidmorning.data.model.response.CategoryCountResponse
+import com.peto.droidmorning.data.model.response.ExamQuestionResponse
 import com.peto.droidmorning.data.model.response.QuestionResponse
 import com.peto.droidmorning.domain.model.category.Category
 import kotlin.time.Instant
@@ -29,6 +31,43 @@ object QuestionResponseFixture {
             questionResponse(
                 id = it.toLong(),
                 title = "질문 $it",
+            )
+        }
+
+    fun examQuestionResponse(
+        questionId: Long = 1L,
+        content: String = "시험 질문 내용",
+        category: Category = Category.Kotlin,
+    ): ExamQuestionResponse =
+        ExamQuestionResponse(
+            questionId = questionId,
+            content = content,
+            category = category.name,
+        )
+
+    fun examQuestionResponseList(size: Int = 5): List<ExamQuestionResponse> =
+        (1..size).map {
+            examQuestionResponse(
+                questionId = it.toLong(),
+                content = "시험 질문 $it",
+                category = Category.entries[it % Category.entries.size],
+            )
+        }
+
+    fun categoryCountResponse(
+        category: Category = Category.Kotlin,
+        count: Long = 10L,
+    ): CategoryCountResponse =
+        CategoryCountResponse(
+            category = category.name,
+            count = count,
+        )
+
+    fun categoryCountResponseList(): List<CategoryCountResponse> =
+        Category.entries.mapIndexed { index, category ->
+            categoryCountResponse(
+                category = category,
+                count = (index + 1) * 10L,
             )
         }
 }
