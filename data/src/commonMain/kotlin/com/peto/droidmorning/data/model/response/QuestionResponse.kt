@@ -1,7 +1,7 @@
 package com.peto.droidmorning.data.model.response
 
-import com.peto.droidmorning.domain.model.Category
-import com.peto.droidmorning.domain.model.Question
+import com.peto.droidmorning.domain.model.category.Category
+import com.peto.droidmorning.domain.model.question.Question
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import kotlin.time.Instant
@@ -26,7 +26,7 @@ data class QuestionResponse(
         Question(
             id = id,
             title = title,
-            category = Category.name(category),
+            category = Category.from(category),
             sourceUrl = sourceUrl,
             createdAt = createdAt,
             updatedAt = updatedAt,

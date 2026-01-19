@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Droid Morning</string>
+    <string name="remove">삭제</string>
+    <string name="cancel">취소</string>
 
     <!-- QuestionCard -->
     <string name="question_card_solved">풀이 완료</string>
@@ -22,6 +24,10 @@
 
     <!-- TestHistoryCard -->
     <string name="test_history_card_question_count">문제</string>
+
+    <!-- ExamQuestionCard -->
+    <string name="exam_question_card_question_label">질문</string>
+    <string name="exam_question_card_answer_label">내 답변</string>
 
     <!-- AppTextArea -->
     <string name="text_area_placeholder">입력하세요</string>

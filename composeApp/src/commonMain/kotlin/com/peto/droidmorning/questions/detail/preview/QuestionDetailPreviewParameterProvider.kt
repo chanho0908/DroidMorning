@@ -1,8 +1,8 @@
 package com.peto.droidmorning.questions.detail.preview
 
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
-import com.peto.droidmorning.domain.model.Category
-import com.peto.droidmorning.domain.model.Question
+import com.peto.droidmorning.domain.model.category.Category
+import com.peto.droidmorning.domain.model.question.Question
 import com.peto.droidmorning.questions.detail.model.AnswerUiModel
 import com.peto.droidmorning.questions.detail.model.QuestionDetailUiState
 import kotlinx.collections.immutable.persistentListOf

@@ -113,18 +113,14 @@ class QuestionDetailViewModel(
                 }
 
                 is AnswerUiModel.Current -> {
-                    // 현재 답변 삭제
                     answerRepository
                         .deleteCurrentAnswer(questionId)
                         .onSuccess {
-                            // loadAnswers()가 완료될 때까지 기다린 후 상태 확인
                             viewModelScope.launch {
                                 loadAnswers()
 
-                                // loadAnswers() 완료 후 히스토리에서 복원된 답변이 있는지 확인
                                 val hasAnswerAfterDelete = _uiState.value.currentAnswer != null
                                 if (!hasAnswerAfterDelete) {
-                                    // 모든 답변이 삭제되었으면 미해결 상태로 변경
                                     updateQuestionSolvedStatus(false)
                                 }
                             }

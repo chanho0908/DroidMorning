@@ -23,7 +23,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.peto.droidmorning.common.ObserveAsEvents
 import com.peto.droidmorning.designsystem.component.AppSearchBar
 import com.peto.droidmorning.designsystem.theme.Dimen
-import com.peto.droidmorning.domain.model.Category
+import com.peto.droidmorning.domain.model.category.Category
 import com.peto.droidmorning.questions.detail.navigation.QuestionDetailNavGraph
 import com.peto.droidmorning.questions.list.component.CategoryChips
 import com.peto.droidmorning.questions.list.component.EmptyQuestion

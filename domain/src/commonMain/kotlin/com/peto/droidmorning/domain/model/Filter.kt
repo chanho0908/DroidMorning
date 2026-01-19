@@ -1,5 +1,8 @@
 package com.peto.droidmorning.domain.model
 
+import com.peto.droidmorning.domain.model.category.Categories
+import com.peto.droidmorning.domain.model.category.Category
+
 data class Filter(
     val searchQuery: SearchQuery = SearchQuery(""),
     val categories: Categories = Categories(emptySet()),

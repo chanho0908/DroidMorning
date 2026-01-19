@@ -14,7 +14,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.peto.droidmorning.designsystem.component.CategoryFilterChip
 import com.peto.droidmorning.designsystem.theme.AppTheme
 import com.peto.droidmorning.designsystem.theme.Dimen
-import com.peto.droidmorning.domain.model.Category
+import com.peto.droidmorning.domain.model.category.Category
 import droidmorning.composeapp.generated.resources.Res
 import droidmorning.composeapp.generated.resources.question_filter_category
 import droidmorning.composeapp.generated.resources.question_filter_favorites

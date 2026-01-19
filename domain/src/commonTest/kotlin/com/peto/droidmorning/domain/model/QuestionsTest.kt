@@ -1,6 +1,10 @@
 package com.peto.droidmorning.domain.model
 
 import com.peto.droidmorning.domain.assertAll
+import com.peto.droidmorning.domain.model.category.Categories
+import com.peto.droidmorning.domain.model.category.Category
+import com.peto.droidmorning.domain.model.question.Question
+import com.peto.droidmorning.domain.model.question.Questions
 import kotlin.test.BeforeTest
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -192,10 +196,30 @@ class QuestionsTest {
         val questions =
             Questions(
                 listOf(
-                    createQuestion(id = 1, title = "Kotlin Basics", category = Category.Kotlin, isSolved = true),
-                    createQuestion(id = 2, title = "Android Basics", category = Category.Android, isSolved = true),
-                    createQuestion(id = 3, title = "Kotlin Advanced", category = Category.Kotlin, isSolved = false),
-                    createQuestion(id = 4, title = "Kotlin Expert", category = Category.Kotlin, isSolved = true),
+                    createQuestion(
+                        id = 1,
+                        title = "Kotlin Basics",
+                        category = Category.Kotlin,
+                        isSolved = true,
+                    ),
+                    createQuestion(
+                        id = 2,
+                        title = "Android Basics",
+                        category = Category.Android,
+                        isSolved = true,
+                    ),
+                    createQuestion(
+                        id = 3,
+                        title = "Kotlin Advanced",
+                        category = Category.Kotlin,
+                        isSolved = false,
+                    ),
+                    createQuestion(
+                        id = 4,
+                        title = "Kotlin Expert",
+                        category = Category.Kotlin,
+                        isSolved = true,
+                    ),
                 ),
             )
         val filter =

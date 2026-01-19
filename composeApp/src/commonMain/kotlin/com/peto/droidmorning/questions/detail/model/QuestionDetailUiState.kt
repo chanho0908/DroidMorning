@@ -1,8 +1,8 @@
 package com.peto.droidmorning.questions.detail.model
 
 import androidx.compose.runtime.Stable
-import com.peto.droidmorning.domain.model.Category
-import com.peto.droidmorning.domain.model.Question
+import com.peto.droidmorning.domain.model.category.Category
+import com.peto.droidmorning.domain.model.question.Question
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.persistentListOf
 import kotlinx.collections.immutable.toImmutableList

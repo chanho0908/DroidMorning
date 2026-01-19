@@ -1,5 +1,7 @@
-package com.peto.droidmorning.domain.model
+package com.peto.droidmorning.domain.model.question
 
+import com.peto.droidmorning.domain.model.SearchQuery
+import com.peto.droidmorning.domain.model.category.Category
 import kotlin.time.Instant
 
 data class Question(

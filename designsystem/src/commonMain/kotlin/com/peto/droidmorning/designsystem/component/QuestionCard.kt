@@ -38,7 +38,7 @@ import com.peto.droidmorning.designsystem.theme.MutedForeground
 import com.peto.droidmorning.designsystem.theme.OnSurface
 import com.peto.droidmorning.designsystem.theme.Success
 import com.peto.droidmorning.designsystem.theme.Warning
-import com.peto.droidmorning.domain.model.Category
+import com.peto.droidmorning.domain.model.category.Category
 import org.jetbrains.compose.resources.stringResource
 
 @Composable

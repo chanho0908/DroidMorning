@@ -1,4 +1,4 @@
-package com.peto.droidmorning.domain.model
+package com.peto.droidmorning.domain.model.category
 
 data class Categories(
     private val values: Set<Category> = emptySet(),

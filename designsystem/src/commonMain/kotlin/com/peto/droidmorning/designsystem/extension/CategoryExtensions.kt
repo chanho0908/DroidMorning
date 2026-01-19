@@ -6,7 +6,7 @@ import com.peto.droidmorning.designsystem.theme.CategoryCompose
 import com.peto.droidmorning.designsystem.theme.CategoryCoroutine
 import com.peto.droidmorning.designsystem.theme.CategoryKotlin
 import com.peto.droidmorning.designsystem.theme.CategoryOOP
-import com.peto.droidmorning.domain.model.Category
+import com.peto.droidmorning.domain.model.category.Category
 
 val Category.color: Color
     get() =

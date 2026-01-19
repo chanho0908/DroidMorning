@@ -12,8 +12,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.peto.droidmorning.designsystem.component.QuestionCard
 import com.peto.droidmorning.designsystem.theme.AppTheme
 import com.peto.droidmorning.designsystem.theme.Dimen
-import com.peto.droidmorning.domain.model.Category
-import com.peto.droidmorning.domain.model.Question
+import com.peto.droidmorning.domain.model.category.Category
+import com.peto.droidmorning.domain.model.question.Question
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.persistentListOf
 import kotlin.time.Instant

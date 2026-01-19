@@ -31,14 +31,15 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import com.peto.droidmorning.designsystem.component.ConfirmDialog
+import com.peto.droidmorning.designsystem.generated.resources.DesignRes
+import com.peto.droidmorning.designsystem.generated.resources.cancel
+import com.peto.droidmorning.designsystem.generated.resources.remove
 import com.peto.droidmorning.designsystem.theme.AppTheme
 import com.peto.droidmorning.designsystem.theme.Dimen
 import com.peto.droidmorning.questions.detail.model.AnswerUiModel
 import com.peto.droidmorning.questions.detail.preview.AnswerHistoryPreviewParameterProvider
 import droidmorning.composeapp.generated.resources.Res
 import droidmorning.composeapp.generated.resources.answer_history_count
-import droidmorning.composeapp.generated.resources.cancel
-import droidmorning.composeapp.generated.resources.delete
 import droidmorning.composeapp.generated.resources.delete_answer_confirm_message
 import droidmorning.composeapp.generated.resources.delete_answer_title
 import kotlinx.collections.immutable.ImmutableList
@@ -65,7 +66,7 @@ fun AnswerHistory(
                 modifier = Modifier.size(Dimen.iconMd),
             )
             Text(
-                text = stringResource(Res.string.answer_history_count, historyAnswers.size),
+                text = "${stringResource(Res.string.answer_history_count)}(${historyAnswers.size})",
                 style = MaterialTheme.typography.titleMedium,
                 fontWeight = FontWeight.Bold,
             )
@@ -154,8 +155,8 @@ private fun HistoryItem(
                 },
                 title = stringResource(Res.string.delete_answer_title),
                 message = stringResource(Res.string.delete_answer_confirm_message),
-                confirmText = stringResource(Res.string.delete),
-                cancelText = stringResource(Res.string.cancel),
+                confirmText = stringResource(DesignRes.string.remove),
+                cancelText = stringResource(DesignRes.string.cancel),
                 icon = Icons.Outlined.Delete,
                 iconTint = MaterialTheme.colorScheme.error,
                 iconBackgroundColor = MaterialTheme.colorScheme.errorContainer,
