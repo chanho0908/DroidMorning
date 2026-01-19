@@ -19,7 +19,9 @@ class KotlinMultiPlatformiOSPlugin : Plugin<Project> {
             iosSimulatorArm64()
 
             targets.withType<KotlinNativeTarget> {
-                compilations["main"].kotlinOptions.freeCompilerArgs += "-Xexport-kdoc"
+                compilations["main"].compilerOptions.configure {
+                    freeCompilerArgs.add("-Xexport-kdoc")
+                }
                 binaries.framework {
                     baseName = project.name
                     isStatic = true
