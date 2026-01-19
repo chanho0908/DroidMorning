@@ -28,9 +28,13 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
+import com.peto.droidmorning.designsystem.generated.resources.DesignRes
+import com.peto.droidmorning.designsystem.generated.resources.cancel
+import com.peto.droidmorning.designsystem.generated.resources.remove
 import com.peto.droidmorning.designsystem.theme.AppTheme
 import com.peto.droidmorning.designsystem.theme.Dimen
 import com.peto.droidmorning.designsystem.theme.Shape
+import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun ConfirmDialog(
@@ -38,8 +42,8 @@ fun ConfirmDialog(
     onConfirm: () -> Unit,
     title: String,
     message: String,
-    confirmText: String,
-    cancelText: String,
+    confirmText: String = stringResource(DesignRes.string.remove),
+    cancelText: String = stringResource(DesignRes.string.cancel),
     icon: ImageVector = Icons.Default.Error,
     iconTint: Color = MaterialTheme.colorScheme.error,
     iconBackgroundColor: Color = MaterialTheme.colorScheme.errorContainer,

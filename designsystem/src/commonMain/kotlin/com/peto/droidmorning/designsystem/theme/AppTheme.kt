@@ -6,7 +6,34 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.ReadOnlyComposable
+import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.graphics.Color
+
+/**
+ * Extended colors for DroidMorning app
+ */
+data class ExtendedColors(
+    val examSelected: Color = ExamSelected,
+    val examCorrect: Color = ExamCorrect,
+    val examCorrectBackground: Color = ExamCorrectBackground,
+)
+
+private val LightExtendedColors =
+    ExtendedColors(
+        examSelected = ExamSelected,
+        examCorrect = ExamCorrect,
+        examCorrectBackground = ExamCorrectBackground,
+    )
+
+private val DarkExtendedColors =
+    ExtendedColors(
+        examSelected = ExamSelectedDark,
+        examCorrect = ExamCorrectDark,
+        examCorrectBackground = ExamCorrectBackgroundDark,
+    )
+
+val LocalExtendedColors = staticCompositionLocalOf { LightExtendedColors }
 
 @Composable
 fun AppTheme(
@@ -14,13 +41,27 @@ fun AppTheme(
     colorScheme: ColorScheme = if (useDarkTheme) DarkColorScheme else LightColorScheme,
     content: @Composable () -> Unit,
 ) {
-    MaterialTheme(
-        colorScheme = colorScheme,
-        typography = droidMorningTypography(),
-        shapes = Shapes,
-        content = content,
-    )
+    val extendedColors = if (useDarkTheme) DarkExtendedColors else LightExtendedColors
+
+    androidx.compose.runtime.CompositionLocalProvider(
+        LocalExtendedColors provides extendedColors,
+    ) {
+        MaterialTheme(
+            colorScheme = colorScheme,
+            typography = droidMorningTypography(),
+            shapes = Shapes,
+            content = content,
+        )
+    }
 }
+
+/**
+ * Extension property to access extended colors
+ */
+val MaterialTheme.extendedColors: ExtendedColors
+    @Composable
+    @ReadOnlyComposable
+    get() = LocalExtendedColors.current
 
 private val LightColorScheme =
     lightColorScheme(

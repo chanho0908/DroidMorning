@@ -78,3 +78,16 @@ val CategoryAndroid = Color(0xFF01BD56)
 val CategoryCompose = Color(0xFFD9B110)
 val CategoryCoroutine = Color(0xFF01C4C6)
 val CategoryOOP = Color(0xFFD77701)
+
+// Exam colors
+val ExamSelected = Color(0xFFFF9800)
+val ExamUnSelected = Color(0xFFFCEEDA)
+val ExamSelectedDark = Color(0xFFFFB74D)
+
+// Exam result colors
+val ExamCorrect = Color(0xFF4CAF50)
+val ExamCorrectBackground = Color(0xFFE8F5E9)
+
+// Dark mode variants
+val ExamCorrectDark = Color(0xFF81C784)
+val ExamCorrectBackgroundDark = Color(0xFF1B5E20)
