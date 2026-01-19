@@ -32,8 +32,6 @@
     <!-- My Answer Section -->
     <string name="my_answer">내 답변</string>
     <string name="edit">수정</string>
-    <string name="delete">삭제</string>
-    <string name="cancel">취소</string>
     <string name="save">저장</string>
     <string name="no_answer_yet">아직 작성한 답변이 없습니다</string>
     <string name="answer_placeholder">답변을 입력하세요</string>
@@ -45,7 +43,7 @@
     <string name="delete_history_confirm">이 답변을 삭제하시겠습니까?</string>
     
     <!-- Answer History Section -->
-    <string name="answer_history_count">답변 히스토리 (%d)</string>
+    <string name="answer_history_count">답변 히스토리</string>
     
     <!-- Bottom Action -->
     <string name="add_answer">답변 추가하기</string>
@@ -56,4 +54,43 @@
 
     <!-- Date Formatting -->
     <string name="last_modified_prefix">마지막 수정: </string>
+    
+    <!-- Exam Screen -->
+    <string name="exam_tab_create">시험 생성</string>
+    <string name="exam_tab_history">시험 기록</string>
+    
+    <!-- Exam Create Tab -->
+    <string name="exam_question_count">문제 개수</string>
+    <string name="exam_category_select">카테고리 선택</string>
+    <string name="exam_available_questions">사용 가능한 문제</string>
+    <string name="exam_category_description">선택한 카테고리에서 문제가 출제됩니다</string>
+    <string name="exam_start">시험 시작하기</string>
+    <string name="exam_question_unit">문제 시험</string>
+    <string name="exam_count_unit">개</string>
+    
+    <!-- Exam History Tab -->
+    <string name="exam_history_empty_title">아직 시험 기록이 없습니다</string>
+    <string name="exam_history_empty_description">시험을 시작해서 기록을 남겨보세요</string>
+    <string name="exam_correct_answer">정답</string>
+    <string name="exam_delete">삭제</string>
+    <string name="exam_delete_confirm_title">시험 삭제</string>
+    <string name="exam_delete_confirm_message">이 시험 기록을 삭제하시겠습니까?</string>
+    <string name="exam_delete_success">시험 기록을 삭제했습니다.</string>
+
+    <!-- Exam Progress Screen -->
+    <string name="exam_answer_placeholder">여기에 답변을 작성하세요...</string>
+    <string name="exam_answer_prompt">답변을 작성해주세요</string>
+    <string name="exam_button_previous">이전</string>
+    <string name="exam_button_next">다음</string>
+    <string name="exam_button_submit">제출하기</string>
+    
+    <!-- Exam Result Screen -->
+    <string name="exam_result_title">시험 상세</string>
+    <string name="exam_result_complete_title">시험 완료!</string>
+    <string name="exam_result_no_answer">답변을 작성하지 않았습니다</string>
+    <string name="exam_result_my_answer">내 답변</string>
+    <string name="exam_result_back_to_questions">문제 목록으로</string>
+    <string name="exam_question_count_format">문제</string>
+    <string name="exam_card_question_label">질문</string>
+    <string name="exam_card_answer_label">내 답변</string>
 </resources>
