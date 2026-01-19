@@ -25,6 +25,18 @@ dependencies {
 
 gradlePlugin {
     plugins {
+        register("kmpPrimitive") {
+            id = "droidmorning.kmp"
+            implementationClass = "com.peto.droidmorning.app.primitive.KotlinMultiPlatformPlugin"
+        }
+        register("kmpAndroid") {
+            id = "droidmorning.kmp.android"
+            implementationClass = "com.peto.droidmorning.app.primitive.KotlinMultiPlatformAndroidPlugin"
+        }
+        register("kmpIos") {
+            id = "droidmorning.kmp.ios"
+            implementationClass = "com.peto.droidmorning.app.primitive.KotlinMultiPlatformiOSPlugin"
+        }
         register("androidLibrary") {
             id = "droidmorning.android.library"
             implementationClass = "com.peto.droidmorning.app.AndroidLibraryConventionPlugin"
@@ -36,6 +48,10 @@ gradlePlugin {
         register("composeMultiplatform") {
             id = "droidmorning.compose.multiplatform"
             implementationClass = "com.peto.droidmorning.app.ComposeMultiplatformConventionPlugin"
+        }
+        register("droidmorningFeature") {
+            id = "droidmorning.feature"
+            implementationClass = "com.peto.droidmorning.app.DroidMorningFeaturePlugin"
         }
     }
 }
