@@ -22,7 +22,6 @@ import com.peto.droidmorning.designsystem.theme.AppTheme
 import com.peto.droidmorning.domain.model.category.Category
 import com.peto.droidmorning.exam.main.ExamScreen
 import com.peto.droidmorning.main.vm.MainViewModel
-import com.peto.droidmorning.profile.ProfileScreen
 import com.peto.droidmorning.questions.list.QuestionScreen
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
@@ -121,8 +120,6 @@ private fun MainContent(
                     onNavigateToExamProgress = onNavigateToExamProgress,
                     onNavigateToExamResult = onNavigateToExamResult,
                 )
-
-            BottomNavigationType.PROFILE -> ProfileScreen()
         }
     }
 }

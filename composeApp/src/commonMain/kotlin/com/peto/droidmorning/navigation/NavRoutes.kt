@@ -17,8 +17,6 @@ sealed class NavRoutes(
 
     data object History : NavRoutes("history")
 
-    data object Profile : NavRoutes("profile")
-
     data object QuestionDetailGraph : NavRoutes("question_detail_graph")
 
     @Serializable
