@@ -14,38 +14,43 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.SavedStateHandle
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.peto.droidmorning.designsystem.theme.AppTheme
-import com.peto.droidmorning.history.HistoryScreen
+import com.peto.droidmorning.domain.model.category.Category
+import com.peto.droidmorning.exam.main.ExamScreen
+import com.peto.droidmorning.main.vm.MainViewModel
 import com.peto.droidmorning.profile.ProfileScreen
 import com.peto.droidmorning.questions.list.QuestionScreen
-import com.peto.droidmorning.test.TestScreen
 import org.jetbrains.compose.resources.stringResource
+import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
 fun MainScreen(
-    onNavigateToQuestionDetail: (Long) -> Unit = {},
+    onNavigateToQuestionDetail: (Long) -> Unit,
+    onNavigateToExamProgress: (questionCount: Int, categories: List<Category>) -> Unit,
+    onNavigateToExamResult: (Long) -> Unit,
     savedStateHandle: SavedStateHandle? = null,
+    viewModel: MainViewModel = koinViewModel(),
 ) {
-    var selectedTab by remember { mutableStateOf(BottomNavigationType.QUESTION) }
+    val selectedTab by viewModel.selectedTab.collectAsStateWithLifecycle()
 
     Scaffold(
         modifier = Modifier.fillMaxSize(),
         bottomBar = {
             BottomNavigationBar(
                 selectedTab = selectedTab,
-                onTabSelected = { selectedTab = it },
+                onTabSelected = viewModel::selectTab,
             )
         },
     ) { paddingValues ->
         MainContent(
             selectedTab = selectedTab,
             onNavigateToQuestionDetail = onNavigateToQuestionDetail,
+            onNavigateToExamProgress = onNavigateToExamProgress,
+            onNavigateToExamResult = onNavigateToExamResult,
             savedStateHandle = savedStateHandle,
             modifier = Modifier.padding(paddingValues),
         )
@@ -96,6 +101,8 @@ private fun BottomNavigationBar(
 private fun MainContent(
     selectedTab: BottomNavigationType,
     onNavigateToQuestionDetail: (Long) -> Unit,
+    onNavigateToExamProgress: (questionCount: Int, categories: List<Category>) -> Unit,
+    onNavigateToExamResult: (Long) -> Unit,
     savedStateHandle: SavedStateHandle?,
     modifier: Modifier = Modifier,
 ) {
@@ -109,8 +116,12 @@ private fun MainContent(
                     savedStateHandle = savedStateHandle,
                 )
 
-            BottomNavigationType.TEST -> TestScreen()
-            BottomNavigationType.HISTORY -> HistoryScreen()
+            BottomNavigationType.EXAM ->
+                ExamScreen(
+                    onNavigateToExamProgress = onNavigateToExamProgress,
+                    onNavigateToExamResult = onNavigateToExamResult,
+                )
+
             BottomNavigationType.PROFILE -> ProfileScreen()
         }
     }
@@ -120,6 +131,10 @@ private fun MainContent(
 @Composable
 fun MainScreenPreview() {
     AppTheme {
-        MainScreen()
+        MainScreen(
+            onNavigateToQuestionDetail = {},
+            onNavigateToExamProgress = { _, _ -> },
+            onNavigateToExamResult = {},
+        )
     }
 }
