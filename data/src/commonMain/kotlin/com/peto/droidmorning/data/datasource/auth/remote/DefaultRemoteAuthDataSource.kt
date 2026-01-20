@@ -1,19 +1,11 @@
 package com.peto.droidmorning.data.datasource.auth.remote
 
-import io.github.jan.supabase.auth.Auth
-import io.github.jan.supabase.auth.providers.Google
-import io.github.jan.supabase.auth.providers.builtin.IDToken
+import com.peto.droidmorning.core.network.AuthClient
 
 class DefaultRemoteAuthDataSource(
-    private val auth: Auth,
+    private val authClient: AuthClient,
 ) : RemoteAuthDataSource {
-    override suspend fun signIn(oauthIdToken: String): String? {
-        auth.signInWith(IDToken) {
-            idToken = oauthIdToken
-            provider = Google
-        }
-        return auth.currentSessionOrNull()?.user?.id
-    }
+    override suspend fun signIn(oauthIdToken: String): String? = authClient.signInWithGoogleIdToken(oauthIdToken)
 
-    override suspend fun signOut() = auth.signOut()
+    override suspend fun signOut() = authClient.signOut()
 }

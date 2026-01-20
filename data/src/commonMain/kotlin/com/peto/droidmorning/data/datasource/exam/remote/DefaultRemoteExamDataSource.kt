@@ -1,58 +1,82 @@
 package com.peto.droidmorning.data.datasource.exam.remote
 
+import com.peto.droidmorning.core.network.AuthClient
+import com.peto.droidmorning.core.network.PostgrestClient
+import com.peto.droidmorning.core.network.PostgrestFilter
+import com.peto.droidmorning.core.network.PostgrestOrder
 import com.peto.droidmorning.data.model.request.toRequest
 import com.peto.droidmorning.data.model.response.ExamDetailResponse
 import com.peto.droidmorning.data.model.response.ExamHistoryResponse
 import com.peto.droidmorning.domain.model.category.Category
 import com.peto.droidmorning.domain.model.exam.Exams
-import io.github.jan.supabase.auth.Auth
-import io.github.jan.supabase.postgrest.Postgrest
-import io.github.jan.supabase.postgrest.query.Columns
-import io.github.jan.supabase.postgrest.query.Order
-import io.github.jan.supabase.postgrest.rpc
+import kotlinx.serialization.builtins.ListSerializer
+import kotlinx.serialization.builtins.serializer
+import kotlinx.serialization.json.Json
+import kotlinx.serialization.json.encodeToJsonElement
+import kotlinx.serialization.json.jsonObject
 
 class DefaultRemoteExamDataSource(
-    private val postgrest: Postgrest,
-    private val auth: Auth,
+    private val postgrest: PostgrestClient,
+    private val authClient: AuthClient,
 ) : RemoteExamDataSource {
+    private val json = Json { ignoreUnknownKeys = true }
+
     override suspend fun submitExam(
         exam: Exams,
         categories: List<Category>,
     ): Long =
         postgrest
-            .rpc(RPC_CREATE_EXAM, exam.toRequest(uid(), categories))
-            .decodeAs<Long>()
+            .rpc(
+                function = RPC_CREATE_EXAM,
+                parameters =
+                    json
+                        .encodeToJsonElement(exam.toRequest(uid(), categories))
+                        .jsonObject,
+            ).let { data ->
+                json.decodeFromString(Long.serializer(), data)
+            }
 
     override suspend fun fetchExamHistory(): List<ExamHistoryResponse> =
         postgrest
-            .from(TABLE_EXAMS)
-            .select(Columns.ALL) {
-                filter {
-                    eq(USER_ID_COLUMN, uid())
-                }
-                order(UPDATED_AT_COLUMN, Order.DESCENDING)
-            }.decodeList<ExamHistoryResponse>()
+            .select(
+                table = TABLE_EXAMS,
+                filters = listOf(PostgrestFilter(USER_ID_COLUMN, uid())),
+                order = PostgrestOrder(UPDATED_AT_COLUMN, descending = true),
+            ).let { data ->
+                json.decodeFromString(
+                    ListSerializer(ExamHistoryResponse.serializer()),
+                    data,
+                )
+            }
 
-    override suspend fun fetchExamDetail(examId: Long): List<ExamDetailResponse> {
-        val params = mapOf(RPC_PARAM_EXAM_ID to examId)
-        return postgrest
-            .rpc(RPC_GET_EXAM_DETAIL, params)
-            .decodeList<ExamDetailResponse>()
-    }
+    override suspend fun fetchExamDetail(examId: Long): List<ExamDetailResponse> =
+        postgrest
+            .rpc(
+                function = RPC_GET_EXAM_DETAIL,
+                parameters =
+                    json
+                        .encodeToJsonElement(mapOf(RPC_PARAM_EXAM_ID to examId))
+                        .jsonObject,
+            ).let { data ->
+                json.decodeFromString(
+                    ListSerializer(ExamDetailResponse.serializer()),
+                    data,
+                )
+            }
 
     override suspend fun deleteExam(examId: Long) {
-        postgrest
-            .from(TABLE_EXAMS)
-            .delete {
-                filter {
-                    eq(ID_COLUMN, examId)
-                    eq(USER_ID_COLUMN, uid())
-                }
-            }
+        postgrest.delete(
+            table = TABLE_EXAMS,
+            filters =
+                listOf(
+                    PostgrestFilter(ID_COLUMN, examId),
+                    PostgrestFilter(USER_ID_COLUMN, uid()),
+                ),
+        )
     }
 
     private fun uid(): String =
-        auth.currentSessionOrNull()?.user?.id
+        authClient.currentUserId()
             ?: throw IllegalStateException("User not logged in")
 
     companion object {

@@ -1,40 +1,58 @@
 package com.peto.droidmorning.data.datasource.answer.remote
 
+import com.peto.droidmorning.core.network.AuthClient
+import com.peto.droidmorning.core.network.PostgrestClient
+import com.peto.droidmorning.core.network.PostgrestFilter
+import com.peto.droidmorning.core.network.PostgrestOrder
 import com.peto.droidmorning.data.model.request.CreateAnswerRequest
 import com.peto.droidmorning.data.model.request.RpcDefaultRequest
 import com.peto.droidmorning.data.model.request.UpdateAnswerRequest
 import com.peto.droidmorning.data.model.response.AnswerHistoryResponse
 import com.peto.droidmorning.data.model.response.CurrentAnswerResponse
-import io.github.jan.supabase.auth.Auth
-import io.github.jan.supabase.postgrest.Postgrest
-import io.github.jan.supabase.postgrest.query.Columns
-import io.github.jan.supabase.postgrest.query.Order
-import io.github.jan.supabase.postgrest.rpc
+import kotlinx.serialization.builtins.ListSerializer
+import kotlinx.serialization.json.Json
+import kotlinx.serialization.json.encodeToJsonElement
+import kotlinx.serialization.json.jsonObject
 
 class DefaultRemoteAnswerDataSource(
-    private val postgrest: Postgrest,
-    private val auth: Auth,
+    private val postgrest: PostgrestClient,
+    private val authClient: AuthClient,
 ) : RemoteAnswerDataSource {
+    private val json = Json { ignoreUnknownKeys = true }
+
     override suspend fun fetchCurrentAnswer(questionId: Long): CurrentAnswerResponse? =
         postgrest
-            .from(ANSWERS_CURRENT_TABLE)
-            .select(Columns.ALL) {
-                filter {
-                    eq(USER_ID_COLUMN, uid())
-                    eq(QUESTION_ID_COLUMN, questionId)
-                }
-            }.decodeSingleOrNull<CurrentAnswerResponse>()
+            .select(
+                table = ANSWERS_CURRENT_TABLE,
+                filters =
+                    listOf(
+                        PostgrestFilter(USER_ID_COLUMN, uid()),
+                        PostgrestFilter(QUESTION_ID_COLUMN, questionId),
+                    ),
+            ).let { data ->
+                json
+                    .decodeFromString(
+                        ListSerializer(CurrentAnswerResponse.serializer()),
+                        data,
+                    ).firstOrNull()
+            }
 
     override suspend fun fetchAnswerHistory(questionId: Long): List<AnswerHistoryResponse> =
         postgrest
-            .from(ANSWER_HISTORY_TABLE)
-            .select(Columns.ALL) {
-                filter {
-                    eq(USER_ID_COLUMN, uid())
-                    eq(QUESTION_ID_COLUMN, questionId)
-                }
-                order(CREATED_AT_COLUMN, order = Order.DESCENDING)
-            }.decodeList<AnswerHistoryResponse>()
+            .select(
+                table = ANSWER_HISTORY_TABLE,
+                filters =
+                    listOf(
+                        PostgrestFilter(USER_ID_COLUMN, uid()),
+                        PostgrestFilter(QUESTION_ID_COLUMN, questionId),
+                    ),
+                order = PostgrestOrder(CREATED_AT_COLUMN, descending = true),
+            ).let { data ->
+                json.decodeFromString(
+                    ListSerializer(AnswerHistoryResponse.serializer()),
+                    data,
+                )
+            }
 
     override suspend fun createAnswer(
         questionId: Long,
@@ -42,7 +60,10 @@ class DefaultRemoteAnswerDataSource(
     ) {
         postgrest.rpc(
             function = RPC_UPSERT_ANSWER_CURRENT,
-            parameters = CreateAnswerRequest(uid(), questionId, content),
+            parameters =
+                json
+                    .encodeToJsonElement(CreateAnswerRequest(uid(), questionId, content))
+                    .jsonObject,
         )
     }
 
@@ -50,36 +71,40 @@ class DefaultRemoteAnswerDataSource(
         questionId: Long,
         content: String,
     ) {
-        postgrest
-            .from(ANSWERS_CURRENT_TABLE)
-            .update(UpdateAnswerRequest(content)) {
-                filter {
-                    eq(USER_ID_COLUMN, uid())
-                    eq(QUESTION_ID_COLUMN, questionId)
-                }
-            }
+        postgrest.update(
+            table = ANSWERS_CURRENT_TABLE,
+            body = json.encodeToJsonElement(UpdateAnswerRequest(content)),
+            filters =
+                listOf(
+                    PostgrestFilter(USER_ID_COLUMN, uid()),
+                    PostgrestFilter(QUESTION_ID_COLUMN, questionId),
+                ),
+        )
     }
 
     override suspend fun deleteCurrentAnswer(questionId: Long) {
         postgrest.rpc(
             function = RPC_DELETE_ANSWER_CURRENT,
-            parameters = RpcDefaultRequest(uid(), questionId),
+            parameters =
+                json
+                    .encodeToJsonElement(RpcDefaultRequest(uid(), questionId))
+                    .jsonObject,
         )
     }
 
     override suspend fun deleteAnswerHistory(historyId: Long) {
-        postgrest
-            .from(ANSWER_HISTORY_TABLE)
-            .delete {
-                filter {
-                    eq(ID_COLUMN, historyId)
-                    eq(USER_ID_COLUMN, uid())
-                }
-            }
+        postgrest.delete(
+            table = ANSWER_HISTORY_TABLE,
+            filters =
+                listOf(
+                    PostgrestFilter(ID_COLUMN, historyId),
+                    PostgrestFilter(USER_ID_COLUMN, uid()),
+                ),
+        )
     }
 
     private fun uid(): String =
-        auth.currentSessionOrNull()?.user?.id
+        authClient.currentUserId()
             ?: throw IllegalStateException("User not logged in")
 
     companion object {
