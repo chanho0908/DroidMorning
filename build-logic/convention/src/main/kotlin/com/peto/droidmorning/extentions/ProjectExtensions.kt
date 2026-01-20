@@ -7,24 +7,16 @@ import org.gradle.api.Project
 import org.gradle.api.artifacts.VersionCatalog
 import org.gradle.api.artifacts.VersionCatalogsExtension
 import org.gradle.kotlin.dsl.configure
-import org.gradle.kotlin.dsl.dependencies
 import org.gradle.kotlin.dsl.getByType
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 
 internal val Project.libs: VersionCatalog
     get() = extensions.getByType<VersionCatalogsExtension>().named("libs")
 
-internal val Project.applicationExtension: CommonExtension<*, *, *, *, *, *>
-    get() = extensions.getByType<ApplicationExtension>()
-
-internal val Project.libraryExtension: CommonExtension<*, *, *, *, *, *>
-    get() = extensions.getByType<LibraryExtension>()
-
 internal val Project.androidExtension: CommonExtension<*, *, *, *, *, *>
-    get() = runCatching { libraryExtension }
-        .recoverCatching { applicationExtension }
-        .onFailure { println("Could not find Library or Application extension from this project") }
-        .getOrThrow()
+    get() = extensions.findByType(LibraryExtension::class.java)
+        ?: extensions.findByType(ApplicationExtension::class.java)
+        ?: error("Could not find Library or Application extension from this project")
 
 internal fun Project.composeMultiplatformDependencies() {
     extensions.configure<KotlinMultiplatformExtension> {
@@ -37,7 +29,7 @@ internal fun Project.composeMultiplatformDependencies() {
         }
     }
 
-    dependencies {
-        "debugImplementation"(libs.library("compose-ui-tooling"))
+    configurations.findByName("debugImplementation")?.let { cfg ->
+        dependencies.add(cfg.name, libs.library("compose-ui-tooling"))
     }
 }
