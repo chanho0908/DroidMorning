@@ -33,3 +33,20 @@ internal fun Project.composeMultiplatformDependencies() {
         dependencies.add(cfg.name, libs.library("compose-ui-tooling"))
     }
 }
+
+internal fun Project.koinDependencies() {
+    extensions.configure<KotlinMultiplatformExtension> {
+        sourceSets.apply {
+            commonMain {
+                dependencies {
+                    implementation(libs.bundle("koin"))
+                }
+            }
+            commonTest {
+                dependencies {
+                    implementation(libs.library("koin-test"))
+                }
+            }
+        }
+    }
+}

@@ -1,7 +1,7 @@
 package com.peto.droidmorning
 
-import com.peto.droidmorning.extentions.bundle
 import com.peto.droidmorning.extentions.composeMultiplatformDependencies
+import com.peto.droidmorning.extentions.koinDependencies
 import com.peto.droidmorning.extentions.library
 import com.peto.droidmorning.extentions.libs
 import com.peto.droidmorning.extentions.plugin
@@ -23,6 +23,7 @@ class DroidMorningFeaturePlugin : Plugin<Project> {
         apply<KotlinMultiPlatformiOSPlugin>()
 
         apply<ComposeMultiplatformConventionPlugin>()
+        apply<KoinConventionPlugin>()
 
         extensions.configure<KotlinMultiplatformExtension> {
             sourceSets.apply {
@@ -31,9 +32,7 @@ class DroidMorningFeaturePlugin : Plugin<Project> {
                         implementation(libs.library("androidx-navigation-compose"))
                         implementation(libs.library("androidx-lifecycle-viewmodel-compose"))
                         implementation(libs.library("androidx-lifecycle-runtime-compose"))
-                        
-                        implementation(libs.bundle("koin"))
-                        
+
                         implementation(libs.library("kotlinx-coroutines-core"))
                         implementation(libs.library("kotlinx-serialization-json"))
                         implementation(libs.library("kotlinx-collections-immutable"))
@@ -43,7 +42,6 @@ class DroidMorningFeaturePlugin : Plugin<Project> {
                 commonTest {
                     dependencies {
                         implementation(libs.library("kotlin-test"))
-                        implementation(libs.library("koin-test"))
                         implementation(libs.library("kotlinx-coroutines-test"))
                     }
                 }
