@@ -1,9 +1,10 @@
 package com.peto.droidmorning
 
 import com.android.build.gradle.LibraryExtension
+import com.peto.droidmorning.extentions.javaVersion
 import com.peto.droidmorning.extentions.libs
+import com.peto.droidmorning.extentions.plugin
 import com.peto.droidmorning.extentions.version
-import org.gradle.api.JavaVersion
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.configure
@@ -12,7 +13,7 @@ class AndroidLibraryConventionPlugin : Plugin<Project> {
     override fun apply(target: Project) {
         with(target) {
             with(pluginManager) {
-                apply("com.android.library")
+                apply(libs.plugin("android-library").pluginId)
             }
 
             extensions.configure<LibraryExtension> {
@@ -23,8 +24,8 @@ class AndroidLibraryConventionPlugin : Plugin<Project> {
                 }
 
                 compileOptions {
-                    sourceCompatibility = JavaVersion.VERSION_11
-                    targetCompatibility = JavaVersion.VERSION_11
+                    sourceCompatibility = libs.javaVersion("java")
+                    targetCompatibility = libs.javaVersion("java")
                 }
 
                 buildFeatures {

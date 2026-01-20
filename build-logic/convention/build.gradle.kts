@@ -6,14 +6,16 @@ plugins {
 
 group = "com.peto.droidmorning.buildlogic"
 
+val javaVersion = JavaVersion.toVersion(libs.versions.java.get())
+
 java {
-    sourceCompatibility = JavaVersion.VERSION_11
-    targetCompatibility = JavaVersion.VERSION_11
+    sourceCompatibility = javaVersion
+    targetCompatibility = javaVersion
 }
 
 kotlin {
     compilerOptions {
-        jvmTarget = JvmTarget.JVM_11
+        jvmTarget = JvmTarget.fromTarget(libs.versions.java.get())
     }
 }
 
@@ -21,7 +23,6 @@ dependencies {
     compileOnly(libs.android.gradle.plugin)
     compileOnly(libs.kotlin.gradle.plugin)
     compileOnly(libs.compose.gradle.plugin)
-    compileOnly(libs.compose.compiler.gradle.plugin)
 }
 
 gradlePlugin {

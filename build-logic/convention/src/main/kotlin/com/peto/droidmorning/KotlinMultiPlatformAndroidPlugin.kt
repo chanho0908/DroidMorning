@@ -1,18 +1,15 @@
 package com.peto.droidmorning
 
 import com.peto.droidmorning.extentions.androidExtension
+import com.peto.droidmorning.extentions.javaVersion
+import com.peto.droidmorning.extentions.jvmTarget
 import com.peto.droidmorning.extentions.libs
 import com.peto.droidmorning.extentions.version
-import org.gradle.api.JavaVersion
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.configure
-import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 
-/**
- * Android 타겟 설정 플러그인
- */
 class KotlinMultiPlatformAndroidPlugin : Plugin<Project> {
     override fun apply(target: Project): Unit = with(target) {
         androidExtension.apply {
@@ -20,17 +17,17 @@ class KotlinMultiPlatformAndroidPlugin : Plugin<Project> {
 
             extensions.configure<KotlinMultiplatformExtension> {
                 androidTarget {
-                    compilerOptions.jvmTarget.set(JvmTarget.JVM_11)
+                    compilerOptions.jvmTarget.set(libs.jvmTarget("java"))
                 }
             }
 
             defaultConfig {
-                minSdk = libs.findVersion("minSdk").get().requiredVersion.toInt()
+                minSdk = libs.version("minSdk").toInt()
             }
 
             compileOptions {
-                sourceCompatibility = JavaVersion.VERSION_11
-                targetCompatibility = JavaVersion.VERSION_11
+                sourceCompatibility = libs.javaVersion("java")
+                targetCompatibility = libs.javaVersion("java")
             }
 
             packaging {
