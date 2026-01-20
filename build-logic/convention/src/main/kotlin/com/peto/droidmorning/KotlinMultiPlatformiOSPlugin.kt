@@ -8,9 +8,6 @@ import org.gradle.kotlin.dsl.withType
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
 
-/**
- * iOS 타겟 설정 플러그인
- */
 class KotlinMultiPlatformiOSPlugin : Plugin<Project> {
     override fun apply(target: Project) = with(target) {
         extensions.configure<KotlinMultiplatformExtension> {

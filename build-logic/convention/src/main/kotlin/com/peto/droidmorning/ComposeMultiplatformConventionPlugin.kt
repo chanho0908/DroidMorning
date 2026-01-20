@@ -6,10 +6,6 @@ import com.peto.droidmorning.extentions.plugin
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 
-/**
- * Compose Multiplatform 컨벤션 플러그인
- * 공통 Compose Multiplatform 설정을 중앙화합니다.
- */
 class ComposeMultiplatformConventionPlugin : Plugin<Project> {
     override fun apply(target: Project) = with(target) {
         with(pluginManager) {
