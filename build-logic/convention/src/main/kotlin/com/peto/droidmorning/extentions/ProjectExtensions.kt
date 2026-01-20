@@ -26,10 +26,6 @@ internal val Project.androidExtension: CommonExtension<*, *, *, *, *, *>
         .onFailure { println("Could not find Library or Application extension from this project") }
         .getOrThrow()
 
-internal fun Project.kotlin(action: KotlinMultiplatformExtension.() -> Unit) {
-    extensions.configure(action)
-}
-
 internal fun Project.composeMultiplatformDependencies() {
     extensions.configure<KotlinMultiplatformExtension> {
         sourceSets.apply {

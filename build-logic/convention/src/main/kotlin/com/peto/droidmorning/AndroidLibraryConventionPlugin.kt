@@ -1,15 +1,13 @@
 package com.peto.droidmorning
 
 import com.android.build.gradle.LibraryExtension
+import com.peto.droidmorning.extentions.libs
+import com.peto.droidmorning.extentions.version
 import org.gradle.api.JavaVersion
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.configure
 
-/**
- * Android Library 컨벤션 플러그인
- * 공통 Android 라이브러리 설정을 중앙화합니다.
- */
 class AndroidLibraryConventionPlugin : Plugin<Project> {
     override fun apply(target: Project) {
         with(target) {
@@ -18,10 +16,10 @@ class AndroidLibraryConventionPlugin : Plugin<Project> {
             }
 
             extensions.configure<LibraryExtension> {
-                compileSdk = 36
+                compileSdk = libs.version("compileSdk").toInt()
 
                 defaultConfig {
-                    minSdk = 24
+                    minSdk = libs.version("minSdk").toInt()
                 }
 
                 compileOptions {
