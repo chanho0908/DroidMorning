@@ -39,7 +39,9 @@ internal fun Project.koinDependencies() {
         sourceSets.apply {
             commonMain {
                 dependencies {
-                    implementation(libs.bundle("koin"))
+                    implementation(libs.library("koin-core"))
+                    implementation(libs.library("koin-compose"))
+                    implementation(libs.library("koin-compose-viewmodel"))
                 }
             }
             commonTest {

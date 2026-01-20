@@ -1,33 +1,19 @@
 package com.peto.droidmorning.data.datasource.auth.local
 
-import androidx.datastore.core.DataStore
-import androidx.datastore.preferences.core.Preferences
-import androidx.datastore.preferences.core.edit
-import androidx.datastore.preferences.core.stringPreferencesKey
-import kotlinx.coroutines.flow.first
+import com.peto.droidmorning.core.datastore.TokenDataStore
 
 class DefaultLocalAuthDataSource(
-    private val dataStore: DataStore<Preferences>,
+    private val tokenDataStore: TokenDataStore,
 ) : LocalAuthDataSource {
-    override suspend fun userId(): String? = preferences()[KEY_USER_ID]
+    override suspend fun userId(): String? = tokenDataStore.userId()
 
-    override suspend fun hasUserId(): Boolean = preferences()[KEY_USER_ID] != null
+    override suspend fun hasUserId(): Boolean = tokenDataStore.hasUserId()
 
     override suspend fun save(userId: String) {
-        dataStore.edit { preferences ->
-            preferences[KEY_USER_ID] = userId
-        }
+        tokenDataStore.save(userId)
     }
 
     override suspend fun clear() {
-        dataStore.edit { preferences ->
-            preferences.remove(KEY_USER_ID)
-        }
-    }
-
-    private suspend fun preferences(): Preferences = dataStore.data.first()
-
-    companion object {
-        private val KEY_USER_ID = stringPreferencesKey("user_id")
+        tokenDataStore.clear()
     }
 }

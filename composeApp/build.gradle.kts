@@ -54,6 +54,8 @@ kotlin {
             implementation(project(":domain"))
             implementation(project(":data"))
             implementation(project(":designsystem"))
+            implementation(project(":core:network"))
+            implementation(project(":core:datastore"))
 
             implementation(libs.bundles.compose.multiplatform)
             implementation(libs.androidx.navigation.compose)
