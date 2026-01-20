@@ -1,4 +1,4 @@
-package com.peto.droidmorning.app.primitive
+package com.peto.droidmorning
 
 import org.gradle.api.Plugin
 import org.gradle.api.Project

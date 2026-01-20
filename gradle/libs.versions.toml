@@ -227,3 +227,12 @@ buildkonfig = { id = "com.codingfeline.buildkonfig", version.ref = "buildkonfig"
 
 # Ktlint
 ktlint = { id = "org.jlleitschuh.gradle.ktlint", version.ref = "ktlint" }
+
+# DroidMorning Convention Plugins
+droidmorning-kmp = { id = "droidmorning.kmp" }
+droidmorning-kmp-android = { id = "droidmorning.kmp.android" }
+droidmorning-kmp-ios = { id = "droidmorning.kmp.ios" }
+droidmorning-android-library = { id = "droidmorning.android.library" }
+droidmorning-kotlin-multiplatform = { id = "droidmorning.kotlin.multiplatform" }
+droidmorning-compose-multiplatform = { id = "droidmorning.compose.multiplatform" }
+droidmorning-feature = { id = "droidmorning.feature" }

@@ -1,6 +1,8 @@
-package com.peto.droidmorning.app
+package com.peto.droidmorning
 
-import com.peto.droidmorning.app.primitive.composeMultiplatformDependencies
+import com.peto.droidmorning.extentions.composeMultiplatformDependencies
+import com.peto.droidmorning.extentions.libs
+import com.peto.droidmorning.extentions.plugin
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 
@@ -11,8 +13,8 @@ import org.gradle.api.Project
 class ComposeMultiplatformConventionPlugin : Plugin<Project> {
     override fun apply(target: Project) = with(target) {
         with(pluginManager) {
-            apply(libs.findPlugin("compose-multiplatform").get().get().pluginId)
-            apply(libs.findPlugin("kotlin-compose").get().get().pluginId)
+            apply(libs.plugin("compose-multiplatform").pluginId)
+            apply(libs.plugin("kotlin-compose").pluginId)
         }
 
         composeMultiplatformDependencies()

@@ -28,31 +28,31 @@ gradlePlugin {
     plugins {
         register("kmpPrimitive") {
             id = "droidmorning.kmp"
-            implementationClass = "com.peto.droidmorning.app.primitive.KotlinMultiPlatformPlugin"
+            implementationClass = "com.peto.droidmorning.KotlinMultiPlatformPlugin"
         }
         register("kmpAndroid") {
             id = "droidmorning.kmp.android"
-            implementationClass = "com.peto.droidmorning.app.primitive.KotlinMultiPlatformAndroidPlugin"
+            implementationClass = "com.peto.droidmorning.KotlinMultiPlatformAndroidPlugin"
         }
         register("kmpIos") {
             id = "droidmorning.kmp.ios"
-            implementationClass = "com.peto.droidmorning.app.primitive.KotlinMultiPlatformiOSPlugin"
+            implementationClass = "com.peto.droidmorning.KotlinMultiPlatformiOSPlugin"
         }
         register("androidLibrary") {
             id = "droidmorning.android.library"
-            implementationClass = "com.peto.droidmorning.app.AndroidLibraryConventionPlugin"
+            implementationClass = "com.peto.droidmorning.AndroidLibraryConventionPlugin"
         }
         register("kotlinMultiplatform") {
             id = "droidmorning.kotlin.multiplatform"
-            implementationClass = "com.peto.droidmorning.app.KotlinMultiplatformConventionPlugin"
+            implementationClass = "com.peto.droidmorning.KotlinMultiplatformConventionPlugin"
         }
         register("composeMultiplatform") {
             id = "droidmorning.compose.multiplatform"
-            implementationClass = "com.peto.droidmorning.app.ComposeMultiplatformConventionPlugin"
+            implementationClass = "com.peto.droidmorning.ComposeMultiplatformConventionPlugin"
         }
         register("droidmorningFeature") {
             id = "droidmorning.feature"
-            implementationClass = "com.peto.droidmorning.app.DroidMorningFeaturePlugin"
+            implementationClass = "com.peto.droidmorning.DroidMorningFeaturePlugin"
         }
     }
 }

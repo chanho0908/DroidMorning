@@ -1,4 +1,4 @@
-package com.peto.droidmorning.app
+package com.peto.droidmorning
 
 import com.android.build.gradle.LibraryExtension
 import org.gradle.api.JavaVersion

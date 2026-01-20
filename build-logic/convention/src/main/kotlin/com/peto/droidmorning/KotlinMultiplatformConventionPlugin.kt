@@ -1,8 +1,7 @@
-package com.peto.droidmorning.app
+package com.peto.droidmorning
 
-import com.peto.droidmorning.app.primitive.KotlinMultiPlatformAndroidPlugin
-import com.peto.droidmorning.app.primitive.KotlinMultiPlatformPlugin
-import com.peto.droidmorning.app.primitive.KotlinMultiPlatformiOSPlugin
+import com.peto.droidmorning.extentions.libs
+import com.peto.droidmorning.extentions.plugin
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.apply
@@ -14,7 +13,7 @@ import org.gradle.kotlin.dsl.apply
 class KotlinMultiplatformConventionPlugin : Plugin<Project> {
     override fun apply(target: Project) = with(target) {
         with(pluginManager) {
-            apply(libs.findPlugin("kotlin-multiplatform").get().get().pluginId)
+            apply(libs.plugin("kotlin-multiplatform").pluginId)
         }
 
         apply<KotlinMultiPlatformPlugin>()

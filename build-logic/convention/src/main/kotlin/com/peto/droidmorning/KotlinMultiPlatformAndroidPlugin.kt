@@ -1,7 +1,8 @@
-package com.peto.droidmorning.app.primitive
+package com.peto.droidmorning
 
-import com.peto.droidmorning.app.androidExtension
-import com.peto.droidmorning.app.libs
+import com.peto.droidmorning.extentions.androidExtension
+import com.peto.droidmorning.extentions.libs
+import com.peto.droidmorning.extentions.version
 import org.gradle.api.JavaVersion
 import org.gradle.api.Plugin
 import org.gradle.api.Project
@@ -15,7 +16,7 @@ import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 class KotlinMultiPlatformAndroidPlugin : Plugin<Project> {
     override fun apply(target: Project): Unit = with(target) {
         androidExtension.apply {
-            compileSdk = libs.findVersion("compileSdk").get().requiredVersion.toInt()
+            compileSdk = libs.version("compileSdk").toInt()
 
             extensions.configure<KotlinMultiplatformExtension> {
                 androidTarget {
