@@ -235,3 +235,4 @@ droidmorning-android-library = { id = "droidmorning.android.library" }
 droidmorning-kotlin-multiplatform = { id = "droidmorning.kotlin.multiplatform" }
 droidmorning-compose-multiplatform = { id = "droidmorning.compose.multiplatform" }
 droidmorning-feature = { id = "droidmorning.feature" }
+droidmorning-koin = { id = "droidmorning.koin" }

@@ -55,5 +55,9 @@ gradlePlugin {
             id = "droidmorning.feature"
             implementationClass = "com.peto.droidmorning.DroidMorningFeaturePlugin"
         }
+        register("droidmorningKoin") {
+            id = "droidmorning.koin"
+            implementationClass = "com.peto.droidmorning.KoinConventionPlugin"
+        }
     }
 }
