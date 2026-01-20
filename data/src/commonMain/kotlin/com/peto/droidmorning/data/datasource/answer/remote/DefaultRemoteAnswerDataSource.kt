@@ -9,8 +9,8 @@ import com.peto.droidmorning.data.model.request.RpcDefaultRequest
 import com.peto.droidmorning.data.model.request.UpdateAnswerRequest
 import com.peto.droidmorning.data.model.response.AnswerHistoryResponse
 import com.peto.droidmorning.data.model.response.CurrentAnswerResponse
+import com.peto.droidmorning.data.util.JsonUtil
 import kotlinx.serialization.builtins.ListSerializer
-import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.encodeToJsonElement
 import kotlinx.serialization.json.jsonObject
 
@@ -18,7 +18,7 @@ class DefaultRemoteAnswerDataSource(
     private val postgrest: PostgrestClient,
     private val authClient: AuthClient,
 ) : RemoteAnswerDataSource {
-    private val json = Json { ignoreUnknownKeys = true }
+    private val json = JsonUtil.defaultJson
 
     override suspend fun fetchCurrentAnswer(questionId: Long): CurrentAnswerResponse? =
         postgrest
@@ -30,10 +30,10 @@ class DefaultRemoteAnswerDataSource(
                         PostgrestFilter(QUESTION_ID_COLUMN, questionId),
                     ),
             ).let { data ->
-                json
-                    .decodeFromString(
-                        ListSerializer(CurrentAnswerResponse.serializer()),
+                JsonUtil
+                    .decode(
                         data,
+                        ListSerializer(CurrentAnswerResponse.serializer()),
                     ).firstOrNull()
             }
 
@@ -48,9 +48,9 @@ class DefaultRemoteAnswerDataSource(
                     ),
                 order = PostgrestOrder(CREATED_AT_COLUMN, descending = true),
             ).let { data ->
-                json.decodeFromString(
-                    ListSerializer(AnswerHistoryResponse.serializer()),
+                JsonUtil.decode(
                     data,
+                    ListSerializer(AnswerHistoryResponse.serializer()),
                 )
             }
 

@@ -7,11 +7,11 @@ import com.peto.droidmorning.core.network.PostgrestOrder
 import com.peto.droidmorning.data.model.request.toRequest
 import com.peto.droidmorning.data.model.response.ExamDetailResponse
 import com.peto.droidmorning.data.model.response.ExamHistoryResponse
+import com.peto.droidmorning.data.util.JsonUtil
 import com.peto.droidmorning.domain.model.category.Category
 import com.peto.droidmorning.domain.model.exam.Exams
 import kotlinx.serialization.builtins.ListSerializer
 import kotlinx.serialization.builtins.serializer
-import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.encodeToJsonElement
 import kotlinx.serialization.json.jsonObject
 
@@ -19,7 +19,7 @@ class DefaultRemoteExamDataSource(
     private val postgrest: PostgrestClient,
     private val authClient: AuthClient,
 ) : RemoteExamDataSource {
-    private val json = Json { ignoreUnknownKeys = true }
+    private val json = JsonUtil.defaultJson
 
     override suspend fun submitExam(
         exam: Exams,
@@ -33,7 +33,7 @@ class DefaultRemoteExamDataSource(
                         .encodeToJsonElement(exam.toRequest(uid(), categories))
                         .jsonObject,
             ).let { data ->
-                json.decodeFromString(Long.serializer(), data)
+                JsonUtil.decode(data, Long.serializer())
             }
 
     override suspend fun fetchExamHistory(): List<ExamHistoryResponse> =
@@ -43,9 +43,9 @@ class DefaultRemoteExamDataSource(
                 filters = listOf(PostgrestFilter(USER_ID_COLUMN, uid())),
                 order = PostgrestOrder(UPDATED_AT_COLUMN, descending = true),
             ).let { data ->
-                json.decodeFromString(
-                    ListSerializer(ExamHistoryResponse.serializer()),
+                JsonUtil.decode(
                     data,
+                    ListSerializer(ExamHistoryResponse.serializer()),
                 )
             }
 
@@ -58,9 +58,9 @@ class DefaultRemoteExamDataSource(
                         .encodeToJsonElement(mapOf(RPC_PARAM_EXAM_ID to examId))
                         .jsonObject,
             ).let { data ->
-                json.decodeFromString(
-                    ListSerializer(ExamDetailResponse.serializer()),
+                JsonUtil.decode(
                     data,
+                    ListSerializer(ExamDetailResponse.serializer()),
                 )
             }
 
