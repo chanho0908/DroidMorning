@@ -1,7 +1,5 @@
 package com.peto.droidmorning
 
-import com.peto.droidmorning.extentions.composeMultiplatformDependencies
-import com.peto.droidmorning.extentions.koinDependencies
 import com.peto.droidmorning.extentions.library
 import com.peto.droidmorning.extentions.libs
 import com.peto.droidmorning.extentions.plugin
