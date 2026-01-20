@@ -8,8 +8,8 @@ import com.peto.droidmorning.data.model.request.LikeRequest
 import com.peto.droidmorning.data.model.response.CategoryCountResponse
 import com.peto.droidmorning.data.model.response.ExamQuestionResponse
 import com.peto.droidmorning.data.model.response.QuestionResponse
+import com.peto.droidmorning.data.util.JsonUtil
 import kotlinx.serialization.builtins.ListSerializer
-import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.encodeToJsonElement
 import kotlinx.serialization.json.jsonObject
 
@@ -17,7 +17,7 @@ class DefaultRemoteQuestionDataSource(
     private val postgrest: PostgrestClient,
     private val authClient: AuthClient,
 ) : RemoteQuestionDataSource {
-    private val json = Json { ignoreUnknownKeys = true }
+    private val json = JsonUtil.defaultJson
 
     override suspend fun fetchExamQuestions(): List<QuestionResponse> =
         postgrest
@@ -28,9 +28,9 @@ class DefaultRemoteQuestionDataSource(
                         .encodeToJsonElement(mapOf(RPC_FETCH_QUESTIONS_PARAM_NAME to uid()))
                         .jsonObject,
             ).let { data ->
-                json.decodeFromString(
-                    ListSerializer(QuestionResponse.serializer()),
+                JsonUtil.decode(
                     data,
+                    ListSerializer(QuestionResponse.serializer()),
                 )
             }
 
@@ -46,9 +46,9 @@ class DefaultRemoteQuestionDataSource(
                         .encodeToJsonElement(ExamQuestionRequest(category, count))
                         .jsonObject,
             ).let { data ->
-                json.decodeFromString(
-                    ListSerializer(ExamQuestionResponse.serializer()),
+                JsonUtil.decode(
                     data,
+                    ListSerializer(ExamQuestionResponse.serializer()),
                 )
             }
 
@@ -77,9 +77,9 @@ class DefaultRemoteQuestionDataSource(
         postgrest
             .rpc(RPC_CATEGORY_COUNT)
             .let { data ->
-                json.decodeFromString(
-                    ListSerializer(CategoryCountResponse.serializer()),
+                JsonUtil.decode(
                     data,
+                    ListSerializer(CategoryCountResponse.serializer()),
                 )
             }
 
